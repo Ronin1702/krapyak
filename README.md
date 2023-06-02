@@ -1,13 +1,19 @@
 # First-Team-Project
 This is the GitHub repo for our first team project (FTP) with branch protection turned on.
 
-## Branche Protection Stuff
+## Imporant Branche Protection Stuff
 <li> The video in "06.3 Activity Files" indicates that we should set up the collaborative repo in this way</li>
 <li> The old "Include Adminstrator" option is replaced by the "Do not allow bypassing the above settings".</li>.
 <li> We won't be able to directly edit the Main branch.</li>
-<li> To "build" a new branch type: git checkout -b examplebranch. (You may use /,-,to distinguish branches.)</li>
-<li> As long as you're in the right branch, you can simply "git push" once you're done commiting, without the following "origin examplebranch".</li>
-<li> <h1>Before the begin of any of your work, you shall always return to the Main branche by typing: git checkout main, to do a "git pull" request.</li> 
+<li> To "build" a new branch type: git checkout -b branchname/example. (You may use / and - to distinguish branches.)
+</li>
+<li> To push while in a branch you must, after commit, type: git push orgin branchname/example.</li>
+<li> <h1>Before beginning any of your work, you're strongly recommended to return to the Main branch by typing: git checkout main, to do a "git pull" request to keep your data fresh.</li> 
+<li> To navigate back your to branch use the git checkout branchname/example command.</li>
+<li> During merging on github, make sure to select your reviewer on the right sidebar so that someone will be notified to review and approve your merge request!</li>
+
+<hr>
+
 ![screenshot](./assets/Images/AdminTheAdmin.png)
 
 ### Credits
