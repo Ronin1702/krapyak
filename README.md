@@ -7,7 +7,7 @@ This is the GitHub repo for our first team project (FTP) with branch protection 
 <li> We won't be able to push directly to the Main branch.</li>
 <li> To "build" a new branch type: git checkout -b branchname/example. (You may use / and - to distinguish branches.)
 </li>
-<li> To push while in a branch you must, after commit, type: git push orgin branchname/example.</li>
+<li> To push while in a branch, you must, after commit, type: git push orgin branchname/example.</li>
 <li> <h1>Before beginning any of your work, you're strongly recommended to return to the Main branch by typing: git checkout main, to do a "git pull" request to keep your data fresh.</li> 
 <li> To navigate back your to branch use the git checkout branchname/example command.</li>
 <li> During merging on github, make sure to select your reviewer on the right sidebar so that someone will be notified to review and approve your merge request!</li>
