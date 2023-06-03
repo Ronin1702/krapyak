@@ -14,6 +14,7 @@ This is the GitHub repo for our first team project (FTP) with branch protection 
 
 <hr>
 
+## Screenshot
 ![screenshot](./assets/Images/AdminTheAdmin.png)
 
 ### Credits
