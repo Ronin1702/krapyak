@@ -1,7 +1,7 @@
 # First-Team-Project
 This is the GitHub repo for our first team project (FTP) with branch protection turned on.
 
-## Imporant Branche Protection Stuff
+## Imporant Branch Protection Stuff
 <li> The video in "06.3 Activity Files" indicates that we should set up the collaborative repo in this way</li>
 <li> The old "Include Adminstrator" option is replaced by the "Do not allow bypassing the above settings".</li>.
 <li> We won't be able to push directly to the Main branch.</li>
