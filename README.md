@@ -29,7 +29,8 @@ Then I am shown a list of the worst hotels/restaurants of the selected city.
 When I click on the hotels/restaurants, 
 Then a map is shown on the right side of the screen showing its location.
 ```
-
+###
+Deployed Link for review: https://ronin1702.github.io/First-Team-Project/
 ### Credits
 <li>Ceres Markley© </li>
 <li>Daniel aka Jianxiong Chen© </li>
