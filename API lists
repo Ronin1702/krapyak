@@ -1,0 +1,9 @@
+<!-- This is the Yelp private review API doc -->
+https://docs.developer.yelp.com/docs/private-reviews-api
+
+<!-- Link to fetch the API -->
+https://api.yelp.com/v3/private/businesses/{business_id}/reviews
+
+<!-- Yelp API reference -->
+https://docs.developer.yelp.com/reference/v3_business_search
+

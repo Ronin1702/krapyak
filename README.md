@@ -1,21 +1,29 @@
 # First-Team-Project
 This is the GitHub repo for our first team project (FTP) with branch protection turned on.
 
-## Imporant Branch Protection Stuff
-<li> The video in "06.3 Activity Files" indicates that we should set up the collaborative repo in this way</li>
-<li> The old "Include Adminstrator" option is replaced by the "Do not allow bypassing the above settings".</li>
-<li> We won't be able to push directly to the Main branch.</li>
-<li> To "build" a new branch type: git checkout -b branchname/example. (You may use / and - to distinguish branches.)
-</li>
-<li> To push while in a branch, you must, after commit, type: git push orgin branchname/example.</li>
-<li> Before beginning any of your work, you're strongly recommended to return to the Main branch by typing: git checkout main, to do a "git pull" request to keep your data fresh.</li>
-<li> To navigate back your to branch use the git checkout branchname/example command.</li>
-<li> During merging on github, make sure to select your reviewer on the right sidebar so that someone will be notified to review and approve your merge request!</li>
+## User Story
 
-<hr>
+```md
+As a traveler,
+I want to know what hotels and/or restaurants to avoid in the area I am staying,
+So that I may NOT have the worst accomadations and/or dining experience.
+```
 
-## Screenshot
-![screenshot](./assets/Images/AdminTheAdmin.png)
+## Acceptance Criteria
+
+```md
+Given I am using Krapyak to know what places to avoid,
+When I open 'Krapyak'
+Then I am drop down menu input box with a Go button.
+When I click on the drop down menu,
+Then I provideds a list of possible research areas this site provides.
+When I select my options from the drop down menu, 
+Then it logs the category of research the user wants, and enbles text input box.
+When I type a city name into the text box and click the "Go" Btn.
+Then I am shown a list of the worst hotels/restaurants of that city.
+When I click on the hotels/restaurants, 
+Then a map is shown on the right side of the screen showing its location.
+```
 
 ### Credits
 <li>Ceres Markley© </li>
