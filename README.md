@@ -1,5 +1,6 @@
-# First-Team-Project
-This is the GitHub repo for our first team project (FTP) with branch protection turned on.
+# Krapyak:
+## Description
+Krapak is a spin-off of Kayak and provides 5 worst places to stay/dine in a given city.
 
 ## User Story
 
