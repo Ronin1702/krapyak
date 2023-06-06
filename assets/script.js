@@ -74,3 +74,25 @@ function getCityNameFromResults(results) {
 }
 
 window.initMap = initMap;
+
+// When an drop down menu option is selected, the right card class is displayed, otherwise hidden.
+document.addEventListener("DOMContentLoaded", () => {
+  const hotelOption = document.getElementById("hotels");
+  const restaurantOption = document.getElementById("restaurants");
+  const hotelCard = document.getElementById("hotelLists");
+  const restaurantCard = document.getElementById("restaurantLists");
+
+  hotelOption.addEventListener("click", () => {
+    hotelCard.classList.add("d-block");
+    hotelCard.classList.remove("d-none");
+    restaurantCard.classList.add("d-none");
+    restaurantCard.classList.remove("d-block");
+  });
+
+  restaurantOption.addEventListener("click", () => {
+    hotelCard.classList.add("d-none");
+    hotelCard.classList.remove("d-block");
+    restaurantCard.classList.add("d-block");
+    restaurantCard.classList.remove("d-none");
+  });
+});
