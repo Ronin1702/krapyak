@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <!-- Below is fontawesome kit embed so that I can use cool icons -->
     <script src="https://kit.fontawesome.com/2ca4a978bf.js" crossorigin="anonymous"></script>
     <!-- Below I added the newest boostrap for CSS -->
@@ -15,17 +15,17 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <title>Krapyak: Worst Hotels and Restaurants!</title>
-    <!-- Below I link our local css and java script -->
+    <!-- Below I link our local css  -->
     <link rel="stylesheet" type="text/css" href="./assets/CSS/styles.css" />
     <script type="module" src="./assets/script.js"></script>
 </head>
 
 <body>
     <!-- I created the big conatain div so that the rest can be rows without a new container -->
-    <div class="containter-fliud">
+    <div class="container-fluid">
         <!--Below I created a header -->
         <!-- the bg-gradient added a gradient shade to he background -->
-        <header class="row m-3 p-3 text-center text-white bg-warning bg-gradient">
+        <header class="row m-3 p-2 text-center text-white bg-warning bg-gradient rounded">
             <h1 class="col-12">Krapyak: Your Travel Nightmares!</h1>
         </header>
 
@@ -36,48 +36,52 @@
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">Options</button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Hotels</a></li>
-                    <li><a class="dropdown-item" href="#">Restaurants</a></li>
+                    <li><a class="dropdown-item" id="hotels">Hotels</a></li>
+                    <li><a class="dropdown-item" id="restaurants">Restaurants</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#">Credits</a></li>
+                    <li><a class="dropdown-item" id="credits">Credits</a></li>
                 </ul>
-                <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                <button class="btn btn-outline-secondary" type="button" id="getCurrentLocationBtn"><i
+                <input type="text" class="form-control"
+                    aria-label="Enter the text of curenet city name when globe icon is clicked">
+                <button class="btn btn-outline-secondary" type="button" id="getCityBtn"><i
                         class="fa-solid fa-earth-asia"></i></button>
                 <button class="btn btn-outline-secondary" type="button" id="goBtn"><i
                         class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
         <div class="row justify-content-around m-3">
-            <div class="col-3 card d-block" id="hotelLists" style="width: 18rem;">
-                <div class="card-header">
-                    Hotels
+            <div class="col-3">
+                <div class="card d-block" id="hotelLists" style="width: 18rem;">
+                    <div class="card-header">
+                        Hotels
+                    </div>
+                    <ol class="list-group list-group-flush">
+                        <li class="list-group-item">St.Regis</li>
+                        <li class="list-group-item">Ritz-Carton</li>
+                        <li class="list-group-item">Marriot</li>
+                    </ol>
                 </div>
-                <ol class="list-group list-group-flush">
-                    <li class="list-group-item">St.Regis</li>
-                    <li class="list-group-item">Ritz-Carton</li>
-                    <li class="list-group-item">Marriot</li>
-                </ol>
-            </div>
-            <div class="col-3 card d-none" id="restaurantLists" style="width: 18rem;">
-                <div class="card-header">
-                    Restaurants
+                <br>
+                <div class="card d-none" id="restaurantLists" style="width: 18rem;">
+                    <div class="card-header">
+                        Restaurants
+                    </div>
+                    <ol class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ol>
                 </div>
-                <ol class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ol>
             </div>
             <div class="col-9 d-block rounded" id="map"></div>
         </div>
     </div>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4&callback=initMap&v=weekly"
-      defer
-    ></script>
-   </body>
+    <!-- Insert API KEY and set the callback id to initMap -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4&callback=initMap"
+        defer></script>
+
+</body>
 
 </html>

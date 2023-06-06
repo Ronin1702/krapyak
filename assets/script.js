@@ -1,4 +1,3 @@
-// Current location scripts below
 let map, infoWindow;
 
 function initMap() {
@@ -8,12 +7,10 @@ function initMap() {
   });
   infoWindow = new google.maps.InfoWindow();
 
-  const locationButton = document.createElement("button");
+  const getCityBtn = document.getElementById("getCityBtn");
+  const cityInput = document.querySelector("input.form-control");
 
-  locationButton.textContent = "Pan to Current Location";
-  locationButton.classList.add("custom-map-control-button");
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-  locationButton.addEventListener("click", () => {
+  getCityBtn.addEventListener("click", () => {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -27,6 +24,21 @@ function initMap() {
           infoWindow.setContent("Location found.");
           infoWindow.open(map);
           map.setCenter(pos);
+
+          // Get city name based on coordinates
+          const geocoder = new google.maps.Geocoder();
+          geocoder.geocode({ location: pos }, (results, status) => {
+            if (status === "OK") {
+              if (results[0]) {
+                const cityName = getCityNameFromResults(results);
+                cityInput.value = cityName;
+              } else {
+                console.log("No results found");
+              }
+            } else {
+              console.log("Geocoder failed due to: " + status);
+            }
+          });
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
@@ -47,6 +59,18 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       : "Error: Your browser doesn't support geolocation."
   );
   infoWindow.open(map);
+}
+
+function getCityNameFromResults(results) {
+  for (let i = 0; i < results.length; i++) {
+    for (let j = 0; j < results[i].address_components.length; j++) {
+      const types = results[i].address_components[j].types;
+      if (types.includes("locality") || types.includes("sublocality")) {
+        return results[i].address_components[j].long_name;
+      }
+    }
+  }
+  return "";
 }
 
 window.initMap = initMap;
