@@ -18,7 +18,7 @@ This is the GitHub repo for our first team project (FTP) with branch protection 
 ![screenshot](./assets/Images/AdminTheAdmin.png)
 
 ### Credits
-<li>Ceres Markley©</li>
-<li>Daniel aka Jianxiong Chen©</li>
-<li>Ian Vignolles-Jeong©</li>
+<li>Ceres Markley© </li>
+<li>Daniel aka Jianxiong Chen© </li>
+<li>Ian Vignolles-Jeong© </li>
 <li>Kai Chen© </li>
