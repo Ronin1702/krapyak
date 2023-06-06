@@ -16,16 +16,18 @@
 </head>
 
 <body>
-    <!--Below I created a header -->
-    <header class="container-fluid mt-2 mb-2 text-center text-white bg-dark p-2">
-        <h1>Krapyak: Your Travel Nightmares!</h1>
-    </header>
+    <!-- I created the big conatain div so that the rest can be rows without a new container -->
+    <div class="containter-fliud">
+        <!--Below I created a header -->
+        <!-- the bg-gradient added a gradient shade to he background -->
+        <header class="row m-3 p-3 text-center text-white bg-warning bg-gradient">
+            <h1 class="col">Krapyak: Your Travel Nightmares!</h1>
+        </header>
 
-    <!-- Below I created a input group with a dropdown menu -->
-    <!-- I borrowed some stuff from https://getbootstrap.com/docs/5.1/forms/input-group/ -->
-    <div class="containter-fluid">
+        <!-- Below I created a input group with a dropdown menu -->
+        <!-- I borrowed some stuff from https://getbootstrap.com/docs/5.1/forms/input-group/ -->
         <div class="row">
-            <div class="input-group mb-3">
+            <div class="col m-3 input-group">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">Options</button>
                 <ul class="dropdown-menu">
@@ -37,8 +39,7 @@
                     <li><a class="dropdown-item" href="#">Credits</a></li>
                 </ul>
                 <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                <!-- I changed the type from button to submit, so that it's easier to call in java -->
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Go!</button>
+                <button class="btn btn-outline-secondary" type="button" id="goBtn">Go!</button>
             </div>
         </div>
     </div>
