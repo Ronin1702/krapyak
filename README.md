@@ -4,6 +4,12 @@ Krapak is a spin-off of Kayak and provides 5 worst places to stay/dine in a give
 
 ## User Story
 
+```md
+As a traveler,
+I want to know what hotels and/or restaurants to avoid in the area I am staying,
+So that I may NOT have the worst accomadations and/or dining experience.
+```
+
 ## Branche Protection Stuff
 <li> The video in "06.3 Activity Files" indicates that we should set up the collaborative repo in this way</li>
 <li> The old "Include Adminstrator" option is replaced by the "Do not allow bypassing the above settings".</li>.
