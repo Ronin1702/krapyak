@@ -63,6 +63,30 @@ function initMap() { //write a function for initMap as indicated in the url tag
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
+  $("#goBtn").click(() => {
+    // Get the input from the user
+    const input = $("#locationInput").val();
+  
+    // Create a new geocoder object
+    const geocoder = new google.maps.Geocoder();
+  
+    // Geocode the input
+    geocoder.geocode({ address: input }, (results, status) => {
+      if (status === "OK") {
+        // Get the first result
+        const result = results[0];
+  
+        // Get the latitude and longitude
+        const lat = result.geometry.location.lat();
+        const lng = result.geometry.location.lng();
+  
+        // Set the map's center to the latitude and longitude
+        map.setCenter({ lat, lng });
+      } else {
+        console.log("Geocoder failed due to: " + status);
+      }
+    });
+  });
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {

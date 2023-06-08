@@ -1,4 +1,10 @@
 #map {
     height: 50vh;
   }
+
+footer {
+  display: flex;
+  justify-content: center;
+  font-family: 'Gasoek One', sans-serif;
+}
   
