@@ -1,17 +1,33 @@
+// google map API key
+const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
+// the two urls used, I noticed as long as you got initMap in the callback it doesn't matter which one I use
+function loadGoogleMapsApi(callbackInitMap) { //here I write a function to loadGoogleMapApi and append it to head
+  $("<script />", { //the argument callbackInitMap has a value of 'initMap' when this function is called.
+    src: `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places&callback=${callbackInitMap}`,
+    defer: true, //defer method to load better by loading after the our document is parsed but before DOMContentLoaded
+    async: true // use async to tell the browser to load the script as soon as it become available
+  }).appendTo("head");
+  
+};
+
+loadGoogleMapsApi("initMap"); // call the fuinction where 'initMap' is the argument that for the callback function.
+//below is where the script populate the map window and pop up a window saying 'Location Found' within the map area when the location is found.
+
+// below I pretty much copied from google map api doc
 let map, infoWindow;
 
-function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
+function initMap() { //write a function for initMap as indicated in the url tag
+  map = new google.maps.Map($("#map")[0], {
     center: { lat: -34.397, lng: 150.644 },
     zoom: 6,
   });
   infoWindow = new google.maps.InfoWindow();
 
-  const getCityBtn = document.getElementById("getCityBtn");
-  const cityInput = document.querySelector("input.form-control");
+  let autocomplete = new google.maps.places.Autocomplete($("#locationInput")[0], {
+    types: ["(cities)"]
+  });
 
-  getCityBtn.addEventListener("click", () => {
-    // Try HTML5 geolocation.
+  $("#getCityBtn").click(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -21,17 +37,16 @@ function initMap() {
           };
 
           infoWindow.setPosition(pos);
-          infoWindow.setContent("Location found.");
+          infoWindow.setContent("Current Location");
           infoWindow.open(map);
           map.setCenter(pos);
 
-          // Get city name based on coordinates
           const geocoder = new google.maps.Geocoder();
           geocoder.geocode({ location: pos }, (results, status) => {
             if (status === "OK") {
               if (results[0]) {
                 const cityName = getCityNameFromResults(results);
-                cityInput.value = cityName;
+                $("#locationInput").val(cityName);
               } else {
                 console.log("No results found");
               }
@@ -45,7 +60,6 @@ function initMap() {
         }
       );
     } else {
-      // Browser doesn't support Geolocation
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
@@ -73,26 +87,17 @@ function getCityNameFromResults(results) {
   return "";
 }
 
-window.initMap = initMap;
+window.initMap = initMap; //call the initMap function within a given window
 
-// When an drop down menu option is selected, the right card class is displayed, otherwise hidden.
-document.addEventListener("DOMContentLoaded", () => {
-  const hotelOption = document.getElementById("hotels");
-  const restaurantOption = document.getElementById("restaurants");
-  const hotelCard = document.getElementById("hotelLists");
-  const restaurantCard = document.getElementById("restaurantLists");
-
-  hotelOption.addEventListener("click", () => {
-    hotelCard.classList.add("d-block");
-    hotelCard.classList.remove("d-none");
-    restaurantCard.classList.add("d-none");
-    restaurantCard.classList.remove("d-block");
+// the jQuery below kicks on when DOMContentLoaded
+$(document).ready(() => {
+  $("#hotels").click(() => {
+    $("#hotelLists").removeClass("d-none").addClass("d-block");
+    $("#restaurantLists").removeClass("d-block").addClass("d-none");
   });
 
-  restaurantOption.addEventListener("click", () => {
-    hotelCard.classList.add("d-none");
-    hotelCard.classList.remove("d-block");
-    restaurantCard.classList.add("d-block");
-    restaurantCard.classList.remove("d-none");
+  $("#restaurants").click(() => {
+    $("#hotelLists").removeClass("d-block").addClass("d-none");
+    $("#restaurantLists").removeClass("d-none").addClass("d-block");
   });
 });
