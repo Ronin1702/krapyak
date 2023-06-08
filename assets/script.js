@@ -1,5 +1,22 @@
-// google map API key
+// API keys
 const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
+// const yelpApiKey = "DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx";
+// const url = 'https://api.yelp.com/v3/businesses/search?location=sanfrancisco&term=pizza';
+
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx',
+    cors: 'no-cors',
+  }
+};
+
+fetch('https://api.yelp.com/v3/businesses/search?location=ohio&categories=restaurants&sort_by=rating&limit=10', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
+
 // the two urls used, I noticed as long as you got initMap in the callback it doesn't matter which one I use
 function loadGoogleMapsApi(callbackInitMap) { //here I write a function to loadGoogleMapApi and append it to head
   $("<script />", { //the argument callbackInitMap has a value of 'initMap' when this function is called.
@@ -24,7 +41,7 @@ function initMap() { //write a function for initMap as indicated in the url tag
   infoWindow = new google.maps.InfoWindow();
 
   let autocomplete = new google.maps.places.Autocomplete($("#locationInput")[0], {
-    types: ["(cities)"]
+    cityName: ["(cities)"]
   });
 
   $("#getCityBtn").click(() => {
@@ -76,10 +93,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function getCityNameFromResults(results) {
+  console.log(results)
   for (let i = 0; i < results.length; i++) {
     for (let j = 0; j < results[i].address_components.length; j++) {
-      const types = results[i].address_components[j].types;
-      if (types.includes("locality") || types.includes("sublocality")) {
+      const cityName = results[i].address_components[j].cityName;
+      if (cityName.includes("locality") || cityName.includes("sublocality")) {
         return results[i].address_components[j].long_name;
       }
     }
