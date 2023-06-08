@@ -7,13 +7,12 @@ const options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx',
-    cors: 'no-cors',
+    Authorization: 'Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx'
   }
 };
-
-fetch('https://api.yelp.com/v3/businesses/search?location=ohio&categories=restaurants&sort_by=rating&limit=10', options)
+fetch('https://api.yelp.com/v3/businesses/search?location=Los%20Angeles&categories=Restaurants&sort_by=rating&limit=10')
   .then(response => response.json())
+ 
   .then(response => console.log(response))
   .catch(err => console.error(err));
 
