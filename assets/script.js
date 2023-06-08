@@ -10,6 +10,10 @@ function initMap() {
   const getCityBtn = document.getElementById("getCityBtn");
   const cityInput = document.querySelector("input.form-control");
 
+  let autocomplete = new google.maps.places.Autocomplete(cityInput, {
+    types: ["(cities)"]
+  });
+
   getCityBtn.addEventListener("click", () => {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -75,7 +79,7 @@ function getCityNameFromResults(results) {
 
 window.initMap = initMap;
 
-// When an drop down menu option is selected, the right card class is displayed, otherwise hidden.
+// When a drop down menu option is selected, the right card class is displayed, otherwise hidden.
 document.addEventListener("DOMContentLoaded", () => {
   const hotelOption = document.getElementById("hotels");
   const restaurantOption = document.getElementById("restaurants");

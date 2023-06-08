@@ -44,7 +44,7 @@
                     <li><a class="dropdown-item" id="credits">More Yak Options Coming Soon!</a></li>
                 </ul>
                 <input type="text" class="form-control"
-                    aria-label="Enter the text of curenet city name when globe icon is clicked">
+                    aria-label="Enter the text of curenet city name when globe icon is clicked" id="locationInput">
                 <button class="btn btn-outline-secondary" type="button" id="getCityBtn"><i
                         class="fa-solid fa-earth-asia"></i></button>
                 <button class="btn btn-outline-secondary" type="button" id="goBtn"><i
@@ -81,7 +81,7 @@
     <!-- Insert API KEY and set the callback id to initMap -->
     <script src="./assets/script.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4&callback=initMap" defer></script>
-        
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4&libraries=places&callback=initMap" defer></script>
 
 </body>
 
