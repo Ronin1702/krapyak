@@ -3,18 +3,6 @@ const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
 // const yelpApiKey = "DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx";
 // const url = 'https://api.yelp.com/v3/businesses/search?location=sanfrancisco&term=pizza';
 
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx'
-  }
-};
-fetch('https://api.yelp.com/v3/businesses/search?location=Los%20Angeles&categories=Restaurants&sort_by=rating&limit=10')
-  .then(response => response.json())
- 
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
 
 // the two urls used, I noticed as long as you got initMap in the callback it doesn't matter which one I use
 function loadGoogleMapsApi(callbackInitMap) { //here I write a function to loadGoogleMapApi and append it to head
