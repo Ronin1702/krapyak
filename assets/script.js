@@ -130,3 +130,20 @@ $(document).ready(() => {
     $("#restaurantLists").removeClass("d-none").addClass("d-block");
   });
 });
+async function fetchData() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx',
+      'Content-Type': 'application/json',
+    }
+  };
+
+  const response = await fetch('https://api.yelp.com/v3/businesses/search?latitude=34.053691&longitude=-118.242767&categories=Bars&sort_by=rating&limit=5', options);
+  const data = await response.json();
+
+  console.log(data);
+}
+
+fetchData();
