@@ -1,3 +1,8 @@
+const goBtn = document.getElementById('goBtn');
+let rowContent = document.querySelector('#outputContent');
+let locationInput = document.querySelector('#locationInput');
+
+
 // API keys
 const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
 // const yelpApiKey = "DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx";
@@ -130,3 +135,47 @@ $(document).ready(() => {
     $("#restaurantLists").removeClass("d-none").addClass("d-block");
   });
 });
+
+
+
+
+var myHeaders = new Headers();
+myHeaders.append("XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx", "");
+myHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://api.yelp.com/v3/businesses/search?location=Columbus&categories=bars&sort_by=rating&limit=20", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+// fetch('https://api.yelp.com/v3/businesses/search?location=Columbus&categories=bars&sort_by=rating&limit=20', options)
+//   .then(response => response.json())
+//   .then(response => console.log(response))
+//   .catch(err => console.error(err));
+
+// function appendInfo() {
+//   rowContent.append('Here are the WORST places to visit in ' + locationInput.value + ':');
+  
+
+// // fetch('https://try.readme.io/https://api.yelp.com/v3/businesses/search?location=Columbus&categories=bars&sort_by=rating&limit=20')
+// //   .then(function (response) {
+// //     return response.json();
+// //   })
+// //   .then(function (data) {
+// //     for (var i = 0; i < data.length; i++) {
+// //       rowContent.append(data[i]);
+// //     }
+// //   });
+
+
+
+// }
+
+
+// goBtn.addEventListener('click', appendInfo);
