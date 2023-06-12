@@ -31,6 +31,23 @@ function initMap() { //write a function for initMap as indicated in the url tag
     cityName: ["(cities)"]
   });
 
+  // Add an event listener to the autocomplete object for the "place_changed" event.
+  autocomplete.addListener("place_changed", function() {
+    // Get the selected place from the autocomplete object.
+    const place = autocomplete.getPlace();
+  
+    // If the place is not null, set the map's center to the place's location.
+    if (place != null) {
+      map.setCenter(place.geometry.location);
+  
+      // Create a new marker object.
+      const marker = new google.maps.Marker({
+        position: place.geometry.location,
+        map: map,
+      });
+    }
+  });
+
   $("#getCityBtn").click(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -86,6 +103,10 @@ function initMap() { //write a function for initMap as indicated in the url tag
   
         // Set the map's center to the latitude and longitude
         map.setCenter({ lat, lng });
+        const marker = new google.maps.Marker({
+          position: { lat: lat, lng: lng },
+          map: map,
+        });
       } else {
         console.log("Geocoder failed due to: " + status);
       }
@@ -111,6 +132,10 @@ function initMap() { //write a function for initMap as indicated in the url tag
   
         // Set the map's center to the latitude and longitude
         map.setCenter({ lat, lng });
+        const marker = new google.maps.Marker({
+          position: { lat: lat, lng: lng },
+          map: map,
+        });
       } else {
         console.log("Geocoder failed due to: " + status);
       }
