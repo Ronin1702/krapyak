@@ -1,5 +1,9 @@
-// google map API key
+// API keys
 const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
+// const yelpApiKey = "DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx";
+// const url = 'https://api.yelp.com/v3/businesses/search?location=sanfrancisco&term=pizza';
+
+
 // the two urls used, I noticed as long as you got initMap in the callback it doesn't matter which one I use
 function loadGoogleMapsApi(callbackInitMap) { //here I write a function to loadGoogleMapApi and append it to head
   $("<script />", { //the argument callbackInitMap has a value of 'initMap' when this function is called.
@@ -24,7 +28,24 @@ function initMap() { //write a function for initMap as indicated in the url tag
   infoWindow = new google.maps.InfoWindow();
 
   let autocomplete = new google.maps.places.Autocomplete($("#locationInput")[0], {
-    types: ["(cities)"]
+    cityName: ["(cities)"]
+  });
+
+  // Add an event listener to the autocomplete object for the "place_changed" event.
+  autocomplete.addListener("place_changed", function() {
+    // Get the selected place from the autocomplete object.
+    const place = autocomplete.getPlace();
+  
+    // If the place is not null, set the map's center to the place's location.
+    if (place != null) {
+      map.setCenter(place.geometry.location);
+  
+      // Create a new marker object.
+      const marker = new google.maps.Marker({
+        position: place.geometry.location,
+        map: map,
+      });
+    }
   });
 
   $("#getCityBtn").click(() => {
@@ -82,12 +103,74 @@ function initMap() { //write a function for initMap as indicated in the url tag
   
         // Set the map's center to the latitude and longitude
         map.setCenter({ lat, lng });
+        const marker = new google.maps.Marker({
+          position: { lat: lat, lng: lng },
+          map: map,
+        });
       } else {
         console.log("Geocoder failed due to: " + status);
       }
     });
   });
+
+  $("#locationInput").on("enter", function() {
+    // Get the input from the user
+    const input = $("#locationInput").val();
+  
+    // Create a new geocoder object
+    const geocoder = new google.maps.Geocoder();
+  
+    // Geocode the input
+    geocoder.geocode({ address: input }, (results, status) => {
+      if (status === "OK") {
+        // Get the first result
+        const result = results[0];
+  
+        // Get the latitude and longitude
+        const lat = result.geometry.location.lat();
+        const lng = result.geometry.location.lng();
+  
+        // Set the map's center to the latitude and longitude
+        map.setCenter({ lat, lng });
+        const marker = new google.maps.Marker({
+          position: { lat: lat, lng: lng },
+          map: map,
+        });
+      } else {
+        console.log("Geocoder failed due to: " + status);
+      }
+    });
+  });
+  
+  $('#locationInput').on('keypress', function (event) {
+    if (event.which === 13 && $("#locationInput").is(":focus")) {
+      event.preventDefault();
+      const input = $("#locationInput").val();
+  
+      // Create a new geocoder object
+      const geocoder = new google.maps.Geocoder();
+  
+      // Geocode the input
+      geocoder.geocode({ address: input }, (results, status) => {
+        if (status === "OK") {
+          // Get the first result
+          const result = results[0];
+  
+          // Get the latitude and longitude
+          const lat = result.geometry.location.lat();
+          const lng = result.geometry.location.lng();
+  
+          // Set the map's center to the latitude and longitude
+          map.setCenter({ lat, lng });
+        } else {
+          console.log("Geocoder failed due to: " + status);
+        }
+      });
+    }
+  });
+  
 }
+
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
@@ -100,10 +183,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function getCityNameFromResults(results) {
+  console.log(results)
   for (let i = 0; i < results.length; i++) {
     for (let j = 0; j < results[i].address_components.length; j++) {
-      const types = results[i].address_components[j].types;
-      if (types.includes("locality") || types.includes("sublocality")) {
+      const cityName = results[i].address_components[j].cityName;
+      if (cityName.includes("locality") || cityName.includes("sublocality")) {
         return results[i].address_components[j].long_name;
       }
     }
@@ -125,3 +209,20 @@ $(document).ready(() => {
     $("#restaurantLists").removeClass("d-none").addClass("d-block");
   });
 });
+async function fetchData() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx',
+      'Content-Type': 'application/json',
+    }
+  };
+
+  const response = await fetch('https://api.yelp.com/v3/businesses/search?latitude=34.053691&longitude=-118.242767&categories=Bars&sort_by=rating&limit=5', options);
+  const data = await response.json();
+
+  console.log(data);
+}
+
+fetchData();
