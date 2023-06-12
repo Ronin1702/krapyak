@@ -36,6 +36,23 @@ function initMap() { //write a function for initMap as indicated in the url tag
     cityName: ["(cities)"]
   });
 
+  // Add an event listener to the autocomplete object for the "place_changed" event.
+  autocomplete.addListener("place_changed", function() {
+    // Get the selected place from the autocomplete object.
+    const place = autocomplete.getPlace();
+  
+    // If the place is not null, set the map's center to the place's location.
+    if (place != null) {
+      map.setCenter(place.geometry.location);
+  
+      // Create a new marker object.
+      const marker = new google.maps.Marker({
+        position: place.geometry.location,
+        map: map,
+      });
+    }
+  });
+
   $("#getCityBtn").click(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -91,12 +108,74 @@ function initMap() { //write a function for initMap as indicated in the url tag
   
         // Set the map's center to the latitude and longitude
         map.setCenter({ lat, lng });
+        const marker = new google.maps.Marker({
+          position: { lat: lat, lng: lng },
+          map: map,
+        });
       } else {
         console.log("Geocoder failed due to: " + status);
       }
     });
   });
+
+  $("#locationInput").on("enter", function() {
+    // Get the input from the user
+    const input = $("#locationInput").val();
+  
+    // Create a new geocoder object
+    const geocoder = new google.maps.Geocoder();
+  
+    // Geocode the input
+    geocoder.geocode({ address: input }, (results, status) => {
+      if (status === "OK") {
+        // Get the first result
+        const result = results[0];
+  
+        // Get the latitude and longitude
+        const lat = result.geometry.location.lat();
+        const lng = result.geometry.location.lng();
+  
+        // Set the map's center to the latitude and longitude
+        map.setCenter({ lat, lng });
+        const marker = new google.maps.Marker({
+          position: { lat: lat, lng: lng },
+          map: map,
+        });
+      } else {
+        console.log("Geocoder failed due to: " + status);
+      }
+    });
+  });
+  
+  $('#locationInput').on('keypress', function (event) {
+    if (event.which === 13 && $("#locationInput").is(":focus")) {
+      event.preventDefault();
+      const input = $("#locationInput").val();
+  
+      // Create a new geocoder object
+      const geocoder = new google.maps.Geocoder();
+  
+      // Geocode the input
+      geocoder.geocode({ address: input }, (results, status) => {
+        if (status === "OK") {
+          // Get the first result
+          const result = results[0];
+  
+          // Get the latitude and longitude
+          const lat = result.geometry.location.lat();
+          const lng = result.geometry.location.lng();
+  
+          // Set the map's center to the latitude and longitude
+          map.setCenter({ lat, lng });
+        } else {
+          console.log("Geocoder failed due to: " + status);
+        }
+      });
+    }
+  });
+  
 }
+
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
