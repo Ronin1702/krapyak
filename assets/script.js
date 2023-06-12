@@ -216,7 +216,7 @@ $(document).ready(() => {
 });
 
 
-
+// fetch request from Yelp Fusion API:
 
 var myHeaders = new Headers();
 myHeaders.append("XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx", "");
@@ -228,33 +228,8 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://api.yelp.com/v3/businesses/search?location=Columbus&categories=bars&sort_by=rating&limit=20", requestOptions)
+fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=columbus&radius=40000&sort_by=rating&limit=30&offset=969", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 
-// fetch('https://api.yelp.com/v3/businesses/search?location=Columbus&categories=bars&sort_by=rating&limit=20', options)
-//   .then(response => response.json())
-//   .then(response => console.log(response))
-//   .catch(err => console.error(err));
-
-// function appendInfo() {
-//   rowContent.append('Here are the WORST places to visit in ' + locationInput.value + ':');
-  
-
-// // fetch('https://try.readme.io/https://api.yelp.com/v3/businesses/search?location=Columbus&categories=bars&sort_by=rating&limit=20')
-// //   .then(function (response) {
-// //     return response.json();
-// //   })
-// //   .then(function (data) {
-// //     for (var i = 0; i < data.length; i++) {
-// //       rowContent.append(data[i]);
-// //     }
-// //   });
-
-
-
-// }
-
-
-// goBtn.addEventListener('click', appendInfo);
