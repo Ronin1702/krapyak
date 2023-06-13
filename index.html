@@ -52,8 +52,12 @@
                     </li>
                     <li><a class="dropdown-item" id="credits">More Yak Options Coming Soon!</a></li>
                 </ul>
+                <span class="input-group-text">Location</span>
                 <input type="text" class="form-control"
-                    aria-label="Enter the text of curenet city name when globe icon is clicked" id="locationInput">
+                    aria-label="location" id="locationInput">
+                    <span class="input-group-text">Category</span>
+                    <input type="text" class="form-control"
+                    aria-label="category" id="categoryInput">
                 <button class="btn btn-outline-secondary" type="button" id="getCityBtn"><i
                         class="fa-solid fa-earth-asia"></i></button>
                 <button class="btn btn-outline-secondary" type="button" id="goBtn"><i
@@ -62,16 +66,16 @@
         </div>
         <div class="row g-2 mx-3">
             <div class="col-3" id="outputContent">
-                <div class="card d-none" id="hotelLists" style="width: 18rem;">
+                <!-- <div class="card d-none" id="hotelLists" style="width: 18rem;">
                     <div class="card-header">
                         Hotels
                     </div>
                     <ol class="list-group list-group-flush"></ol>
-                </div>
+                </div> -->
 
                 <div class="card d-none" id="restaurantLists" style="width: 18rem;">
-                    <div class="card-header"> Restaurants </div>
-                    <ol class="list-group list-group-flush" id="restaurantList">
+                    <div class="card-header" id="listHeader"></div>
+                    <ol class="card-body list-group list-group-flush" id="restaurantList">
                     </ol>
                 </div>
             </div>
