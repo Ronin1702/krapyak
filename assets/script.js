@@ -279,25 +279,6 @@ function getSearchInput() {
     })
     .catch(error => console.log('error', error));
 }
-// When the goBtn is clicked the above fetch link get the location inputs in the textbox.
-document.getElementById('goBtn').addEventListener('click', getSearchInput);
 
-// Append and Display the Restaurant results in the list from localStorage
-function displayRestaurants() {
-
-  // Retrieve the names from localStorage
-  let bizNames = JSON.parse(localStorage.getItem('bizNames'));
-
-  // Get the restaurantList element
-  const listItems = document.getElementById('list');
-  // Clear the existing list items
-  listItems.innerHTML = '';
-
-  // Create a list item for each name and append it to the restaurantList
-  bizNames.forEach(name => {
-    const listItem = document.createElement('li');
-    listItem.textContent = name;
-    listItem.className = "list-group-item";
-    listItems.appendChild(listItem);
-  });
-}
+document.getElementById('goBtn').addEventListener('click', getRearchInput);
+document.getAnimations('locateBtn').addEventListener('click',getRearchInput);
