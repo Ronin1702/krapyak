@@ -207,17 +207,6 @@ function getCityStateFromResults(results) {
 window.initMap = initMap; //call the initMap function within a given window
 
 // the jQuery below kicks on when DOMContentLoaded
-$(document).ready(() => {
-  $("#hotels").click(() => {
-    $("#hotelLists").removeClass("d-none").addClass("d-block");
-    $("#restaurantLists").removeClass("d-block").addClass("d-none");
-  });
-
-  $("#restaurants").click(() => {
-    $("#hotelLists").removeClass("d-block").addClass("d-none");
-    $("#restaurantLists").removeClass("d-none").addClass("d-block");
-  });
-});
 
 // Write a function to get the city or location input:
 function getSearchInput() {
@@ -280,15 +269,15 @@ function displayRestaurants() {
   let bizNames = JSON.parse(localStorage.getItem('bizNames'));
 
   // Get the restaurantList element
-  const restaurantList = document.getElementById('restaurantList');
+  const listItems = document.getElementById('list');
   // Clear the existing list items
-  restaurantList.innerHTML = '';
+  listItems.innerHTML = '';
 
   // Create a list item for each name and append it to the restaurantList
   bizNames.forEach(name => {
     const listItem = document.createElement('li');
     listItem.textContent = name;
     listItem.className = "list-group-item";
-    restaurantList.appendChild(listItem);
+    listItems.appendChild(listItem);
   });
 }
