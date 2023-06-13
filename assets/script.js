@@ -1,3 +1,8 @@
+const goBtn = document.getElementById('goBtn');
+let rowContent = document.querySelector('#outputContent');
+let locationInput = document.querySelector('#locationInput');
+
+
 // API keys
 const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
 // const yelpApiKey = "DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx";
@@ -209,20 +214,22 @@ $(document).ready(() => {
     $("#restaurantLists").removeClass("d-none").addClass("d-block");
   });
 });
-async function fetchData() {
-  const options = {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx',
-      'Content-Type': 'application/json',
-    }
-  };
 
-  const response = await fetch('https://api.yelp.com/v3/businesses/search?latitude=34.053691&longitude=-118.242767&categories=Bars&sort_by=rating&limit=5', options);
-  const data = await response.json();
 
-  console.log(data);
-}
+// fetch request from Yelp Fusion API:
 
-fetchData();
+var myHeaders = new Headers();
+myHeaders.append("XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx", "");
+myHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=columbus&radius=40000&sort_by=rating&limit=30&offset=969", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
