@@ -278,7 +278,37 @@ function getSearchInput() {
         .catch(error => console.log('error', error));
     })
     .catch(error => console.log('error', error));
+    function displayRestaurants() {
+      // Get the first three restaurants from the `bizNames` array.
+      const restaurants = bizNames.slice(0, 3);
+    
+      // Create a new ul element to hold the restaurants.
+      const listCard = document.getElementById('list');
+    
+      // Loop through the restaurants and add them to the ul element.
+      for (const restaurant of restaurants) {
+        const list = document.createElement('li');
+    
+        // Add the restaurant name to the li element.
+        const listItemName = document.createElement('h4');
+        listItemName.textContent = restaurant.name;
+        list.appendChild(listItemName);
+    
+        // Add the restaurant address to the li element.
+        const listItemAddress = document.createElement('p');
+        listItemAddress.textContent = restaurant.address;
+        list.appendChild(listItemAddress);
+    
+        // Add the restaurant rating to the li element.
+        const listItemRating = document.createElement('p');
+        listItemRating.textContent = restaurant.rating;
+        list.appendChild(listItemRating);
+    
+        // Add the li element to the listCard ul element.
+        listCard.appendChild(list);
+      }
+    }
 }
 
 document.getElementById('goBtn').addEventListener('click', getRearchInput);
-document.getAnimations('locateBtn').addEventListener('click',getRearchInput);
+document.getAnimations('getCityBtn').addEventListener('click',getRearchInput);
