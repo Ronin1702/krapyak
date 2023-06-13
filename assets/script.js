@@ -4,7 +4,11 @@ let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
 let categoryInput = document.querySelector('#categoryInput');
 let listHeader = document.querySelector('#listHeader');
-
+function capitalizeEachWord(str) {
+  return str.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
 // API keys
 const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
 // const yelpApiKey = "DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx";
@@ -92,10 +96,11 @@ function initMap() { //write a function for initMap as indicated in the url tag
     }
   });
   $("#goBtn").click(() => {
-    listHeader.textContent = categoryInput.value;
+    
+    listHeader.textContent = capitalizeEachWord(categoryInput.value);
     // Get the input from the user
     const input = $("#locationInput").val();
-        // Create a new geocoder object
+    // Create a new geocoder object
     const geocoder = new google.maps.Geocoder();
 
     // Geocode the input
@@ -222,18 +227,17 @@ function getSearchInput() {
     headers: yelpHeaders,
     redirect: 'follow'
   };
-  console.log(categoryInput.value) 
   // fetch restaurant json
-  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories="+ categoryInput.value +"&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
-  .then(response => response.json())
+  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + categoryInput.value + "&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
+    .then(response => response.json())
     .then(result => {
       console.log('Result:', result);
-      console.log(categoryInput.value)
+      console.log(categoryInput.value)//check the value I put in the fetch url above
       let totalArray = result.total
       console.log('totalArray:', totalArray)
       // conditional (ternary) operator: If the arry is less then 1000 then use totalArray -5, if not  :  then use 1000-5.
       let offsetArray = totalArray < 1000 ? totalArray - 5 : 1000 - 5;
-      console.log('offsetArray:', offsetArray)
+      console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
       yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
@@ -244,14 +248,14 @@ function getSearchInput() {
         redirect: 'follow'
       };
       // Perform a new fetch operation using the offset parameter
-      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories="+ categoryInput+"&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
+      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + categoryInput.value + "&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
         .then(response => response.json())
         .then(newResult => {
           console.log(newResult)
           let bizNames = newResult.businesses.map(business => business.name).reverse(); //get bizNames in reversed array order
           // let bizNames = newResult.businesses.map(business => business.name); //get bizNames in default array order
           localStorage.setItem('bizNames', JSON.stringify(bizNames));
-          console.log(bizNames); // To see the stored names2
+          console.log('Array Reversed:', bizNames); // To see the stored names2
 
           // Call the function to display the restaurants
           displayRestaurants();
