@@ -19,13 +19,14 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <title>Krapyak</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛶</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛶</text></svg>">
     <!-- Below I link our local css  -->
     <link rel="stylesheet" type="text/css" href="./assets/CSS/styles.css" />
     <script type="module" src="./assets/script.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Cedarville+Cursive&family=Cherry+Bomb+One&family=Diphylleia&family=Gasoek+One&display=swap');
-      </style>
+    </style>
 </head>
 
 <body>
@@ -59,27 +60,18 @@
                         class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
-        <div class="row justify-content-around m-3">
+        <div class="row g-2 mx-3">
             <div class="col-3" id="outputContent">
                 <div class="card d-none" id="hotelLists" style="width: 18rem;">
                     <div class="card-header">
                         Hotels
                     </div>
-                    <ol class="list-group list-group-flush">
-                        <li class="list-group-item">St.Regis</li>
-                        <li class="list-group-item">Ritz-Carton</li>
-                        <li class="list-group-item">Marriot</li>
-                    </ol>
+                    <ol class="list-group list-group-flush"></ol>
                 </div>
-                
+
                 <div class="card d-none" id="restaurantLists" style="width: 18rem;">
-                    <div class="card-header">
-                        Restaurants
-                    </div>
+                    <div class="card-header"> Restaurants </div>
                     <ol class="list-group list-group-flush" id="restaurantList">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
                     </ol>
                 </div>
             </div>
@@ -88,7 +80,7 @@
     </div>
     <!-- Insert API KEY and set the callback id to initMap -->
     <script src="./assets/script.js"></script>
-     <footer class="row fixed-bottom mx-3 mb-2 text-center rounded">
+    <footer class="row fixed-bottom mx-3 mb-2 text-center rounded">
         <h5> Designed, Coded, and 🌳 Cultivated by Team 💪 ONE ™</h5>
     </footer>
 </body>

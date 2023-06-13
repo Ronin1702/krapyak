@@ -28,7 +28,7 @@ let map, infoWindow;
 function initMap() { //write a function for initMap as indicated in the url tag
   map = new google.maps.Map($("#map")[0], {
     center: { lat: -34.397, lng: 150.644 },
-    zoom: 6,
+    zoom: 12,
   });
   infoWindow = new google.maps.InfoWindow();
 
@@ -198,7 +198,7 @@ function getCityStateFromResults(results) {
       state = results[0].address_components[i].short_name;
     }
   }
-  
+
   return city && state ? city + ', ' + state : '';
 }
 
@@ -218,25 +218,75 @@ $(document).ready(() => {
 });
 
 // Write a function to get the city or location input:
-function getRearchInput() {
+function getSearchInput() {
+  localStorage.clear();  // clear local storage
   const searchInput = document.getElementById('locationInput').value;
-
+  
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
-  // myHeaders.append("XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx", "");
-  elpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+  yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
 
   var requestOptions = {
     method: 'GET',
     headers: yelpHeaders,
     redirect: 'follow'
   };
-  // 10 results starting after the 989th. 
+
   // fetch restaurant json
-  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=restaurants&radius=40000&sort_by=rating&limit=10&offset=989", requestOptions)
+  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=restaurants&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => {
+      console.log('Result:', result);
+      let totalArray = result.total
+      console.log('totalArray:', totalArray)
+      // conditional (ternary) operator: If the arry is less then 1000 then use totalArray -5, if not  :  then use 1000-5.
+      let offsetArray = totalArray < 1000 ? totalArray - 5 : 1000 - 5;
+      console.log('offsetArray:', offsetArray)
+      // fetch request from Yelp Fusion API:
+      var yelpHeaders = new Headers();
+      yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+
+      var requestOptions = {
+        method: 'GET',
+        headers: yelpHeaders,
+        redirect: 'follow'
+      };
+      // Perform a new fetch operation using the offset parameter
+      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=restaurants&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
+        .then(response => response.json())
+        .then(newResult => {
+          console.log(newResult)
+          let bizNames = newResult.businesses.map(business => business.name).reverse(); //get bizNames in reversed array order
+          // let bizNames = newResult.businesses.map(business => business.name); //get bizNames in default array order
+          localStorage.setItem('bizNames', JSON.stringify(bizNames));
+          console.log(bizNames); // To see the stored names2
+
+          // Call the function to display the restaurants
+          displayRestaurants();
+        })
+        .catch(error => console.log('error', error));
+    })
     .catch(error => console.log('error', error));
 }
+// When the goBtn is clicked the above fetch link get the location inputs in the textbox.
+document.getElementById('goBtn').addEventListener('click', getSearchInput);
 
-document.getElementById('goBtn').addEventListener('click', getRearchInput);
+// Append and Display the Restaurant results in the list from localStorage
+function displayRestaurants() {
+
+  // Retrieve the names from localStorage
+  let bizNames = JSON.parse(localStorage.getItem('bizNames'));
+
+  // Get the restaurantList element
+  const restaurantList = document.getElementById('restaurantList');
+  // Clear the existing list items
+  restaurantList.innerHTML = '';
+
+  // Create a list item for each name and append it to the restaurantList
+  bizNames.forEach(name => {
+    const listItem = document.createElement('li');
+    listItem.textContent = name;
+    listItem.className = "list-group-item";
+    restaurantList.appendChild(listItem);
+  });
+}
