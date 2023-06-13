@@ -4,11 +4,29 @@ let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
 let categoryInput = document.querySelector('#categoryInput');
 let listHeader = document.querySelector('#listHeader');
+let images = document.querySelectorAll('.top-city-img');
 function capitalizeEachWord(str) {
   return str.replace(/\w\S*/g, function (txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 }
+
+function picLocation(element) {
+  var locaInfo = element.querySelector('img').getAttribute('alt');
+  return locaInfo;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  images.forEach(function(image) {
+    image.addEventListener('click', function() {
+      locationInput.value = picLocation(this);
+      // set Hotels = category
+      categoryInput.value = "restaurants";
+      $("#goBtn").click();
+      console.log(locationInput);
+    });
+  });
+});
 // API keys
 const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
 
@@ -30,7 +48,7 @@ let map, infoWindow;
 
 function initMap() { //write a function for initMap as indicated in the url tag
   map = new google.maps.Map($("#map")[0], {
-    center: { lat: -34.397, lng: 150.644 },
+    center: { lat: 39.9833, lng: -82.9833 },
     zoom: 12,
   });
   infoWindow = new google.maps.InfoWindow();
@@ -283,3 +301,4 @@ function displayRestaurants() {
     listItems.appendChild(listItem);
   });
 }
+
