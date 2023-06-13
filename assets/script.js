@@ -1,13 +1,34 @@
 const goBtn = document.getElementById('goBtn');
 let rowContent = document.querySelector('#outputContent');
 let locationInput = document.querySelector('#locationInput');
+// Get a reference to the 'categoryInput' and 'listHeader' element
+let categoryInput = document.querySelector('#categoryInput');
+let listHeader = document.querySelector('#listHeader');
+let images = document.querySelectorAll('.top-city-img');
+function capitalizeEachWord(str) {
+  return str.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
 
+function picLocation(element) {
+  var locaInfo = element.querySelector('img').getAttribute('alt');
+  return locaInfo;
+}
 
+document.addEventListener('DOMContentLoaded', function() {
+  images.forEach(function(image) {
+    image.addEventListener('click', function() {
+      locationInput.value = picLocation(this);
+      // set Hotels = category
+      categoryInput.value = "restaurants";
+      $("#goBtn").click();
+      console.log(locationInput);
+    });
+  });
+});
 // API keys
 const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
-// const yelpApiKey = "DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx";
-// const url = 'https://api.yelp.com/v3/businesses/search?location=sanfrancisco&term=pizza';
-
 
 // the two urls used, I noticed as long as you got initMap in the callback it doesn't matter which one I use
 function loadGoogleMapsApi(callbackInitMap) { //here I write a function to loadGoogleMapApi and append it to head
@@ -27,8 +48,8 @@ let map, infoWindow;
 
 function initMap() { //write a function for initMap as indicated in the url tag
   map = new google.maps.Map($("#map")[0], {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 6,
+    center: { lat: 39.9833, lng: -82.9833 },
+    zoom: 12,
   });
   infoWindow = new google.maps.InfoWindow();
 
@@ -51,7 +72,7 @@ function initMap() { //write a function for initMap as indicated in the url tag
         map: map,
       });
     }
-    });
+  });
 
   $("#getCityBtn").click(() => {
     if (navigator.geolocation) {
@@ -71,8 +92,8 @@ function initMap() { //write a function for initMap as indicated in the url tag
           geocoder.geocode({ location: pos }, (results, status) => {
             if (status === "OK") {
               if (results[0]) {
-                const cityName = getCityNameFromResults(results);
-                $("#locationInput").val(cityName);
+                const cityNameState = getCityStateFromResults(results);
+                $("#locationInput").val(cityNameState);
               } else {
                 console.log("No results found");
               }
@@ -90,9 +111,10 @@ function initMap() { //write a function for initMap as indicated in the url tag
     }
   });
   $("#goBtn").click(() => {
+    
+    listHeader.textContent = capitalizeEachWord(categoryInput.value);
     // Get the input from the user
     const input = $("#locationInput").val();
-
     // Create a new geocoder object
     const geocoder = new google.maps.Geocoder();
 
@@ -187,72 +209,95 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 }
 
-function getCityNameFromResults(results) {
-  console.log(results)
-  for (let i = 0; i < results.length; i++) {
-    for (let j = 0; j < results[i].address_components.length; j++) {
-      const cityName = results[i].address_components[j].cityName;
-      if (cityName.includes("locality") || cityName.includes("sublocality")) {
-        return results[i].address_components[j].long_name;
-      }
+function getCityStateFromResults(results) {
+  let city, state;
+
+  for (let i = 0; i < results[0].address_components.length; i++) {
+    if (results[0].address_components[i].types.includes('locality')) {
+      city = results[0].address_components[i].long_name;
+    }
+    if (results[0].address_components[i].types.includes('administrative_area_level_1')) {
+      state = results[0].address_components[i].short_name;
     }
   }
-  return "";
+
+  return city && state ? city + ', ' + state : '';
 }
 
 window.initMap = initMap; //call the initMap function within a given window
 
 // the jQuery below kicks on when DOMContentLoaded
-$(document).ready(() => {
-  $("#hotels").click(() => {
-    $("#hotelLists").removeClass("d-none").addClass("d-block");
-    $("#restaurantLists").removeClass("d-block").addClass("d-none");
-  });
 
-  $("#restaurants").click(() => {
-    $("#hotelLists").removeClass("d-block").addClass("d-none");
-    $("#restaurantLists").removeClass("d-none").addClass("d-block");
-  });
-});
-
-<<<<<<< HEAD
-var myHeaders = new Headers();
-myHeaders.append("XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx", "");
-myHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
-
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow',
-};
-
-fetch("https://api.yelp.com/v3/businesses/search?location=columbus&radius=40000&sort_by=rating&limit=30&offset=969", requestOptions)
-  .then(response => response.JSON())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-=======
 // Write a function to get the city or location input:
-function getRearchInput(){
+function getSearchInput() {
+  localStorage.clear();  // clear local storage
   const searchInput = document.getElementById('locationInput').value;
 
-// fetch request from Yelp Fusion API:
-var myHeaders = new Headers();
-myHeaders.append("XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx", "");
-myHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+  // fetch request from Yelp Fusion API:
+  var yelpHeaders = new Headers();
+  yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
 
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-// 10 results starting after the 989th. 
-// fetch restaurant json
-fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=restaurants&radius=40000&sort_by=rating&limit=10&offset=989", requestOptions)
-  .then(response => response.json())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+  var requestOptions = {
+    method: 'GET',
+    headers: yelpHeaders,
+    redirect: 'follow'
+  };
+  // fetch restaurant json
+  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + categoryInput.value + "&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
+    .then(response => response.json())
+    .then(result => {
+      console.log('Result:', result);
+      console.log(categoryInput.value)//check the value I put in the fetch url above
+      let totalArray = result.total
+      console.log('totalArray:', totalArray)
+      // conditional (ternary) operator: If the arry is less then 1000 then use totalArray -5, if not  :  then use 1000-5.
+      let offsetArray = totalArray < 1000 ? totalArray - 5 : 1000 - 5;
+      console.log('Update offsetArray:', offsetArray)
+      // fetch request from Yelp Fusion API:
+      var yelpHeaders = new Headers();
+      yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+
+      var requestOptions = {
+        method: 'GET',
+        headers: yelpHeaders,
+        redirect: 'follow'
+      };
+      // Perform a new fetch operation using the offset parameter
+      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + categoryInput.value + "&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
+        .then(response => response.json())
+        .then(newResult => {
+          console.log(newResult)
+          let bizNames = newResult.businesses.map(business => business.name).reverse(); //get bizNames in reversed array order
+          // let bizNames = newResult.businesses.map(business => business.name); //get bizNames in default array order
+          localStorage.setItem('bizNames', JSON.stringify(bizNames));
+          console.log('Array Reversed:', bizNames); // To see the stored names2
+
+          // Call the function to display the restaurants
+          displayRestaurants();
+        })
+        .catch(error => console.log('error', error));
+    })
+    .catch(error => console.log('error', error));
 }
+// When the goBtn is clicked the above fetch link get the location inputs in the textbox.
+document.getElementById('goBtn').addEventListener('click', getSearchInput);
 
-document.getElementById('goBtn').addEventListener('click', getRearchInput);
-document.getAnimations('locateBtn').addEventListener('click',getRearchInput);
->>>>>>> 91d6127122c7abe8b6df13407f9c6ff3ce1db334
+// Append and Display the Restaurant results in the list from localStorage
+function displayRestaurants() {
+
+  // Retrieve the names from localStorage
+  let bizNames = JSON.parse(localStorage.getItem('bizNames'));
+
+  // Get the restaurantList element
+  const listItems = document.getElementById('list');
+  // Clear the existing list items
+  listItems.innerHTML = '';
+
+  // Create a list item for each name and append it to the restaurantList
+  bizNames.forEach(name => {
+    const listItem = document.createElement('li');
+    listItem.textContent = name;
+    listItem.className = "list-group-item";
+    listItems.appendChild(listItem);
+  });
+}
