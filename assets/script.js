@@ -16,7 +16,7 @@ function loadGoogleMapsApi(callbackInitMap) { //here I write a function to loadG
     defer: true, //defer method to load better by loading after the our document is parsed but before DOMContentLoaded
     async: true // use async to tell the browser to load the script as soon as it become available
   }).appendTo("head");
-  
+
 };
 
 loadGoogleMapsApi("initMap"); // call the fuinction where 'initMap' is the argument that for the callback function.
@@ -37,14 +37,14 @@ function initMap() { //write a function for initMap as indicated in the url tag
   });
 
   // Add an event listener to the autocomplete object for the "place_changed" event.
-  autocomplete.addListener("place_changed", function() {
+  autocomplete.addListener("place_changed", function () {
     // Get the selected place from the autocomplete object.
     const place = autocomplete.getPlace();
-  
+
     // If the place is not null, set the map's center to the place's location.
     if (place != null) {
       map.setCenter(place.geometry.location);
-  
+
       // Create a new marker object.
       const marker = new google.maps.Marker({
         position: place.geometry.location,
@@ -92,20 +92,20 @@ function initMap() { //write a function for initMap as indicated in the url tag
   $("#goBtn").click(() => {
     // Get the input from the user
     const input = $("#locationInput").val();
-  
+
     // Create a new geocoder object
     const geocoder = new google.maps.Geocoder();
-  
+
     // Geocode the input
     geocoder.geocode({ address: input }, (results, status) => {
       if (status === "OK") {
         // Get the first result
         const result = results[0];
-  
+
         // Get the latitude and longitude
         const lat = result.geometry.location.lat();
         const lng = result.geometry.location.lng();
-  
+
         // Set the map's center to the latitude and longitude
         map.setCenter({ lat, lng });
         const marker = new google.maps.Marker({
@@ -118,23 +118,23 @@ function initMap() { //write a function for initMap as indicated in the url tag
     });
   });
 
-  $("#locationInput").on("enter", function() {
+  $("#locationInput").on("enter", function () {
     // Get the input from the user
     const input = $("#locationInput").val();
-  
+
     // Create a new geocoder object
     const geocoder = new google.maps.Geocoder();
-  
+
     // Geocode the input
     geocoder.geocode({ address: input }, (results, status) => {
       if (status === "OK") {
         // Get the first result
         const result = results[0];
-  
+
         // Get the latitude and longitude
         const lat = result.geometry.location.lat();
         const lng = result.geometry.location.lng();
-  
+
         // Set the map's center to the latitude and longitude
         map.setCenter({ lat, lng });
         const marker = new google.maps.Marker({
@@ -146,25 +146,25 @@ function initMap() { //write a function for initMap as indicated in the url tag
       }
     });
   });
-  
+
   $('#locationInput').on('keypress', function (event) {
     if (event.which === 13 && $("#locationInput").is(":focus")) {
       event.preventDefault();
       const input = $("#locationInput").val();
-  
+
       // Create a new geocoder object
       const geocoder = new google.maps.Geocoder();
-  
+
       // Geocode the input
       geocoder.geocode({ address: input }, (results, status) => {
         if (status === "OK") {
           // Get the first result
           const result = results[0];
-  
+
           // Get the latitude and longitude
           const lat = result.geometry.location.lat();
           const lng = result.geometry.location.lng();
-  
+
           // Set the map's center to the latitude and longitude
           map.setCenter({ lat, lng });
         } else {
@@ -173,7 +173,7 @@ function initMap() { //write a function for initMap as indicated in the url tag
       });
     }
   });
-  
+
 }
 
 
@@ -215,9 +215,11 @@ $(document).ready(() => {
   });
 });
 
+// Write a function to get the city or location input:
+function getRearchInput(){
+  const searchInput = document.getElementById('locationInput').value;
 
 // fetch request from Yelp Fusion API:
-
 var myHeaders = new Headers();
 myHeaders.append("XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx", "");
 myHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
@@ -227,9 +229,13 @@ var requestOptions = {
   headers: myHeaders,
   redirect: 'follow'
 };
-
-fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=columbus&radius=40000&sort_by=rating&limit=30&offset=969", requestOptions)
+// 10 results starting after the 989th. 
+// fetch restaurant json
+fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=restaurants&radius=40000&sort_by=rating&limit=10&offset=989", requestOptions)
   .then(response => response.json())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
+}
 
+document.getElementById('goBtn').addEventListener('click', getRearchInput);
+document.getAnimations('locateBtn').addEventListener('click',getRearchInput);
