@@ -92,6 +92,7 @@ function initMap() { //write a function for initMap as indicated in the url tag
     }
   });
   $("#goBtn").click(() => {
+    listHeader.textContent = categoryInput.value;
     // Get the input from the user
     const input = $("#locationInput").val();
         // Create a new geocoder object
