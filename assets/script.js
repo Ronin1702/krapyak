@@ -71,8 +71,8 @@ function initMap() { //write a function for initMap as indicated in the url tag
           geocoder.geocode({ location: pos }, (results, status) => {
             if (status === "OK") {
               if (results[0]) {
-                const cityName = getCityNameFromResults(results);
-                $("#locationInput").val(cityName);
+                const cityNameState = getCityStateFromResults(results);
+                $("#locationInput").val(cityNameState);
               } else {
                 console.log("No results found");
               }
@@ -187,17 +187,19 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 }
 
-function getCityNameFromResults(results) {
-  console.log(results)
-  for (let i = 0; i < results.length; i++) {
-    for (let j = 0; j < results[i].address_components.length; j++) {
-      const cityName = results[i].address_components[j].cityName;
-      if (cityName.includes("locality") || cityName.includes("sublocality")) {
-        return results[i].address_components[j].long_name;
-      }
+function getCityStateFromResults(results) {
+  let city, state;
+
+  for (let i = 0; i < results[0].address_components.length; i++) {
+    if (results[0].address_components[i].types.includes('locality')) {
+      city = results[0].address_components[i].long_name;
+    }
+    if (results[0].address_components[i].types.includes('administrative_area_level_1')) {
+      state = results[0].address_components[i].short_name;
     }
   }
-  return "";
+  
+  return city && state ? city + ', ' + state : '';
 }
 
 window.initMap = initMap; //call the initMap function within a given window
@@ -216,26 +218,25 @@ $(document).ready(() => {
 });
 
 // Write a function to get the city or location input:
-function getRearchInput(){
+function getRearchInput() {
   const searchInput = document.getElementById('locationInput').value;
 
-// fetch request from Yelp Fusion API:
-var myHeaders = new Headers();
-myHeaders.append("XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx", "");
-myHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+  // fetch request from Yelp Fusion API:
+  var yelpHeaders = new Headers();
+  // myHeaders.append("XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx", "");
+  elpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
 
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-// 10 results starting after the 989th. 
-// fetch restaurant json
-fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=restaurants&radius=40000&sort_by=rating&limit=10&offset=989", requestOptions)
-  .then(response => response.json())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+  var requestOptions = {
+    method: 'GET',
+    headers: yelpHeaders,
+    redirect: 'follow'
+  };
+  // 10 results starting after the 989th. 
+  // fetch restaurant json
+  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=restaurants&radius=40000&sort_by=rating&limit=10&offset=989", requestOptions)
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
 }
 
 document.getElementById('goBtn').addEventListener('click', getRearchInput);
-document.getAnimations('locateBtn').addEventListener('click',getRearchInput);
