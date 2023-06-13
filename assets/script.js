@@ -212,7 +212,7 @@ window.initMap = initMap; //call the initMap function within a given window
 function getSearchInput() {
   localStorage.clear();  // clear local storage
   const searchInput = document.getElementById('locationInput').value;
-  
+
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
   yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
@@ -222,12 +222,13 @@ function getSearchInput() {
     headers: yelpHeaders,
     redirect: 'follow'
   };
-
+  console.log(categoryInput.value) 
   // fetch restaurant json
-  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=restaurants&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
-    .then(response => response.json())
+  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories="+ categoryInput.value +"&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
+  .then(response => response.json())
     .then(result => {
       console.log('Result:', result);
+      console.log(categoryInput.value)
       let totalArray = result.total
       console.log('totalArray:', totalArray)
       // conditional (ternary) operator: If the arry is less then 1000 then use totalArray -5, if not  :  then use 1000-5.
@@ -243,7 +244,7 @@ function getSearchInput() {
         redirect: 'follow'
       };
       // Perform a new fetch operation using the offset parameter
-      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=restaurants&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
+      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories="+ categoryInput+"&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
         .then(response => response.json())
         .then(newResult => {
           console.log(newResult)
