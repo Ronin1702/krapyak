@@ -1,7 +1,9 @@
 const goBtn = document.getElementById('goBtn');
 let rowContent = document.querySelector('#outputContent');
 let locationInput = document.querySelector('#locationInput');
-
+// Get a reference to the 'categoryInput' and 'listHeader' element
+let categoryInput = document.querySelector('#categoryInput');
+let listHeader = document.querySelector('#listHeader');
 
 // API keys
 const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
@@ -92,8 +94,7 @@ function initMap() { //write a function for initMap as indicated in the url tag
   $("#goBtn").click(() => {
     // Get the input from the user
     const input = $("#locationInput").val();
-
-    // Create a new geocoder object
+        // Create a new geocoder object
     const geocoder = new google.maps.Geocoder();
 
     // Geocode the input
