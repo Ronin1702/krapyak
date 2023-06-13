@@ -221,6 +221,6 @@ var requestOptions = {
 };
 
 fetch("https://api.yelp.com/v3/businesses/search?location=columbus&radius=40000&sort_by=rating&limit=30&offset=969", requestOptions)
-  .then(response => response.text())
+  .then(response => response.JSON())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
