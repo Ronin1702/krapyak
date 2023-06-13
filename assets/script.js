@@ -1,4 +1,6 @@
 const goBtn = document.getElementById('goBtn');
+// base on https://docs.developer.yelp.com/docs/resources-categories, some categoryList needs lower case
+let categoryList = ["Parks", "Restaurants", "Hotels","banks", "coffee", "farmersmarket", "Bars", "Nightlife"];
 let rowContent = document.querySelector('#outputContent');
 let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
@@ -20,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
   images.forEach(function(image) {
     image.addEventListener('click', function() {
       locationInput.value = picLocation(this);
-      // set Hotels = category
-      categoryInput.value = "restaurants";
+      // set categoryInput randomly picked up from array of categoryList 
+      categoryInput.value = categoryList[Math.floor(Math.random() * categoryList.length)];
       $("#goBtn").click();
       console.log(locationInput);
     });
@@ -112,7 +114,7 @@ function initMap() { //write a function for initMap as indicated in the url tag
   });
   $("#goBtn").click(() => {
     
-    listHeader.textContent = capitalizeEachWord(categoryInput.value);
+    listHeader.textContent = "Worst "+capitalizeEachWord(categoryInput.value)+ " List:";
     // Get the input from the user
     const input = $("#locationInput").val();
     // Create a new geocoder object
@@ -235,7 +237,7 @@ function getSearchInput() {
 
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
-  yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+  yelpHeaders.append("Authorization", "Bearer ZQ0ivuxCz8UtpEp_aWdzBBBMid4yj_j2tinBEnA7JD-StFKuuZR8M8nimdc39andphNW7xRIPcdzmlCyxXAToCywp_-x3pcoKSvvBkLsPqlJQIAvpwSyQjhpYByBZHYx");
 
   var requestOptions = {
     method: 'GET',
@@ -255,7 +257,7 @@ function getSearchInput() {
       console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
-      yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+      yelpHeaders.append("Authorization", "Bearer ZQ0ivuxCz8UtpEp_aWdzBBBMid4yj_j2tinBEnA7JD-StFKuuZR8M8nimdc39andphNW7xRIPcdzmlCyxXAToCywp_-x3pcoKSvvBkLsPqlJQIAvpwSyQjhpYByBZHYx");
 
       var requestOptions = {
         method: 'GET',
