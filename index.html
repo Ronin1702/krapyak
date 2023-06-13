@@ -19,13 +19,13 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <title>Krapyak</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛶</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛶</text></svg>">
     <!-- Below I link our local css  -->
     <link rel="stylesheet" type="text/css" href="./assets/CSS/styles.css" />
-    <script type="module" src="./assets/script.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Cedarville+Cursive&family=Cherry+Bomb+One&family=Diphylleia&family=Gasoek+One&display=swap');
-      </style>
+    </style>
 </head>
 
 <body>
@@ -33,62 +33,37 @@
     <div class="container-fluid">
         <!--Below I created a header -->
         <!-- the bg-gradient added a gradient shade to he background -->
-        <header class="row mx-2 mt-2 text-center text-white bg-warning rounded">
-            <h1 class="col-12"><span class="" id="krapyak">krapyak 🛶 </span> Your Destination's Nightmares...</h1>
+        <header class="mx-2 mt-2 text-center text-white bg-warning rounded">
+            <h1><span id="krapyak">krapyak 🛶 </span> Your Destination's Nightmares...</h1>
         </header>
 
         <!-- Below I created a input group with a dropdown menu -->
         <!-- I borrowed some stuff from https://getbootstrap.com/docs/5.1/forms/input-group/ -->
         <div class="row">
-            <div class="col m-3 input-group">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">Options</button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" id="hotels">Hotels</a></li>
-                    <li><a class="dropdown-item" id="restaurants">Restaurants</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" id="credits">More Yak Options Coming Soon!</a></li>
-                </ul>
-                <input type="text" class="form-control"
-                    aria-label="Enter the text of curenet city name when globe icon is clicked" id="locationInput">
+            <div class="col m-2 input-group">
+                <span class="input-group-text">Location</span>
+                <input type="text" class="form-control" aria-label="location" id="locationInput">
+                <span class="input-group-text">Category</span>
+                <input type="text" class="form-control" aria-label="category" id="categoryInput">
                 <button class="btn btn-outline-secondary" type="button" id="getCityBtn"><i
                         class="fa-solid fa-earth-asia"></i></button>
                 <button class="btn btn-outline-secondary" type="button" id="goBtn"><i
                         class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
-        <div class="row justify-content-around m-3">
-            <div class="col-3">
-                <div class="card d-none" id="hotelLists" style="width: 18rem;">
-                    <div class="card-header">
-                        Hotels
-                    </div>
-                    <ol class="list-group list-group-flush">
-                        <li class="list-group-item">St.Regis</li>
-                        <li class="list-group-item">Ritz-Carton</li>
-                        <li class="list-group-item">Marriot</li>
-                    </ol>
-                </div>
-                
-                <div class="card d-none" id="restaurantLists" style="width: 18rem;">
-                    <div class="card-header">
-                        Restaurants
-                    </div>
-                    <ol class="list-group list-group-flush">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ol>
-                </div>
+        <div class="row row-cols-2 justify-content-around g-2 mx-2">
+
+            <div class="col card d-block" id="listCard" style="width: 18rem;">
+                <div class="card-header" id="listHeader"></div>
+                <ol class="card-body list-group list-group-flush" id="list">
+                </ol>
             </div>
-            <div class="col-9 d-block rounded" id="map"></div>
+
+            <div class="col d-block rounded" id="map"></div>
         </div>
     </div>
     <!-- Insert API KEY and set the callback id to initMap -->
     <script src="./assets/script.js"></script>
-    <script src="./assets/yelp.js"></script>
     <footer class="row fixed-bottom mx-3 mb-2 text-center rounded">
         <h5> Designed, Coded, and 🌳 Cultivated by Team 💪 ONE ™</h5>
     </footer>
