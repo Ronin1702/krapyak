@@ -18,6 +18,8 @@ function picLocation(element) {
   return locaInfo;
 }
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
   images.forEach(function(image) {
     image.addEventListener('click', function() {
@@ -303,4 +305,16 @@ function displayRestaurants() {
     listItems.appendChild(listItem);
   });
 }
+
+// hides Daniel's suggestion pictures when clicking go button
+function hidePics() {
+  var hidePic = document.getElementById('suggestions');
+  hidePic.style.display = "none";
+  var showPic = document.getElementById('showResults');
+  showPic.style.display = "flex";
+
+}
+
+goBtn.addEventListener('click', hidePics);
+
 
