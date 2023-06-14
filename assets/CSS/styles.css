@@ -31,6 +31,10 @@ footer {
   background-color: #F2A007;
 }
   
+.row {
+  padding-bottom: 30px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
