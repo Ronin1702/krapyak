@@ -259,11 +259,7 @@ function getSearchInput() {
       console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
-<<<<<<< HEAD
-      yelpHeaders.append("Authorization", "Bearer AJd_-brP0SR373HBoy1kA1NQQDN4XKgORy24LJjxuvfW6c9MyCRs0NqBTBnMho12trBlZFSLrymP4j9vKBbX4ToCVDZnTsWK35S_gMRQAQD6JXIpl74xqKsDMcl-ZHYx");
-=======
       yelpHeaders.append("Authorization", "Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx");
->>>>>>> 87d35fe5305da9bf8e89e83237e00693d9087dd0
 
       var requestOptions = {
         method: 'GET',
@@ -289,26 +285,10 @@ function getSearchInput() {
         .catch(error => console.log('error', error));
     })
     .catch(error => console.log('error', error));
-    function displayRestaurants() {
+}
+// When the goBtn is clicked the above fetch link get the location inputs in the textbox.
+document.getElementById('goBtn').addEventListener('click', getSearchInput);
 
-<<<<<<< HEAD
-      // Retrieve the names from localStorage
-      let bizNames = JSON.parse(localStorage.getItem('bizNames'));
-    
-      // Get the restaurantList element
-      const listItems = document.getElementById('list');
-      // Clear the existing list items
-      listItems.innerHTML = '';
-    
-      // Create a list item for each name and append it to the restaurantList
-      bizNames.forEach(name => {
-        const listItem = document.createElement('li');
-        listItem.textContent = name;
-        listItem.className = "list-group-item";
-        listItems.appendChild(listItem);
-      });
-    }
-=======
 // Append and Display the Restaurant results in the list from localStorage
 function displayRestaurants() {
 
@@ -338,7 +318,6 @@ function displayRestaurants() {
     ratingEl.appendChild(divName);
 
   });
->>>>>>> 87d35fe5305da9bf8e89e83237e00693d9087dd0
 }
 /////////////////////////////
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
@@ -351,7 +330,3 @@ function hidePics() {
 }
 
 goBtn.addEventListener('click', hidePics);
-
-
-document.getElementById('goBtn').addEventListener('click', getRearchInput);
-document.getAnimations('getCityBtn').addEventListener('click',getRearchInput);
