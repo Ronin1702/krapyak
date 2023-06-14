@@ -18,6 +18,8 @@ function picLocation(element) {
   return locaInfo;
 }
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
   images.forEach(function(image) {
     image.addEventListener('click', function() {
@@ -237,7 +239,7 @@ function getSearchInput() {
 
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
-  yelpHeaders.append("Authorization", "Bearer ZQ0ivuxCz8UtpEp_aWdzBBBMid4yj_j2tinBEnA7JD-StFKuuZR8M8nimdc39andphNW7xRIPcdzmlCyxXAToCywp_-x3pcoKSvvBkLsPqlJQIAvpwSyQjhpYByBZHYx");
+  yelpHeaders.append("Authorization", "Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx");
 
   var requestOptions = {
     method: 'GET',
@@ -257,7 +259,7 @@ function getSearchInput() {
       console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
-      yelpHeaders.append("Authorization", "Bearer ZQ0ivuxCz8UtpEp_aWdzBBBMid4yj_j2tinBEnA7JD-StFKuuZR8M8nimdc39andphNW7xRIPcdzmlCyxXAToCywp_-x3pcoKSvvBkLsPqlJQIAvpwSyQjhpYByBZHYx");
+      yelpHeaders.append("Authorization", "Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx");
 
       var requestOptions = {
         method: 'GET',
@@ -270,9 +272,12 @@ function getSearchInput() {
         .then(newResult => {
           console.log(newResult)
           let bizNames = newResult.businesses.map(business => business.name).reverse(); //get bizNames in reversed array order
+          let bizRating = newResult.businesses.map(business => business.rating).reverse(); //get bizRating in reversed array order
           // let bizNames = newResult.businesses.map(business => business.name); //get bizNames in default array order
           localStorage.setItem('bizNames', JSON.stringify(bizNames));
+          localStorage.setItem('bizRating', JSON.stringify(bizRating));
           console.log('Array Reversed:', bizNames); // To see the stored names2
+          console.log('Array Reversed:', bizRating); // To see the stored ratings
 
           // Call the function to display the restaurants
           displayRestaurants();
@@ -289,18 +294,41 @@ function displayRestaurants() {
 
   // Retrieve the names from localStorage
   let bizNames = JSON.parse(localStorage.getItem('bizNames'));
+  let bizRating = JSON.parse(localStorage.getItem('bizRating'));
 
   // Get the restaurantList element
-  const listItems = document.getElementById('list');
+  const cardItems = document.getElementById('resultEl');
   // Clear the existing list items
-  listItems.innerHTML = '';
+  cardItems.innerHTML = '';
 
   // Create a list item for each name and append it to the restaurantList
   bizNames.forEach(name => {
-    const listItem = document.createElement('li');
-    listItem.textContent = name;
-    listItem.className = "list-group-item";
-    listItems.appendChild(listItem);
+    const divName = document.getElementById('resultEl');
+    divName.textContent = name;
+    resultEl.appendChild(divName);
+
+  });
+
+  bizRating.forEach(i => {
+    // const listItem = document.getElementById('ratingEl');
+    // listItem.textContent = rating;
+    // ratingEl.appendChild(listItem);
+    const divName = document.getElementById('ratingEl');
+    divName.textContent = i;
+    ratingEl.appendChild(divName);
+
   });
 }
+/////////////////////////////
+// hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
+function hidePics() {
+  var hidePic = document.getElementById('suggestions');
+  hidePic.style.display = "none";
+  var showPic = document.getElementById('showResults');
+  showPic.style.display = "flex";
+
+}
+
+goBtn.addEventListener('click', hidePics);
+
 

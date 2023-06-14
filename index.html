@@ -51,18 +51,37 @@
                         class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
-        <div class="row row-cols-2 justify-content-around g-2 mx-2">
+       
 
-            <div class="col card d-block" id="listCard" style="width: 18rem;">
-                <div class="card-header" id="listHeader"></div>
-                <ol class="card-body list-group list-group-flush" id="list">
-                </ol>
-            </div>
+        <div class="resultCards" id="showResults">
+            <section class="card" id="resultEl">
+              <header>Place 1</header>
+              <p id="ratingEl"></p>
+            </section>
 
-            <div class="col d-block rounded" id="map"></div>
-        </div>
-    </div>
-    <div class="container">
+            <section class="card" id="resultEl">
+              <header>Place 2</header>
+              <p id="ratingEl"> rating</p>
+            </section>
+
+            <section class="card" id="resultEl">
+                <header>Place 3</header>
+                <p id="ratingEl">rating</p>
+              </section>
+
+              <section class="card" id="resultEl">
+                <header>Place 4</header>
+                <p id="ratingEl">rating</p>
+              </section>
+
+              <section class="card" id="resultEl">
+                <header>Place 5</header>
+                <p id="ratingEl">rating</p>
+              </section>
+          </div>
+
+
+    <div class="container" id="suggestions">
         <div class="text-row">
             <h2>Top places to visit: </h2>
           </div>
@@ -81,6 +100,20 @@
           </div>
         </div>
     </div>
+
+    <div class="row row-cols-2 justify-content-around g-2 mx-2 py-5">
+
+        <!-- <div class="col card d-block" id="listCard" style="width: 18rem;">
+            <div class="card-header" id="listHeader"></div>
+            <ol class="card-body list-group list-group-flush" id="list">
+            </ol>
+        </div> -->
+
+        <div class="col d-block rounded" id="map"></div>
+    </div>
+
+    
+</div>
     <!-- Insert API KEY and set the callback id to initMap -->
     <script src="./assets/script.js"></script>
     <footer class="row fixed-bottom mx-3 mb-2 text-center rounded">
@@ -89,3 +122,11 @@
 </body>
 
 </html>
+
+
+
+
+<!--changed the layout, map is on bottom now with Daniel's cards being above them (still below search bar)
+    added card elements below search bar that will apear once Daniel's cards become hidden
+    added padding below the search bar and around the map to avoid clipping
+    NEEDED: change footer to sticky to stay on bottom (so that it does not cover the map)-->
