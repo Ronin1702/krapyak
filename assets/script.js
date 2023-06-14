@@ -241,17 +241,14 @@ fetch('https://cors-anywhere.herokuapp.com/api.yelp.com/v3/autocomplete?text=cat
   .then(response => response.json())
   .then(response => console.log(response))
   .then(response => {
-    const categories = response.categories;
-    // Change categoryList to the JSON response array.
-    const categoryList = categories;
-
-    // Create an autocomplete object.
-    const autocomplete = new yelpHeaders.categories.Autocomplete(document.getElementById('categoryInput'), {
-      source: function(request, response) {
-        const term = request.term;
-        const suggestions = categoryList.filter(category => category.toLowerCase().startsWith(term.toLowerCase()));
-        response(suggestions);
-      }
+    let autocomplete = new yelp.Autocomplete($("#categoryInput")[0], {
+      categoryName: ["(categories)"]
+    });
+    
+    // Add an event listener to the autocomplete object for the "place_changed" event.
+    autocomplete.addListener("place_changed", function () {
+      // Get the selected category from the autocomplete object.
+      const category = autocomplete.getCategory();
     });
   })
   .catch(err => console.error(err));
