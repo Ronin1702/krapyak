@@ -228,31 +228,6 @@ function getCityStateFromResults(results) {
 
 window.initMap = initMap; //call the initMap function within a given window
 
-// Get the options object.
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer AJd_-brP0SR373HBoy1kA1NQQDN4XKgORy24LJjxuvfW6c9MyCRs0NqBTBnMho12trBlZFSLrymP4j9vKBbX4ToCVDZnTsWK35S_gMRQAQD6JXIpl74xqKsDMcl-ZHYx'
-  }
-};
-
-fetch('https://cors-anywhere.herokuapp.com/api.yelp.com/v3/autocomplete?text=categories', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .then(response => {
-    let autocomplete = new yelp.Autocomplete($("#categoryInput")[0], {
-      categoryName: ["(categories)"]
-    });
-    
-    // Add an event listener to the autocomplete object for the "place_changed" event.
-    autocomplete.addListener("place_changed", function () {
-      // Get the selected category from the autocomplete object.
-      const category = autocomplete.getCategory();
-    });
-  })
-  .catch(err => console.error(err));
-
 // the jQuery below kicks on when DOMContentLoaded
 
 // Write a function to get the city or location input:
@@ -282,7 +257,7 @@ function getSearchInput() {
       console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
-      yelpHeaders.append("Authorization", "Bearer ZQ0ivuxCz8UtpEp_aWdzBBBMid4yj_j2tinBEnA7JD-StFKuuZR8M8nimdc39andphNW7xRIPcdzmlCyxXAToCywp_-x3pcoKSvvBkLsPqlJQIAvpwSyQjhpYByBZHYx");
+      yelpHeaders.append("Authorization", "Bearer AJd_-brP0SR373HBoy1kA1NQQDN4XKgORy24LJjxuvfW6c9MyCRs0NqBTBnMho12trBlZFSLrymP4j9vKBbX4ToCVDZnTsWK35S_gMRQAQD6JXIpl74xqKsDMcl-ZHYx");
 
       var requestOptions = {
         method: 'GET',
