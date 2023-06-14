@@ -19,8 +19,10 @@ h1 {
 
 
 #map {
+    flex: auto;
     height: 50vh;
     width: 60%;
+    flex-wrap: wrap;
   }
 
 footer {
@@ -90,6 +92,7 @@ footer {
 .resultCards {
   display: none;
   flex-direction: row;
+  flex:auto;
   justify-content: space-around;
   align-items: center;
   width: 90%;
@@ -116,4 +119,22 @@ footer {
 
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.767);
+}
+
+
+@media screen and (max-width:1650px) {
+  .resultCards {
+    max-width: 100%;
+    width: 100%;
+    flex-shrink: 50%;
+  }
+}
+
+@media screen and (max-width:1475px) {
+  .resultCards {
+    max-width: 75%;
+    width: 75%;
+    flex-wrap: wrap;
+    flex-shrink: 50%;
+  }
 }

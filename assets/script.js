@@ -331,4 +331,4 @@ function hidePics() {
 
 goBtn.addEventListener('click', hidePics);
 
-
+let suggestionPic = document.getElementsByClassName
