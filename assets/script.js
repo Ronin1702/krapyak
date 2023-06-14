@@ -228,6 +228,34 @@ function getCityStateFromResults(results) {
 
 window.initMap = initMap; //call the initMap function within a given window
 
+// Get the options object.
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer AJd_-brP0SR373HBoy1kA1NQQDN4XKgORy24LJjxuvfW6c9MyCRs0NqBTBnMho12trBlZFSLrymP4j9vKBbX4ToCVDZnTsWK35S_gMRQAQD6JXIpl74xqKsDMcl-ZHYx'
+  }
+};
+
+fetch('https://cors-anywhere.herokuapp.com/api.yelp.com/v3/autocomplete?text=categories', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .then(response => {
+    const categories = response.categories;
+    // Change categoryList to the JSON response array.
+    const categoryList = categories;
+
+    // Create an autocomplete object.
+    const autocomplete = new yelpHeaders.categories.Autocomplete(document.getElementById('categoryInput'), {
+      source: function(request, response) {
+        const term = request.term;
+        const suggestions = categoryList.filter(category => category.toLowerCase().startsWith(term.toLowerCase()));
+        response(suggestions);
+      }
+    });
+  })
+  .catch(err => console.error(err));
+
 // the jQuery below kicks on when DOMContentLoaded
 
 // Write a function to get the city or location input:
@@ -281,34 +309,22 @@ function getSearchInput() {
     })
     .catch(error => console.log('error', error));
     function displayRestaurants() {
-      // Get the first three restaurants from the `bizNames` array.
-      const restaurants = bizNames.slice(0, 3);
+
+      // Retrieve the names from localStorage
+      let bizNames = JSON.parse(localStorage.getItem('bizNames'));
     
-      // Create a new ul element to hold the restaurants.
-      const listCard = document.getElementById('list');
+      // Get the restaurantList element
+      const listItems = document.getElementById('list');
+      // Clear the existing list items
+      listItems.innerHTML = '';
     
-      // Loop through the restaurants and add them to the ul element.
-      for (const restaurant of restaurants) {
-        const list = document.createElement('li');
-    
-        // Add the restaurant name to the li element.
-        const listItemName = document.createElement('h4');
-        listItemName.textContent = restaurant.name;
-        list.appendChild(listItemName);
-    
-        // Add the restaurant address to the li element.
-        const listItemAddress = document.createElement('p');
-        listItemAddress.textContent = restaurant.address;
-        list.appendChild(listItemAddress);
-    
-        // Add the restaurant rating to the li element.
-        const listItemRating = document.createElement('p');
-        listItemRating.textContent = restaurant.rating;
-        list.appendChild(listItemRating);
-    
-        // Add the li element to the listCard ul element.
-        listCard.appendChild(list);
-      }
+      // Create a list item for each name and append it to the restaurantList
+      bizNames.forEach(name => {
+        const listItem = document.createElement('li');
+        listItem.textContent = name;
+        listItem.className = "list-group-item";
+        listItems.appendChild(listItem);
+      });
     }
 }
 
