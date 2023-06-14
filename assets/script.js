@@ -1,14 +1,34 @@
 const goBtn = document.getElementById('goBtn');
+// base on https://docs.developer.yelp.com/docs/resources-categories, some categoryList needs lower case
+let categoryList = ["Parks", "Restaurants", "Hotels","banks", "coffee", "farmersmarket", "Bars", "Nightlife"];
 let rowContent = document.querySelector('#outputContent');
 let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
 let categoryInput = document.querySelector('#categoryInput');
 let listHeader = document.querySelector('#listHeader');
+let images = document.querySelectorAll('.top-city-img');
 function capitalizeEachWord(str) {
   return str.replace(/\w\S*/g, function (txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 }
+
+function picLocation(element) {
+  var locaInfo = element.querySelector('img').getAttribute('alt');
+  return locaInfo;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  images.forEach(function(image) {
+    image.addEventListener('click', function() {
+      locationInput.value = picLocation(this);
+      // set categoryInput randomly picked up from array of categoryList 
+      categoryInput.value = categoryList[Math.floor(Math.random() * categoryList.length)];
+      $("#goBtn").click();
+      console.log(locationInput);
+    });
+  });
+});
 // API keys
 const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
 
@@ -30,7 +50,7 @@ let map, infoWindow;
 
 function initMap() { //write a function for initMap as indicated in the url tag
   map = new google.maps.Map($("#map")[0], {
-    center: { lat: -34.397, lng: 150.644 },
+    center: { lat: 39.9833, lng: -82.9833 },
     zoom: 12,
   });
   infoWindow = new google.maps.InfoWindow();
@@ -94,7 +114,7 @@ function initMap() { //write a function for initMap as indicated in the url tag
   });
   $("#goBtn").click(() => {
     
-    listHeader.textContent = capitalizeEachWord(categoryInput.value);
+    listHeader.textContent = "Worst "+capitalizeEachWord(categoryInput.value)+ " List:";
     // Get the input from the user
     const input = $("#locationInput").val();
     // Create a new geocoder object
@@ -217,7 +237,7 @@ function getSearchInput() {
 
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
-  yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+  yelpHeaders.append("Authorization", "Bearer ZQ0ivuxCz8UtpEp_aWdzBBBMid4yj_j2tinBEnA7JD-StFKuuZR8M8nimdc39andphNW7xRIPcdzmlCyxXAToCywp_-x3pcoKSvvBkLsPqlJQIAvpwSyQjhpYByBZHYx");
 
   var requestOptions = {
     method: 'GET',
@@ -237,7 +257,7 @@ function getSearchInput() {
       console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
-      yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+      yelpHeaders.append("Authorization", "Bearer ZQ0ivuxCz8UtpEp_aWdzBBBMid4yj_j2tinBEnA7JD-StFKuuZR8M8nimdc39andphNW7xRIPcdzmlCyxXAToCywp_-x3pcoKSvvBkLsPqlJQIAvpwSyQjhpYByBZHYx");
 
       var requestOptions = {
         method: 'GET',
@@ -283,3 +303,4 @@ function displayRestaurants() {
     listItems.appendChild(listItem);
   });
 }
+
