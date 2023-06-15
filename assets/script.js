@@ -1,14 +1,37 @@
 const goBtn = document.getElementById('goBtn');
+// base on https://docs.developer.yelp.com/docs/resources-categories, some categoryList needs lower case
+let categoryList = ["Parks", "Restaurants", "Hotels","banks", "coffee", "farmersmarket", "Bars", "Nightlife"];
 let rowContent = document.querySelector('#outputContent');
 let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
 let categoryInput = document.querySelector('#categoryInput');
 let listHeader = document.querySelector('#listHeader');
+let images = document.querySelectorAll('.top-city-img');
 function capitalizeEachWord(str) {
   return str.replace(/\w\S*/g, function (txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 }
+
+function picLocation(element) {
+  var locaInfo = element.querySelector('img').getAttribute('alt');
+  return locaInfo;
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  images.forEach(function(image) {
+    image.addEventListener('click', hidePics);
+    image.addEventListener('click', function() {
+      locationInput.value = picLocation(this);
+      // set categoryInput randomly picked up from array of categoryList 
+      categoryInput.value = categoryList[Math.floor(Math.random() * categoryList.length)];
+      $("#goBtn").click();
+      console.log(locationInput);
+    });
+  });
+});
 // API keys
 const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
 
@@ -30,7 +53,7 @@ let map, infoWindow;
 
 function initMap() { //write a function for initMap as indicated in the url tag
   map = new google.maps.Map($("#map")[0], {
-    center: { lat: -34.397, lng: 150.644 },
+    center: { lat: 39.9833, lng: -82.9833 },
     zoom: 12,
   });
   infoWindow = new google.maps.InfoWindow();
@@ -93,8 +116,6 @@ function initMap() { //write a function for initMap as indicated in the url tag
     }
   });
   $("#goBtn").click(() => {
-    
-    listHeader.textContent = capitalizeEachWord(categoryInput.value);
     // Get the input from the user
     const input = $("#locationInput").val();
     // Create a new geocoder object
@@ -214,7 +235,8 @@ window.initMap = initMap; //call the initMap function within a given window
 function getSearchInput() {
   localStorage.clear();  // clear local storage
   const searchInput = document.getElementById('locationInput').value;
-
+  var newCategoryInput= categoryInput.value.replace(/\s/g, '').toLowerCase();
+  console.log(newCategoryInput)
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
   yelpHeaders.append("Authorization", "Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx");
@@ -225,11 +247,10 @@ function getSearchInput() {
     redirect: 'follow'
   };
   // fetch restaurant json
-  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + categoryInput.value + "&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
+  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
     .then(response => response.json())
     .then(result => {
       console.log('Result:', result);
-      console.log(categoryInput.value)//check the value I put in the fetch url above
       let totalArray = result.total
       console.log('totalArray:', totalArray)
       // conditional (ternary) operator: If the arry is less then 1000 then use totalArray -5, if not  :  then use 1000-5.
@@ -245,14 +266,17 @@ function getSearchInput() {
         redirect: 'follow'
       };
       // Perform a new fetch operation using the offset parameter
-      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + categoryInput.value + "&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
+      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
         .then(response => response.json())
         .then(newResult => {
           console.log(newResult)
           let bizNames = newResult.businesses.map(business => business.name).reverse(); //get bizNames in reversed array order
+          let bizRating = newResult.businesses.map(business => business.rating).reverse(); //get bizRating in reversed array order
           // let bizNames = newResult.businesses.map(business => business.name); //get bizNames in default array order
           localStorage.setItem('bizNames', JSON.stringify(bizNames));
+          localStorage.setItem('bizRating', JSON.stringify(bizRating));
           console.log('Array Reversed:', bizNames); // To see the stored names2
+          console.log('Array Reversed:', bizRating); // To see the stored ratings
 
           // Call the function to display the restaurants
           displayRestaurants();
@@ -269,17 +293,40 @@ function displayRestaurants() {
 
   // Retrieve the names from localStorage
   let bizNames = JSON.parse(localStorage.getItem('bizNames'));
+  let bizRating = JSON.parse(localStorage.getItem('bizRating'));
 
   // Get the restaurantList element
-  const listItems = document.getElementById('list');
+  const cardItems = document.getElementById('resultEl');
   // Clear the existing list items
-  listItems.innerHTML = '';
+  cardItems.innerHTML = '';
 
   // Create a list item for each name and append it to the restaurantList
   bizNames.forEach(name => {
-    const listItem = document.createElement('li');
-    listItem.textContent = name;
-    listItem.className = "list-group-item";
-    listItems.appendChild(listItem);
+    const divName = document.getElementById('resultEl');
+    divName.textContent = name;
+    resultEl.appendChild(divName);
+
+  });
+
+  bizRating.forEach(i => {
+    // const listItem = document.getElementById('ratingEl');
+    // listItem.textContent = rating;
+    // ratingEl.appendChild(listItem);
+    const divName = document.getElementById('ratingEl');
+    divName.textContent = i;
+    ratingEl.appendChild(divName);
+
   });
 }
+/////////////////////////////
+// hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
+function hidePics() {
+  var hidePic = document.getElementById('suggestions');
+  hidePic.style.display = "none";
+  var showPic = document.getElementById('showResults');
+  showPic.style.display = "flex";
+
+}
+
+goBtn.addEventListener('click', hidePics);
+
