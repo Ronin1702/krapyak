@@ -83,7 +83,6 @@ footer {
   display: none;
   flex-direction: row;
   flex:auto;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -93,6 +92,10 @@ footer {
   color: #fff;
 }
 
+.card {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.767);
 }
