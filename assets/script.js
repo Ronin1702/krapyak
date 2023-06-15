@@ -251,7 +251,6 @@ function getSearchInput() {
     .then(response => response.json())
     .then(result => {
       console.log('Result:', result);
-      console.log(categoryInput.value)//check the value I put in the fetch url above
       let totalArray = result.total
       console.log('totalArray:', totalArray)
       // conditional (ternary) operator: If the arry is less then 1000 then use totalArray -5, if not  :  then use 1000-5.
