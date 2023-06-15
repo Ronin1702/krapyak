@@ -42,81 +42,103 @@
         <div class="row">
             <div class="col m-2 input-group">
                 <span class="input-group-text">Location</span>
-                <input type="text" class="form-control" aria-label="location" id="locationInput">
+                <input type="text" class="form-control" placeholder="Enter a Location" aria-label="location"
+                    id="locationInput">
                 <span class="input-group-text">Category</span>
-                <input type="text" class="form-control" aria-label="category" id="categoryInput">
+                <input type="text" class="form-control" aria-label="category"
+                    placeholder="e.g. Sports Bars, Hotels, Disc Golf, Axe Throwing, etc..." id="categoryInput">
                 <button class="btn btn-outline-secondary" type="button" id="getCityBtn"><i
                         class="fa-solid fa-earth-asia"></i></button>
                 <button class="btn btn-outline-secondary" type="button" id="goBtn"><i
                         class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
-       
-
-        <div class="resultCards" id="showResults">
-            <section class="card" id="resultEl">
-              <header>Place 1</header>
-              <p id="ratingEl"></p>
-            </section>
-
-            <section class="card" id="resultEl">
-              <header>Place 2</header>
-              <p id="ratingEl"> rating</p>
-            </section>
-
-            <section class="card" id="resultEl">
-                <header>Place 3</header>
-                <p id="ratingEl">rating</p>
-              </section>
-
-              <section class="card" id="resultEl">
-                <header>Place 4</header>
-                <p id="ratingEl">rating</p>
-              </section>
-
-              <section class="card" id="resultEl">
-                <header>Place 5</header>
-                <p id="ratingEl">rating</p>
-              </section>
-          </div>
 
 
-    <div class="container" id="suggestions">
-        <div class="text-row">
-            <h2>Top places to visit: </h2>
-          </div>
-        <div class="image-text">
-          <div class="top-city-img">
-            <img src="./assets/Images/hongkong.jpg" alt="Hong Kong">
-            <div class="show-text-on-img">Hong Kong</div>
-          </div>
-          <div class="top-city-img">
-            <img src="./assets/Images/LA.jpg" alt="Los Angeles">
-            <div class="show-text-on-img">Los Angeles</div>
-          </div>
-          <div class="top-city-img">
-            <img src="./assets/Images/munich.jpg" alt="Munich">
-            <div class="show-text-on-img">Munich</div>
-          </div>
+        <div class="container">
+            <div class="text-row">
+                <h2> Tourist Hotspots! </h2>
+            </div>
+            <div class="image-text" id="suggestions">
+                <div class="top-city-img">
+                    <img src="./assets/Images/hongkong.jpg" alt="Hong Kong">
+                    <div class="show-text-on-img">Hong Kong</div>
+                </div>
+                <div class="top-city-img">
+                    <img src="./assets/Images/LA.jpg" alt="Los Angeles">
+                    <div class="show-text-on-img">Los Angeles</div>
+                </div>
+                <div class="top-city-img">
+                    <img src="./assets/Images/munich.jpg" alt="Munich">
+                    <div class="show-text-on-img">Munich</div>
+                </div>
+            </div>
         </div>
+
+
+        <div class="resultCards container-fluid" id="showResults">
+          
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-3">
+                <section class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="..." alt="Card image cap">
+                  <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                          card's content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+              </section>
+              </div>
+              <div class="col-12 col-md-6 col-lg-3">
+                <section class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="..." alt="Card image cap">
+                  <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                          card's content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+              </section>
+              </div>
+              <div class="col-12 col-md-6 col-lg-3">
+                <section class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="..." alt="Card image cap">
+                  <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                          card's content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+              </section>
+              </div>
+              <div class="col-12 col-md-6 col-lg-3">
+                <section class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="..." alt="Card image cap">
+                  <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                          card's content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+              </section>
+              </div>
+            </div>
+          
+        </div>
+
+        <div>
+            <div class="row row-cols-2 justify-content-around g-2 mx-2 py-5">
+
+                <div class="col d-block rounded" id="map"></div>
+            </div>
+        </div>
+
+
     </div>
-
-    <div class="row row-cols-2 justify-content-around g-2 mx-2 py-5">
-
-        <!-- <div class="col card d-block" id="listCard" style="width: 18rem;">
-            <div class="card-header" id="listHeader"></div>
-            <ol class="card-body list-group list-group-flush" id="list">
-            </ol>
-        </div> -->
-
-        <div class="col d-block rounded" id="map"></div>
-    </div>
-
-    
-</div>
     <!-- Insert API KEY and set the callback id to initMap -->
     <script src="./assets/script.js"></script>
-    <footer class="row mx-3 text-center rounded">
+    <footer class="row absolute mx-3 mb-2 text-center rounded">
         <h5> Designed, Coded, and 🌳 Cultivated by Team 💪 ONE ™</h5>
     </footer>
 </body>

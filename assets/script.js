@@ -22,6 +22,7 @@ function picLocation(element) {
 
 document.addEventListener('DOMContentLoaded', function() {
   images.forEach(function(image) {
+    image.addEventListener('click', hidePics);
     image.addEventListener('click', function() {
       locationInput.value = picLocation(this);
       // set categoryInput randomly picked up from array of categoryList 
@@ -330,3 +331,4 @@ function hidePics() {
 }
 
 goBtn.addEventListener('click', hidePics);
+
