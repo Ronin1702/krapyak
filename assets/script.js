@@ -277,8 +277,8 @@ function getSearchInput() {
           // let bizNames = newResult.businesses.map(business => business.name); //get bizNames in default array order
           localStorage.setItem('bizNames', JSON.stringify(bizNames));
           localStorage.setItem('bizRating', JSON.stringify(bizRating));
-          localStorage.setItem('bizRating', JSON.stringify(bizPicUrl));
-          localStorage.setItem('bizRating', JSON.stringify(bizUrl));
+          localStorage.setItem('bizPicUrl', JSON.stringify(bizPicUrl));
+          localStorage.setItem('bizUrl', JSON.stringify(bizUrl));
           console.log('Array Reversed:', bizNames); // To see the stored names2
           console.log('Array Reversed:', bizRating); // To see the stored ratings
           console.log('Array Reversed:', bizPicUrl);
