@@ -297,29 +297,71 @@ function displayRestaurants() {
   let bizNames = JSON.parse(localStorage.getItem('bizNames'));
   let bizRating = JSON.parse(localStorage.getItem('bizRating'));
 
-  // Get the restaurantList element
-  const cardItems = document.getElementById('resultEl');
-  // Clear the existing list items
-  cardItems.innerHTML = '';
+  // Get the first 4 businesses from the list.
+  const firstFourBusinesses = [bizNames[0], bizNames[1], bizNames[2], bizNames[3]];
 
-  // Create a list item for each name and append it to the restaurantList
-  bizNames.forEach(name => {
-    const divName = document.getElementById('resultEl');
-    divName.textContent = name;
-    resultEl.appendChild(divName);
-
-  });
-
-  bizRating.forEach(i => {
-    // const listItem = document.getElementById('ratingEl');
-    // listItem.textContent = rating;
-    // ratingEl.appendChild(listItem);
-    const divName = document.getElementById('ratingEl');
-    divName.textContent = i;
-    ratingEl.appendChild(divName);
-
-  });
+  // Loop through the first 4 businesses and update the h5 and p elements
+  for (let i = 0; i < 4; i++) {
+    const section = document.getElementById(`section-${i}`);
+    const h5 = section.querySelector('h5');
+    const p = section.querySelector('p');
+    h5.textContent = bizNames[i];
+    p.textContent = bizRating[i];
+  }
 }
+
+// When the goBtn is clicked the above fetch link get the location inputs in the textbox.
+document.getElementById('goBtn').addEventListener('click', displayRestaurants);
+
+// Append and Display the Restaurant results in the list from localStorage
+function displayRestaurants() {
+
+  // Retrieve the names from localStorage
+  let bizNames = JSON.parse(localStorage.getItem('bizNames'));
+  let bizRating = JSON.parse(localStorage.getItem('bizRating'));
+
+function createCards() {
+
+    // Create a new div element for the result cards.
+    const resultCardsDiv = document.createElement('div');
+    resultCardsDiv.className = 'resultCards container-fluid row mx-auto ml-1 mr-1';
+    resultCardsDiv.id = 'showResults';
+  
+    // Create a new div element for the row.
+    const rowDiv = document.createElement('div');
+    rowDiv.className = 'row';
+  
+    // Create 4 card sections.
+    for (let i = 0; i < 4; i++) {
+  
+    // Create a new card section.
+      const cardSection = document.createElement('section');
+      cardSection.className = 'card mt-4 mx-auto mb-2';
+      cardSection.style = 'width: 18rem;';
+  
+    // Create an image element for the card.
+      const imgElement = document.createElement('img');
+      imgElement.className = 'card-img-top';
+      imgElement.src = '...';
+      imgElement.alt = 'Card image cap';
+  
+    // Create a div element for the card body.
+      const cardBodyDiv = document.createElement('div');
+      cardBodyDiv.className = 'card-body';
+  
+    // Create an h5 element for the card title.
+      const h5Element = document.createElement('h5');
+      h5Element.className = 'card-title';
+      h5Element.textContent = 'Card title';
+  
+    // Create a p element for the card text.
+      const pElement = document.createElement('p');
+      pElement.className = 'card-text';
+      pElement.textContent = 'Some quick example text to build on the card title and make up the bulk of the\ncard's content.';
+    // Create an a element for the card button.
+    const aElement = document.createElement('a');
+    aElement.className = 'btn btn-primary';
+    aElement.textContent = 'Go somewhere';
 /////////////////////////////
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
 function hidePics() {
