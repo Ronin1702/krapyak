@@ -272,12 +272,17 @@ function getSearchInput() {
           console.log(newResult)
           let bizNames = newResult.businesses.map(business => business.name).reverse(); //get bizNames in reversed array order
           let bizRating = newResult.businesses.map(business => business.rating).reverse(); //get bizRating in reversed array order
+          let bizPicUrl= newResult.businesses.map(business => business.image_url).reverse();
+          let bizUrl= newResult.businesses.map(business => business.url).reverse();
           // let bizNames = newResult.businesses.map(business => business.name); //get bizNames in default array order
           localStorage.setItem('bizNames', JSON.stringify(bizNames));
           localStorage.setItem('bizRating', JSON.stringify(bizRating));
+          localStorage.setItem('bizRating', JSON.stringify(bizPicUrl));
+          localStorage.setItem('bizRating', JSON.stringify(bizUrl));
           console.log('Array Reversed:', bizNames); // To see the stored names2
           console.log('Array Reversed:', bizRating); // To see the stored ratings
-
+          console.log('Array Reversed:', bizPicUrl);
+          console.log('Array Reversed:', bizUrl);
           // Call the function to display the restaurants
           displayRestaurants();
         })
@@ -294,7 +299,8 @@ function displayRestaurants() {
   // Retrieve the names from localStorage
   let bizNames = JSON.parse(localStorage.getItem('bizNames'));
   let bizRating = JSON.parse(localStorage.getItem('bizRating'));
-
+  let bizPicUrl = JSON.parse(localStorage.getItem('bizPicUrl'));
+  let bizUrl = JSON.parse(localStorage.getItem('bizUrl'));
   // Get the restaurantList element
   const cardItems = document.getElementById('resultEl');
   // Clear the existing list items
