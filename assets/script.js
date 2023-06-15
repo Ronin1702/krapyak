@@ -22,6 +22,7 @@ function picLocation(element) {
 
 document.addEventListener('DOMContentLoaded', function() {
   images.forEach(function(image) {
+    image.addEventListener('click', hidePics);
     image.addEventListener('click', function() {
       locationInput.value = picLocation(this);
       // set categoryInput randomly picked up from array of categoryList 
@@ -115,8 +116,6 @@ function initMap() { //write a function for initMap as indicated in the url tag
     }
   });
   $("#goBtn").click(() => {
-    
-    listHeader.textContent = "Worst "+capitalizeEachWord(categoryInput.value)+ " List:";
     // Get the input from the user
     const input = $("#locationInput").val();
     // Create a new geocoder object
@@ -236,7 +235,8 @@ window.initMap = initMap; //call the initMap function within a given window
 function getSearchInput() {
   localStorage.clear();  // clear local storage
   const searchInput = document.getElementById('locationInput').value;
-
+  var newCategoryInput= categoryInput.value.replace(/\s/g, '').toLowerCase();
+  console.log(newCategoryInput)
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
   yelpHeaders.append("Authorization", "Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx");
@@ -247,11 +247,10 @@ function getSearchInput() {
     redirect: 'follow'
   };
   // fetch restaurant json
-  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + categoryInput.value + "&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
+  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
     .then(response => response.json())
     .then(result => {
       console.log('Result:', result);
-      console.log(categoryInput.value)//check the value I put in the fetch url above
       let totalArray = result.total
       console.log('totalArray:', totalArray)
       // conditional (ternary) operator: If the arry is less then 1000 then use totalArray -5, if not  :  then use 1000-5.
@@ -267,7 +266,7 @@ function getSearchInput() {
         redirect: 'follow'
       };
       // Perform a new fetch operation using the offset parameter
-      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + categoryInput.value + "&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
+      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
         .then(response => response.json())
         .then(newResult => {
           console.log(newResult)
@@ -330,5 +329,4 @@ function hidePics() {
 }
 
 goBtn.addEventListener('click', hidePics);
-
 
