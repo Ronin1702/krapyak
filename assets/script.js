@@ -1,6 +1,6 @@
 const goBtn = document.getElementById('goBtn');
 // base on https://docs.developer.yelp.com/docs/resources-categories, some categoryList needs lower case
-let categoryList = ["Parks", "Restaurants", "Hotels", "coffee", "farmersmarket", "Bars", "Nightlife"];
+let categoryList = ["Parks", "Restaurants", "Hotels", "Coffees", "Farmersmarkets", "Bars", "Nightlifes"];
 let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
 let categoryInput = document.querySelector('#categoryInput');
