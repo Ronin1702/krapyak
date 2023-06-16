@@ -319,7 +319,6 @@ function displayRestaurants() {
   }
 
 }
-/////////////////////////////
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
 function hidePics() {
   var hidePic = document.getElementById('suggestions');
@@ -330,4 +329,3 @@ function hidePics() {
 }
 
 goBtn.addEventListener('click', hidePics);
-
