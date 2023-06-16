@@ -1,7 +1,6 @@
 const goBtn = document.getElementById('goBtn');
 // base on https://docs.developer.yelp.com/docs/resources-categories, some categoryList needs lower case
 let categoryList = ["Parks", "Restaurants", "Hotels", "coffee", "farmersmarket", "Bars", "Nightlife"];
-let rowContent = document.querySelector('#outputContent');
 let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
 let categoryInput = document.querySelector('#categoryInput');
@@ -17,8 +16,6 @@ function picLocation(element) {
   var locaInfo = element.querySelector('img').getAttribute('alt');
   return locaInfo;
 }
-
-
 
 document.addEventListener('DOMContentLoaded', function () {
   images.forEach(function (image) {
@@ -270,7 +267,6 @@ function getCityStateFromResults(results) {
 window.initMap = initMap; //call the initMap function within a given window
 
 // the jQuery below kicks on when DOMContentLoaded
-
 // Write a function to get the city or location input:
 function getSearchInput() {
   localStorage.clear();  // clear local storage
