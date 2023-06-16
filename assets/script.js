@@ -1,6 +1,6 @@
 const goBtn = document.getElementById('goBtn');
 // base on https://docs.developer.yelp.com/docs/resources-categories, some categoryList needs lower case
-let categoryList = ["Parks", "Restaurants", "Hotels","banks", "coffee", "farmersmarket", "Bars", "Nightlife"];
+let categoryList = ["Parks", "Restaurants", "Hotels", "coffee", "farmersmarket", "Bars", "Nightlife"];
 let rowContent = document.querySelector('#outputContent');
 let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
@@ -292,34 +292,32 @@ document.getElementById('goBtn').addEventListener('click', getSearchInput);
 
 // Append and Display the Restaurant results in the list from localStorage
 function displayRestaurants() {
+  var localStorageData = localStorage.getItem('bizNames');
+  if (localStorageData) {
+    var data = JSON.parse(localStorageData);
+    var cardTitles = document.querySelectorAll('.card-title');
+    for (var i = 0; i < cardTitles.length; i++) {
+      cardTitles[i].textContent = data[i];
+    }
+  }
+  var localStorageData = localStorage.getItem('bizRating');
+  if (localStorageData) {
+    var data = JSON.parse(localStorageData);
+    var cardContent = document.querySelectorAll('.card-text');
+    for (var i = 0; i < cardContent.length; i++) {
+      cardContent[i].textContent = "Rating: "+data[i];
+    }
+  }
+  var localStorageData = localStorage.getItem('bizUrl');
+  if (localStorageData) {
+    var data = JSON.parse(localStorageData);
+    var cardUrl = document.querySelectorAll('.btn btn-primary');
+    for (var i = 0; i < cardUrl.length; i++) {
+      cardUrl[i].href = data[i] ;
+      console.log(cardUrl);
+    }
+  }
 
-  // Retrieve the names from localStorage
-  let bizNames = JSON.parse(localStorage.getItem('bizNames'));
-  let bizRating = JSON.parse(localStorage.getItem('bizRating'));
-  let bizPicUrl = JSON.parse(localStorage.getItem('bizPicUrl'));
-  let bizUrl = JSON.parse(localStorage.getItem('bizUrl'));
-  // Get the restaurantList element
-  const cardItems = document.getElementById('resultEl');
-  // Clear the existing list items
-  cardItems.innerHTML = '';
-
-  // Create a list item for each name and append it to the restaurantList
-  bizNames.forEach(name => {
-    const divName = document.getElementById('resultEl');
-    divName.textContent = name;
-    resultEl.appendChild(divName);
-
-  });
-
-  bizRating.forEach(i => {
-    // const listItem = document.getElementById('ratingEl');
-    // listItem.textContent = rating;
-    // ratingEl.appendChild(listItem);
-    const divName = document.getElementById('ratingEl');
-    divName.textContent = i;
-    ratingEl.appendChild(divName);
-
-  });
 }
 /////////////////////////////
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
