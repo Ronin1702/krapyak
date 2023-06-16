@@ -1,6 +1,6 @@
 const goBtn = document.getElementById('goBtn');
 // base on https://docs.developer.yelp.com/docs/resources-categories, some categoryList needs lower case
-let categoryList = ["Parks", "Restaurants", "Hotels","banks", "coffee", "farmersmarket", "Bars", "Nightlife"];
+let categoryList = ["Parks", "Restaurants", "Hotels", "coffee", "farmersmarket", "Bars", "Nightlife"];
 let rowContent = document.querySelector('#outputContent');
 let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
@@ -237,6 +237,8 @@ function getSearchInput() {
   const searchInput = document.getElementById('locationInput').value;
   var newCategoryInput= categoryInput.value.replace(/\s/g, '').toLowerCase();
   console.log(newCategoryInput)
+  var newCategoryInput= categoryInput.value.replace(/\s/g, '').toLowerCase();
+  console.log(newCategoryInput)
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
   yelpHeaders.append("Authorization", "Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx");
@@ -276,11 +278,9 @@ function getSearchInput() {
           // let bizNames = newResult.businesses.map(business => business.name); //get bizNames in default array order
           localStorage.setItem('bizNames', JSON.stringify(bizNames));
           localStorage.setItem('bizRating', JSON.stringify(bizRating));
-          localStorage.setItem('bizPicUrl', JSON.stringify(bizPicUrl));
           localStorage.setItem('bizUrl', JSON.stringify(bizUrl));
           console.log('Array Reversed:', bizNames); // To see the stored names2
           console.log('Array Reversed:', bizRating); // To see the stored ratings
-          console.log('Array Reversed:', bizPicUrl);
           console.log('Array Reversed:', bizUrl);
           // Call the function to display the restaurants
           displayRestaurants();
@@ -294,30 +294,32 @@ document.getElementById('goBtn').addEventListener('click', getSearchInput);
 
 // Append and Display the Restaurant results in the list from localStorage
 function displayRestaurants() {
-
-  // Retrieve the names, ratings, and URLs of the businesses from localStorage.
-  const bizNames = JSON.parse(localStorage.getItem('bizNames'));
-  const bizRating = JSON.parse(localStorage.getItem('bizRating'));
-  const bizUrl = JSON.parse(localStorage.getItem('bizUrl'));
-
-  // Get the resultCards element
-  const cardItems = document.getElementById('showResults');
-
-  // Loop through the businesses and update the HTML
-  for (let i = 0; i < bizNames.length; i++) {
-
-    // Get the card section for the current business
-    const cardSection = cardItems.querySelector(`section[id="${i}"]`);
-
-    // Update the card title
-    cardSection.querySelector('.card-title').textContent = bizNames[i];
-
-    // Update the card rating
-    cardSection.querySelector('.card-text').textContent = bizRating[i];
-
-    // Update the card button href
-    cardSection.querySelector('.btn').href = bizUrl[i];
+  var localStorageData = localStorage.getItem('bizNames');
+  if (localStorageData) {
+    var data = JSON.parse(localStorageData);
+    var cardTitles = document.querySelectorAll('.card-title');
+    for (var i = 0; i < cardTitles.length; i++) {
+      cardTitles[i].textContent = data[i];
+    }
   }
+  var localStorageData = localStorage.getItem('bizRating');
+  if (localStorageData) {
+    var data = JSON.parse(localStorageData);
+    var cardContent = document.querySelectorAll('.card-text');
+    for (var i = 0; i < cardContent.length; i++) {
+      cardContent[i].textContent = "Rating: "+data[i];
+    }
+  }
+  var localStorageData = localStorage.getItem('bizUrl');
+  if (localStorageData) {
+    var data = JSON.parse(localStorageData);
+    var cardUrl = document.querySelectorAll('[href="#"]');
+    for (var i = 0; i < cardUrl.length; i++) {
+      cardUrl[i].href = data[i];
+      console.log(cardUrl);
+    }
+  }
+
 }
 /////////////////////////////
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
