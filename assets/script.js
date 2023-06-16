@@ -116,8 +116,6 @@ function initMap() { //write a function for initMap as indicated in the url tag
     }
   });
   $("#goBtn").click(() => {
-    
-    listHeader.textContent = "Worst "+capitalizeEachWord(categoryInput.value)+ " List:";
     // Get the input from the user
     const input = $("#locationInput").val();
     // Create a new geocoder object
@@ -237,7 +235,8 @@ window.initMap = initMap; //call the initMap function within a given window
 function getSearchInput() {
   localStorage.clear();  // clear local storage
   const searchInput = document.getElementById('locationInput').value;
-
+  var newCategoryInput= categoryInput.value.replace(/\s/g, '').toLowerCase();
+  console.log(newCategoryInput)
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
   yelpHeaders.append("Authorization", "Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx");
@@ -248,11 +247,10 @@ function getSearchInput() {
     redirect: 'follow'
   };
   // fetch restaurant json
-  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + categoryInput.value + "&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
+  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
     .then(response => response.json())
     .then(result => {
       console.log('Result:', result);
-      console.log(categoryInput.value)//check the value I put in the fetch url above
       let totalArray = result.total
       console.log('totalArray:', totalArray)
       // conditional (ternary) operator: If the arry is less then 1000 then use totalArray -5, if not  :  then use 1000-5.
@@ -268,18 +266,22 @@ function getSearchInput() {
         redirect: 'follow'
       };
       // Perform a new fetch operation using the offset parameter
-      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + categoryInput.value + "&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
+      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
         .then(response => response.json())
         .then(newResult => {
           console.log(newResult)
           let bizNames = newResult.businesses.map(business => business.name).reverse(); //get bizNames in reversed array order
           let bizRating = newResult.businesses.map(business => business.rating).reverse(); //get bizRating in reversed array order
+          let bizUrl= newResult.businesses.map(business => business.url).reverse();
           // let bizNames = newResult.businesses.map(business => business.name); //get bizNames in default array order
           localStorage.setItem('bizNames', JSON.stringify(bizNames));
           localStorage.setItem('bizRating', JSON.stringify(bizRating));
+          localStorage.setItem('bizPicUrl', JSON.stringify(bizPicUrl));
+          localStorage.setItem('bizUrl', JSON.stringify(bizUrl));
           console.log('Array Reversed:', bizNames); // To see the stored names2
           console.log('Array Reversed:', bizRating); // To see the stored ratings
-
+          console.log('Array Reversed:', bizPicUrl);
+          console.log('Array Reversed:', bizUrl);
           // Call the function to display the restaurants
           displayRestaurants();
         })
@@ -293,75 +295,30 @@ document.getElementById('goBtn').addEventListener('click', getSearchInput);
 // Append and Display the Restaurant results in the list from localStorage
 function displayRestaurants() {
 
-  // Retrieve the names from localStorage
-  let bizNames = JSON.parse(localStorage.getItem('bizNames'));
-  let bizRating = JSON.parse(localStorage.getItem('bizRating'));
+  // Retrieve the names, ratings, and URLs of the businesses from localStorage.
+  const bizNames = JSON.parse(localStorage.getItem('bizNames'));
+  const bizRating = JSON.parse(localStorage.getItem('bizRating'));
+  const bizUrl = JSON.parse(localStorage.getItem('bizUrl'));
 
-  // Get the first 4 businesses from the list.
-  const firstFourBusinesses = [bizNames[0], bizNames[1], bizNames[2], bizNames[3]];
+  // Get the resultCards element
+  const cardItems = document.getElementById('showResults');
 
-  // Loop through the first 4 businesses and update the h5 and p elements
-  for (let i = 0; i < 4; i++) {
-    const section = document.getElementById(`section-${i}`);
-    const h5 = section.querySelector('h5');
-    const p = section.querySelector('p');
-    h5.textContent = bizNames[i];
-    p.textContent = bizRating[i];
+  // Loop through the businesses and update the HTML
+  for (let i = 0; i < bizNames.length; i++) {
+
+    // Get the card section for the current business
+    const cardSection = cardItems.querySelector(`section[id="${i}"]`);
+
+    // Update the card title
+    cardSection.querySelector('.card-title').textContent = bizNames[i];
+
+    // Update the card rating
+    cardSection.querySelector('.card-text').textContent = bizRating[i];
+
+    // Update the card button href
+    cardSection.querySelector('.btn').href = bizUrl[i];
   }
 }
-
-// When the goBtn is clicked the above fetch link get the location inputs in the textbox.
-document.getElementById('goBtn').addEventListener('click', displayRestaurants);
-
-// Append and Display the Restaurant results in the list from localStorage
-function displayRestaurants() {
-
-  // Retrieve the names from localStorage
-  let bizNames = JSON.parse(localStorage.getItem('bizNames'));
-  let bizRating = JSON.parse(localStorage.getItem('bizRating'));
-
-function createCards() {
-
-    // Create a new div element for the result cards.
-    const resultCardsDiv = document.createElement('div');
-    resultCardsDiv.className = 'resultCards container-fluid row mx-auto ml-1 mr-1';
-    resultCardsDiv.id = 'showResults';
-  
-    // Create a new div element for the row.
-    const rowDiv = document.createElement('div');
-    rowDiv.className = 'row';
-  
-    // Create 4 card sections.
-    for (let i = 0; i < 4; i++) {
-  
-    // Create a new card section.
-      const cardSection = document.createElement('section');
-      cardSection.className = 'card mt-4 mx-auto mb-2';
-      cardSection.style = 'width: 18rem;';
-  
-    // Create an image element for the card.
-      const imgElement = document.createElement('img');
-      imgElement.className = 'card-img-top';
-      imgElement.src = '...';
-      imgElement.alt = 'Card image cap';
-  
-    // Create a div element for the card body.
-      const cardBodyDiv = document.createElement('div');
-      cardBodyDiv.className = 'card-body';
-  
-    // Create an h5 element for the card title.
-      const h5Element = document.createElement('h5');
-      h5Element.className = 'card-title';
-      h5Element.textContent = 'Card title';
-  
-    // Create a p element for the card text.
-      const pElement = document.createElement('p');
-      pElement.className = 'card-text';
-      pElement.textContent = 'Some quick example text to build on the card title and make up the bulk of the\ncard's content.';
-    // Create an a element for the card button.
-    const aElement = document.createElement('a');
-    aElement.className = 'btn btn-primary';
-    aElement.textContent = 'Go somewhere';
 /////////////////////////////
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
 function hidePics() {
