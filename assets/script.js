@@ -373,7 +373,7 @@ function displayResults() {
   var localStorageData = localStorage.getItem('bizUrl');
   if (localStorageData) {
     var data = JSON.parse(localStorageData);
-    var cardUrl = document.querySelectorAll('[href="#"]');
+    var cardUrl = document.querySelectorAll('.card-link');
     for (var i = 0; i < cardUrl.length; i++) {
       cardUrl[i].href = data[i];
     }
