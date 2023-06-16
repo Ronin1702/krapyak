@@ -253,6 +253,7 @@ function getSearchInput() {
       console.log('Result:', result);
       let totalArray = result.total
       console.log('totalArray:', totalArray)
+      localStorage.setItem('totalArray',totalArray)//store total array in localStorage
       // conditional (ternary) operator: If the arry is less then 1000 then use totalArray -5, if not  :  then use 1000-5.
       let offsetArray = totalArray < 1000 ? totalArray - 5 : 1000 - 5;
       console.log('Update offsetArray:', offsetArray)
@@ -277,11 +278,11 @@ function getSearchInput() {
           localStorage.setItem('bizNames', JSON.stringify(bizNames));
           localStorage.setItem('bizRating', JSON.stringify(bizRating));
           localStorage.setItem('bizUrl', JSON.stringify(bizUrl));
-          console.log('Array Reversed:', bizNames); // To see the stored names2
-          console.log('Array Reversed:', bizRating); // To see the stored ratings
-          console.log('Array Reversed:', bizUrl);
+          console.log('bizNames Array Reversed:', bizNames); // To see the stored names2
+          console.log('biz Rating Array Reversed:', bizRating); // To see the stored ratings
+          console.log('bizUrl Array Reversed:', bizUrl);
           // Call the function to display the restaurants
-          displayRestaurants();
+          displayResults();
         })
         .catch(error => console.log('error', error));
     })
@@ -291,7 +292,8 @@ function getSearchInput() {
 document.getElementById('goBtn').addEventListener('click', getSearchInput);
 
 // Append and Display the Restaurant results in the list from localStorage
-function displayRestaurants() {
+function displayResults() {
+  $('#card-head').empty(); // this is to make sure that it empties the card-head before appending new info.
   var localStorageData = localStorage.getItem('bizNames');
   if (localStorageData) {
     var data = JSON.parse(localStorageData);
@@ -314,12 +316,11 @@ function displayRestaurants() {
     var cardUrl = document.querySelectorAll('[href="#"]');
     for (var i = 0; i < cardUrl.length; i++) {
       cardUrl[i].href = data[i];
-      console.log(cardUrl);
     }
   }
-
+// append info to card-head
+  $('#card-head').append('There are total of '+localStorage.getItem('totalArray')+' '+ capitalizeEachWord(categoryInput.value)+' in '+locationInput.value)
 }
-/////////////////////////////
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
 function hidePics() {
   var hidePic = document.getElementById('suggestions');
@@ -330,4 +331,3 @@ function hidePics() {
 }
 
 goBtn.addEventListener('click', hidePics);
-
