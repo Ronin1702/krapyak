@@ -311,9 +311,9 @@ function displayRestaurants() {
   var localStorageData = localStorage.getItem('bizUrl');
   if (localStorageData) {
     var data = JSON.parse(localStorageData);
-    var cardUrl = document.querySelectorAll('.btn btn-primary');
+    var cardUrl = document.querySelectorAll('[href="#"]');
     for (var i = 0; i < cardUrl.length; i++) {
-      cardUrl[i].href = data[i] ;
+      cardUrl[i].href = data[i];
       console.log(cardUrl);
     }
   }
