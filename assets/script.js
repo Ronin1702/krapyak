@@ -7,7 +7,7 @@ let locationInput = document.querySelector('#locationInput');
 let categoryInput = document.querySelector('#categoryInput');
 let listHeader = document.querySelector('#listHeader');
 let images = document.querySelectorAll('.top-city-img');
-function capitalizeEachWord(str) {
+function capitalizeEachWord(str) { //uppercase first letter of each word
   return str.replace(/\w\S*/g, function (txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
@@ -20,10 +20,10 @@ function picLocation(element) {
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
-  images.forEach(function(image) {
+document.addEventListener('DOMContentLoaded', function () {
+  images.forEach(function (image) {
     image.addEventListener('click', hidePics);
-    image.addEventListener('click', function() {
+    image.addEventListener('click', function () {
       locationInput.value = picLocation(this);
       // set categoryInput randomly picked up from array of categoryList 
       categoryInput.value = categoryList[Math.floor(Math.random() * categoryList.length)];
@@ -55,6 +55,19 @@ function initMap() { //write a function for initMap as indicated in the url tag
   map = new google.maps.Map($("#map")[0], {
     center: { lat: 39.9833, lng: -82.9833 },
     zoom: 12,
+  });
+  $(".mb-2.col-lg-3.col-md-6.col-sm-12").click(function () {
+    // Parse the bizLocations array from localStorage
+    var bizLat = JSON.parse(localStorage.getItem('bizLat'));
+    var bizLng = JSON.parse(localStorage.getItem('bizLng'));
+    // Create a marker for each location in bizLocations
+    for (var i = 0; i < bizLat.length; i++) {
+      map = new google.maps.Map($("#map")[0], {
+        center: { lat: bizLat[i], lng: bizLng[i] },
+        zoom: 20,
+      });
+    }
+
   });
   infoWindow = new google.maps.InfoWindow();
 
@@ -235,7 +248,7 @@ window.initMap = initMap; //call the initMap function within a given window
 function getSearchInput() {
   localStorage.clear();  // clear local storage
   const searchInput = document.getElementById('locationInput').value;
-  var newCategoryInput= categoryInput.value.replace(/\s/g, '').toLowerCase();
+  var newCategoryInput = categoryInput.value.replace(/\s/g, '').toLowerCase();
   console.log(newCategoryInput)
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
@@ -253,7 +266,7 @@ function getSearchInput() {
       console.log('Result:', result);
       let totalArray = result.total
       console.log('totalArray:', totalArray)
-      localStorage.setItem('totalArray',totalArray)//store total array in localStorage
+      localStorage.setItem('totalArray', totalArray)//store total array in localStorage
       // conditional (ternary) operator: If the arry is less then 1000 then use totalArray -5, if not  :  then use 1000-5.
       let offsetArray = totalArray < 1000 ? totalArray - 5 : 1000 - 5;
       console.log('Update offsetArray:', offsetArray)
@@ -273,11 +286,19 @@ function getSearchInput() {
           console.log(newResult)
           let bizNames = newResult.businesses.map(business => business.name).reverse(); //get bizNames in reversed array order
           let bizRating = newResult.businesses.map(business => business.rating).reverse(); //get bizRating in reversed array order
-          let bizUrl= newResult.businesses.map(business => business.url).reverse();
+          let bizUrl = newResult.businesses.map(business => business.url).reverse();
+          let bizLat = newResult.businesses.map(business => business.coordinates.latitude).reverse();
+
+          let bizLng = newResult.businesses.map(business => business.coordinates.longitude).reverse();
+
+
+          localStorage.setItem('bizLat', JSON.stringify(bizLat));
+          localStorage.setItem('bizLng', JSON.stringify(bizLng));
           // let bizNames = newResult.businesses.map(business => business.name); //get bizNames in default array order
           localStorage.setItem('bizNames', JSON.stringify(bizNames));
           localStorage.setItem('bizRating', JSON.stringify(bizRating));
           localStorage.setItem('bizUrl', JSON.stringify(bizUrl));
+
           console.log('bizNames Array Reversed:', bizNames); // To see the stored names2
           console.log('biz Rating Array Reversed:', bizRating); // To see the stored ratings
           console.log('bizUrl Array Reversed:', bizUrl);
@@ -307,7 +328,7 @@ function displayResults() {
     var data = JSON.parse(localStorageData);
     var cardContent = document.querySelectorAll('.card-text');
     for (var i = 0; i < cardContent.length; i++) {
-      cardContent[i].textContent = "Rating: "+data[i];
+      cardContent[i].textContent = "Rating: " + data[i];
     }
   }
   var localStorageData = localStorage.getItem('bizUrl');
@@ -318,8 +339,8 @@ function displayResults() {
       cardUrl[i].href = data[i];
     }
   }
-// append info to card-head
-  $('#card-head').append('There are total of '+localStorage.getItem('totalArray')+' '+ capitalizeEachWord(categoryInput.value)+' in '+locationInput.value)
+  // append info to card-head
+  $('#card-head').append('There are total of ' + localStorage.getItem('totalArray') + ' ' + capitalizeEachWord(categoryInput.value) + ' in ' + locationInput.value)
 }
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
 function hidePics() {
