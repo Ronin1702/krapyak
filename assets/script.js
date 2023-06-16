@@ -1,6 +1,6 @@
 const goBtn = document.getElementById('goBtn');
 // base on https://docs.developer.yelp.com/docs/resources-categories, some categoryList needs lower case
-let categoryList = ["Parks", "Restaurants", "Hotels", "coffee", "farmersmarket", "Bars", "Nightlife"];
+let categoryList = ["Parks", "Restaurants", "Hotels", "coffee", "farmersmarkets", "Bars", "Nightlife"];
 let rowContent = document.querySelector('#outputContent');
 let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
@@ -319,7 +319,7 @@ function displayResults() {
     }
   }
 // append info to card-head
-  $('#card-head').append('There are total of '+localStorage.getItem('totalArray')+' '+ capitalizeEachWord(categoryInput.value)+' in '+locationInput.value)
+  $('#card-head').append('There are '+localStorage.getItem('totalArray')+' '+ capitalizeEachWord(categoryInput.value)+' in '+locationInput.value)
 }
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
 function hidePics() {
