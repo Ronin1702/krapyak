@@ -291,7 +291,7 @@ function getSearchInput() {
   console.log(newCategoryInput)
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
-  yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+  yelpHeaders.append("Authorization", "Bearer iEWpEJus8XutzADQ0Sn8mCkwJwfRrQ33D_0RtGPU51O4VueCdfHXlQJcIGOllFyesExpaiyk_4vo_mPjqm9XZvGFFTs0EhAknYi5uRKoQOQ9rdZAHUC0IfOzLDOMZHYx");
 
   var requestOptions = {
     method: 'GET',
@@ -311,7 +311,7 @@ function getSearchInput() {
       console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
-      yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+      yelpHeaders.append("Authorization", "Bearer iEWpEJus8XutzADQ0Sn8mCkwJwfRrQ33D_0RtGPU51O4VueCdfHXlQJcIGOllFyesExpaiyk_4vo_mPjqm9XZvGFFTs0EhAknYi5uRKoQOQ9rdZAHUC0IfOzLDOMZHYx");
 
       var requestOptions = {
         method: 'GET',
