@@ -304,7 +304,7 @@ function displayRestaurants() {
   if (localStorageData) {
     var data = JSON.parse(localStorageData);
     var cardContent = document.querySelectorAll('.card-text');
-    for (var i = 0; i < cardTitles.length; i++) {
+    for (var i = 0; i < cardContent.length; i++) {
       cardContent[i].textContent = "Rating: "+data[i];
     }
   }
@@ -312,9 +312,9 @@ function displayRestaurants() {
   if (localStorageData) {
     var data = JSON.parse(localStorageData);
     var cardUrl = document.querySelectorAll('.btn btn-primary');
-    for (var i = 0; i < cardTitles.length; i++) {
+    for (var i = 0; i < cardUrl.length; i++) {
       cardUrl[i].href = data[i] ;
-      console.log(cardUrl)
+      console.log(cardUrl);
     }
   }
 
