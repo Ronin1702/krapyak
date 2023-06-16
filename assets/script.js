@@ -259,7 +259,7 @@ function getSearchInput() {
       console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
-      yelpHeaders.append("Authorization", "Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx");
+      yelpHeaders.append("Authorization", "Bearer AJd_-brP0SR373HBoy1kA1NQQDN4XKgORy24LJjxuvfW6c9MyCRs0NqBTBnMho12trBlZFSLrymP4j9vKBbX4ToCVDZnTsWK35S_gMRQAQD6JXIpl74xqKsDMcl-ZHYx");
 
       var requestOptions = {
         method: 'GET',
