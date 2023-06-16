@@ -56,18 +56,45 @@ function initMap() { //write a function for initMap as indicated in the url tag
     center: { lat: 39.9833, lng: -82.9833 },
     zoom: 12,
   });
-  $(".mb-2.col-lg-3.col-md-6.col-sm-12").click(function () {
+  $("#biz1").click(function () {
     // Parse the bizLocations array from localStorage
-    var bizLat = JSON.parse(localStorage.getItem('bizLat'));
-    var bizLng = JSON.parse(localStorage.getItem('bizLng'));
+    var bizLatitude = JSON.parse(localStorage.getItem('bizLat'));
+    var bizLongitude = JSON.parse(localStorage.getItem('bizLng'));
     // Create a marker for each location in bizLocations
-    for (var i = 0; i < bizLat.length; i++) {
-      map = new google.maps.Map($("#map")[0], {
-        center: { lat: bizLat[i], lng: bizLng[i] },
-        zoom: 20,
-      });
-    }
-
+    map = new google.maps.Map($("#map")[0], {
+      center: { lat: bizLatitude[0], lng: bizLongitude[0] },
+      zoom: 18,
+    });
+  });
+  $("#biz2").click(function () {
+    // Parse the bizLocations array from localStorage
+    var bizLatitude = JSON.parse(localStorage.getItem('bizLat'));
+    var bizLongitude = JSON.parse(localStorage.getItem('bizLng'));
+    // Create a marker for each location in bizLocations
+    map = new google.maps.Map($("#map")[0], {
+      center: { lat: bizLatitude[1], lng: bizLongitude[1] },
+      zoom: 18,
+    });
+  });
+  $("#biz3").click(function () {
+    // Parse the bizLocations array from localStorage
+    var bizLatitude = JSON.parse(localStorage.getItem('bizLat'));
+    var bizLongitude = JSON.parse(localStorage.getItem('bizLng'));
+    // Create a marker for each location in bizLocations
+    map = new google.maps.Map($("#map")[0], {
+      center: { lat: bizLatitude[2], lng: bizLongitude[2] },
+      zoom: 18,
+    });
+  });
+  $("#biz4").click(function () {
+    // Parse the bizLocations array from localStorage
+    var bizLatitude = JSON.parse(localStorage.getItem('bizLat'));
+    var bizLongitude = JSON.parse(localStorage.getItem('bizLng'));
+    // Create a marker for each location in bizLocations
+    map = new google.maps.Map($("#map")[0], {
+      center: { lat: bizLatitude[3], lng: bizLongitude[3] },
+      zoom: 18,
+    });
   });
   infoWindow = new google.maps.InfoWindow();
 
@@ -252,7 +279,7 @@ function getSearchInput() {
   console.log(newCategoryInput)
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
-  yelpHeaders.append("Authorization", "Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx");
+  yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
 
   var requestOptions = {
     method: 'GET',
@@ -272,7 +299,7 @@ function getSearchInput() {
       console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
-      yelpHeaders.append("Authorization", "Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx");
+      yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
 
       var requestOptions = {
         method: 'GET',
