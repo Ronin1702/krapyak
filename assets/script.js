@@ -1,6 +1,6 @@
 const goBtn = document.getElementById('goBtn');
 // base on https://docs.developer.yelp.com/docs/resources-categories, some categoryList needs lower case
-let categoryList = ["Parks", "Restaurants", "Hotels","banks", "coffee", "farmersmarket", "Bars", "Nightlife"];
+let categoryList = ["Parks", "Restaurants", "Hotels", "coffee", "farmersmarket", "Bars", "Nightlife"];
 let rowContent = document.querySelector('#outputContent');
 let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
@@ -272,12 +272,14 @@ function getSearchInput() {
           console.log(newResult)
           let bizNames = newResult.businesses.map(business => business.name).reverse(); //get bizNames in reversed array order
           let bizRating = newResult.businesses.map(business => business.rating).reverse(); //get bizRating in reversed array order
+          let bizUrl= newResult.businesses.map(business => business.url).reverse();
           // let bizNames = newResult.businesses.map(business => business.name); //get bizNames in default array order
           localStorage.setItem('bizNames', JSON.stringify(bizNames));
           localStorage.setItem('bizRating', JSON.stringify(bizRating));
+          localStorage.setItem('bizUrl', JSON.stringify(bizUrl));
           console.log('Array Reversed:', bizNames); // To see the stored names2
           console.log('Array Reversed:', bizRating); // To see the stored ratings
-
+          console.log('Array Reversed:', bizUrl);
           // Call the function to display the restaurants
           displayRestaurants();
         })
@@ -290,33 +292,32 @@ document.getElementById('goBtn').addEventListener('click', getSearchInput);
 
 // Append and Display the Restaurant results in the list from localStorage
 function displayRestaurants() {
+  var localStorageData = localStorage.getItem('bizNames');
+  if (localStorageData) {
+    var data = JSON.parse(localStorageData);
+    var cardTitles = document.querySelectorAll('.card-title');
+    for (var i = 0; i < cardTitles.length; i++) {
+      cardTitles[i].textContent = data[i];
+    }
+  }
+  var localStorageData = localStorage.getItem('bizRating');
+  if (localStorageData) {
+    var data = JSON.parse(localStorageData);
+    var cardContent = document.querySelectorAll('.card-text');
+    for (var i = 0; i < cardContent.length; i++) {
+      cardContent[i].textContent = "Rating: "+data[i];
+    }
+  }
+  var localStorageData = localStorage.getItem('bizUrl');
+  if (localStorageData) {
+    var data = JSON.parse(localStorageData);
+    var cardUrl = document.querySelectorAll('[href="#"]');
+    for (var i = 0; i < cardUrl.length; i++) {
+      cardUrl[i].href = data[i];
+      console.log(cardUrl);
+    }
+  }
 
-  // Retrieve the names from localStorage
-  let bizNames = JSON.parse(localStorage.getItem('bizNames'));
-  let bizRating = JSON.parse(localStorage.getItem('bizRating'));
-
-  // Get the restaurantList element
-  const cardItems = document.getElementById('resultEl');
-  // Clear the existing list items
-  cardItems.innerHTML = '';
-
-  // Create a list item for each name and append it to the restaurantList
-  bizNames.forEach(name => {
-    const divName = document.getElementById('resultEl');
-    divName.textContent = name;
-    resultEl.appendChild(divName);
-
-  });
-
-  bizRating.forEach(i => {
-    // const listItem = document.getElementById('ratingEl');
-    // listItem.textContent = rating;
-    // ratingEl.appendChild(listItem);
-    const divName = document.getElementById('ratingEl');
-    divName.textContent = i;
-    ratingEl.appendChild(divName);
-
-  });
 }
 /////////////////////////////
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
