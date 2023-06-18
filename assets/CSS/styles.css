@@ -1,9 +1,9 @@
 body {
-  background-color: #9BC1F2;
+  background-color: #ceddf1;
 }
 
 .card {
-  background-color: #FBC651;
+  background-color: #FDE293;
   border-radius: 30px;
   border: 2px solid #FFFFFF;
 }
@@ -17,10 +17,7 @@ body {
 #card-head {
   font-family: 'Montserrat', sans-serif;
   font-size: 30px;
-  background-color: #FBC651;
   font-weight: normal;
-  border-radius: 15px;
-  border: 2px solid #FFFFFF;
 }
 
 .card:hover {
@@ -36,14 +33,11 @@ body {
 footer {
   font-family: 'Cherry Bomb One', cursive;
   font-size: 30px;
-  background-color: #FBC651;
   font-weight: normal;
-  border-radius: 10px;
-  border: 2px solid #FFFFFF;
 }
 
 header {
-  background-color: #FBC651;
+  background-color: #FDE293;
   border-radius: 15px;
   border: solid 2px #FFFFFF;
 }
@@ -55,19 +49,22 @@ h1 {
 }
 
 h2 {
+  font-weight: bold;
   font-family: 'Montserrat', sans-serif;
   font-size: 36px;
-  background-color: #FBC651;
   border-radius: 15px;
-  border: solid 2px #FFFFFF;
 }
 
 h3 {
   font-family: 'Montserrat', sans-serif;
   font-size: 36px;
-  background-color: #FBC651;
+  background-color: #FDE293;
   border-radius: 15px;
   border: 2px solid #FFFFFF;
+}
+
+h4 {
+  font-weight: bold;
 }
 
 input {
@@ -99,6 +96,11 @@ input {
   justify-content: space-between;
   align-items: center;
   font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+.row image-text {
+  font-weight: bold;
 }
 
 .show-text-on-img {
@@ -117,7 +119,7 @@ input {
   font-size: 18px;
   box-sizing: border-box;
   border-radius: 20px;
-  border: 2px solid #FBC651;
+  border: 2px solid #FDE293;
   overflow: auto;
 }
 
@@ -142,6 +144,6 @@ input {
   height: 100%;
   object-fit: cover;
   border-radius: 20px;
-  border: 2px solid #FBC651;
+  border: 2px solid #FDE293;
   overflow: auto;
 }

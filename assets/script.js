@@ -1,6 +1,6 @@
 const goBtn = document.getElementById('goBtn');
 // base on https://docs.developer.yelp.com/docs/resources-categories, some categoryList needs lower case
-let categoryList = ["Parks", "Restaurants", "Hotels", "Coffees", "Farmersmarkets", "Bars", "Nightlifes"];
+let categoryList = ["Parks", "Restaurants", "Hotels", "Coffee", "Farmersmarket", "Bars", "Nightlife"];
 let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
 let categoryInput = document.querySelector('#categoryInput');
@@ -273,9 +273,11 @@ function getSearchInput() {
   const searchInput = document.getElementById('locationInput').value;
   var newCategoryInput = categoryInput.value.replace(/\s/g, '').toLowerCase();
   console.log(newCategoryInput)
+  var endsWithS = capitalizeEachWord(categoryInput.value).endsWith('s');
+
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
-  yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+  yelpHeaders.append("Authorization", "Bearer AJd_-brP0SR373HBoy1kA1NQQDN4XKgORy24LJjxuvfW6c9MyCRs0NqBTBnMho12trBlZFSLrymP4j9vKBbX4ToCVDZnTsWK35S_gMRQAQD6JXIpl74xqKsDMcl-ZHYx");
 
   var requestOptions = {
     method: 'GET',
@@ -295,7 +297,7 @@ function getSearchInput() {
       console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
-      yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+      yelpHeaders.append("Authorization", "Bearer AJd_-brP0SR373HBoy1kA1NQQDN4XKgORy24LJjxuvfW6c9MyCRs0NqBTBnMho12trBlZFSLrymP4j9vKBbX4ToCVDZnTsWK35S_gMRQAQD6JXIpl74xqKsDMcl-ZHYx");
 
       var requestOptions = {
         method: 'GET',
@@ -352,7 +354,11 @@ function displayResults() {
     var data = JSON.parse(localStorageData);
     var cardContent = document.querySelectorAll('.card-text');
     for (var i = 0; i < cardContent.length; i++) {
-      cardContent[i].textContent = "Rating: " + data[i];
+      var emoji = "";
+      for (var j = 0; j < data[i]; j++) {
+        emoji += "💩";
+      }
+      cardContent[i].textContent = "Rating: " + data[i] + emoji;
     }
   }
   var localStorageData = localStorage.getItem('bizUrl');
@@ -364,9 +370,12 @@ function displayResults() {
     }
   }
   // append info to card-head
-  $('#card-head').append('There are ' + localStorage.getItem('totalArray') + ' ' + capitalizeEachWord(categoryInput.value) + ' near ' + locationInput.value + 
-  '. Below are the bottom four')
+  $('#card-head').append('Displaying bottom 4 of ' + localStorage.getItem('totalArray') + ' ' + capitalizeEachWord(categoryInput.value) + ' near ' + locationInput.value)
+  if (endsWithS) {
+    $('#card-head').append('s');
+  }
 }
+
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
 function hidePics() {
   var hidePic = document.getElementById('suggestions');
