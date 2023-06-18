@@ -364,7 +364,8 @@ function displayResults() {
     }
   }
   // append info to card-head
-  $('#card-head').append('There are ' + localStorage.getItem('totalArray') + ' ' + capitalizeEachWord(categoryInput.value) + ' near ' + locationInput.value)
+  $('#card-head').append('There are ' + localStorage.getItem('totalArray') + ' ' + capitalizeEachWord(categoryInput.value) + ' near ' + locationInput.value + 
+  '. Below are the bottom four')
 }
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
 function hidePics() {

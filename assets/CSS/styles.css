@@ -15,7 +15,7 @@ body {
 }
 
 #card-head {
-  font-family: 'Lilita One', cursive;
+  font-family: 'Montserrat', sans-serif;
   font-size: 30px;
   background-color: #FBC651;
   font-weight: normal;
@@ -55,7 +55,7 @@ h1 {
 }
 
 h2 {
-  font-family: 'Lilita One', cursive;
+  font-family: 'Montserrat', sans-serif;
   font-size: 36px;
   background-color: #FBC651;
   border-radius: 15px;
@@ -63,7 +63,7 @@ h2 {
 }
 
 h3 {
-  font-family: 'Lilita One', cursive;
+  font-family: 'Montserrat', sans-serif;
   font-size: 36px;
   background-color: #FBC651;
   border-radius: 15px;
@@ -98,7 +98,7 @@ input {
   flex:auto;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Lilita One', cursive;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .show-text-on-img {
