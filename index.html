@@ -34,14 +34,14 @@
     <div class="container-fluid">
         <!--Below I created a header -->
         <!-- the bg-gradient added a gradient shade to he background -->
-        <header class="mx-2 mt-2 text-center bg-warning rounded">
+        <header class="mx-2 mt-2 text-center">
             <h1><span id="krapyak">krapyak 🛶 </span> Your Destination's Nightmares...</h1>
         </header>
 
         <!-- Below I created a input group with a dropdown menu -->
         <!-- I borrowed some stuff from https://getbootstrap.com/docs/5.1/forms/input-group/ -->
         <div class="row">
-            <div class="col m-2 input-group">
+            <div class="m-2 input-group">
                 <span class="input-group-text">Location</span>
                 <input type="text" class="form-control" placeholder="Enter a Location" aria-label="location"
                     id="locationInput">
@@ -57,19 +57,19 @@
 
 
         <div class="container" id="suggestions">
-            <div class="text-row">
-                <h2> Tourist Hotspots! </h2>
+            <div class="text-row" style="width: 20rem">
+                <h2 class="text-center"> Tourist Hotspots! </h2>
             </div>
             <div class="row image-text">
-                <div class="col-3 top-city-img">
+                <div class="top-city-img mb-3">
                     <img src="./assets/Images/hongkong.jpg" alt="Hong Kong"> <p class="text-center">Hong Kong</p>
                     <div class="show-text-on-img">Hong Kong</div>
                 </div>
-                <div class="col-3 top-city-img">
+                <div class="top-city-img mb-3">
                     <img src="./assets/Images/LA.jpg" alt="Los Angeles"> <p class="text-center">Los Angeles</p>
                     <div class="show-text-on-img">Los Angeles</div>
                 </div>
-                <div class="col-3 top-city-img">
+                <div class="top-city-img mb-3">
                     <img src="./assets/Images/munich.jpg" alt="Munich"> <p class="text-center">Munich</p>
                     <div class="show-text-on-img">Munich</div>
                 </div>
@@ -80,38 +80,39 @@
         <div class="resultCards container-fluid row mx-auto ml-1 mr-1" id="showResults">
             <h1 class="text-center" id="card-head"></h1>
             <hr class="mb-2">
-            <h3 class="text-center mb-3"> the <span style="font-size: 40px;">💩</span></h3>
+            <h3 class="text-center mb-3" style="width: 36rem; margin: 0 auto;"> We advise not stepping in <span class="text-center" style="font-size: 18px;">💩💩💩</span></h3>
             <div class="row">
-                    <section class="card mt-4 mx-auto mb-2" style="width: 16rem; height:12rem;" id="biz1">
-                        <div class="card-body">
-                            <h5 class="card-title">Fetching <span style="font-size: 40px;">💩</span></h5>
-                            <p class="card-text">Yaks flushing..</p>
-                            <a href="#" class="btn btn-primary"><i class="fa-brands fa-yelp"></i></a>    
-                    </section>
-                
-                    <section class="card mt-4 mx-auto mb-2" style="width: 16rem; height:12rem;" id="biz2">
-                        <div class="card-body">
-                            <h5 class="card-title">Fetching <span style="font-size: 40px;">💩</span></h5>
-                            <p class="card-text">Yaks flushing..</p>
-                            <a href="#" class="btn btn-primary"><i class="fa-brands fa-yelp"></i></a>
-                        </div>
-                    </section>               
-                
-                    <section class="card mt-4 mx-auto mb-2" style="width: 16rem; height:12rem;" id="biz3">
-                        <div class="card-body">
-                            <h5 class="card-title">Fetching <span style="font-size: 40px;">💩</span></h5>
-                            <p class="card-text">Yaks flushing...</p>
-                            <a href="#" class="btn btn-primary"><i class="fa-brands fa-yelp"></i></a>
-                        </div>
-                    </section>
-                
-                    <section class="card mt-4 mx-auto mb-2" style="width: 16rem; height:12rem;" id="biz4">
-                        <div class="card-body">
-                            <h5 class="card-title">Fetching <span style="font-size: 40px;">💩</span></h5>
-                            <p class="card-text">Yaks flushing..</p>
-                            <a href="#" class="btn btn-primary"><i class="fa-brands fa-yelp"></i></a>
-                        </div>
-                    </section>
+                <section class="card mt-4 mx-auto mb-2" style="width: 16rem; height:14rem;" id="biz1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Fetching <span style="font-size: 40px;">💩</span></h5>
+                        <p class="card-text">Yaks flushing...</p>
+                        <a href="#" class="btn btn-primary btn-block text-center card-bottom-center"><i class="fa-brands fa-yelp" ><p>Yelp</p></i></a>
+                    </div>
+                </section>
+            
+                <section class="card mt-4 mx-auto mb-2" style="width: 16rem; height:14rem;" id="biz2">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Fetching <span style="font-size: 40px;">💩</span></h5>
+                        <p class="card-text">Yaks flushing...</p>
+                        <a href="#" class="btn btn-primary btn-block text-center card-bottom-center"><i class="fa-brands fa-yelp" ><p>Yelp</p></i></a>
+                    </div>
+                </section>               
+            
+                <section class="card mt-4 mx-auto mb-2" style="width: 16rem; height:14rem;" id="biz3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Fetching <span style="font-size: 40px;">💩</span></h5>
+                        <p class="card-text">Yaks flushing...</p>
+                        <a href="#" class="btn btn-primary btn-block text-center card-bottom-center"><i class="fa-brands fa-yelp" ><p>Yelp</p></i></a>
+                    </div>
+                </section>
+            
+                <section class="card mt-4 mx-auto mb-2" style="width: 16rem; height:14rem;" id="biz4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Fetching <span style="font-size: 40px;">💩</span></h5>
+                        <p class="card-text">Yaks flushing...</p>
+                        <a href="#" class="btn btn-primary btn-block text-center card-bottom-center"><i class="fa-brands fa-yelp" ><p>Yelp</p></i></a>
+                    </div>
+                </section>
                 
             </div>
         </div>
@@ -127,7 +128,7 @@
     </div>
     <!-- Insert API KEY and set the callback id to initMap -->
     <script src="./assets/script.js"></script>
-    <footer class="mx-3 mb-2 text-center rounded">
+    <footer class="mx-3 mb-2 text-center">
         <h5> Designed, Coded, and 🌳 Cultivated by Team ONE ™</h5>
     </footer>
 </body>

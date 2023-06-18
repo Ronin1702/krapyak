@@ -325,7 +325,7 @@ function getSearchInput() {
           console.log('bizNames Array Reversed:', bizNames); // To see the stored names2
           console.log('biz Rating Array Reversed:', bizRating); // To see the stored ratings
           console.log('bizUrl Array Reversed:', bizUrl);
-          // Call the function to display the restaurants
+          // Call the function to display the business results.
           displayResults();
         })
         .catch(error => console.log('error', error));
@@ -334,8 +334,9 @@ function getSearchInput() {
 }
 // When the goBtn is clicked the above fetch link get the location inputs in the textbox.
 document.getElementById('goBtn').addEventListener('click', getSearchInput);
+document.getElementById('categoryInput').addEventListener('enter', getSearchInput)
 
-// Append and Display the Restaurant results in the list from localStorage
+// Append and Display the business category results in the list from localStorage
 function displayResults() {
   $('#card-head').empty(); // this is to make sure that it empties the card-head before appending new info.
   var localStorageData = localStorage.getItem('bizNames');
