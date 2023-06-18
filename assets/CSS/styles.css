@@ -1,20 +1,36 @@
 body {
-  background-color: #88B6F2;
+  background-color: #9BC1F2;
 }
 
 input {
   font-size: 18px;
 }
 #krapyak {
-    font-weight: normal;
-    font-size: 60px;
-    font-family: 'Cherry Bomb One', cursive;
+  font-weight: normal;
+  font-size: 64px;
+  font-family: 'Cherry Bomb One', cursive;
 }
 
 h1 {
-  font-weight: bold;
-  font-size: 28px;
-  font-family: 'Diphylleia', serif;
+  font-weight: normal;
+  font-size: 32px;
+  font-family: 'Cherry Bomb One', cursive;
+}
+
+h2 {
+  font-family: 'Cherry Bomb One', cursive;
+  font-size: 36px;
+  background-color: #FFC107;
+  font-weight: normal;
+  border-radius: 10px;
+}
+
+h3 {
+  font-family: 'Cherry Bomb One', cursive;
+  font-size: 36px;
+  background-color: #FFC107;
+  font-weight: normal;
+  border-radius: 10px;
 }
 
 
@@ -25,19 +41,20 @@ h1 {
     flex-wrap: wrap;
   }
 
-footer {
-  color: #fff;
-  font-weight: bold;
-  font-size: 28px;
-  font-family: 'Diphylleia', serif;
-  background-color: #F2A007;
-}
+  footer {
+    font-family: 'Cherry Bomb One', cursive;
+    font-size: 30px;
+    background-color: #FFC107;
+    font-weight: normal;
+  }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-}.image-text {
+}
+
+.image-text {
   display: flex;
   justify-content: center;
 }
@@ -63,7 +80,7 @@ footer {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
+  color: #FFFFFF;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   display: flex;
@@ -87,10 +104,22 @@ footer {
   align-items: center;
 }
 
+.card {
+  background-color: #FFC107;
+  border-radius: 30px;
+}
+
 .card header {
   padding: 20px;
   background: #13293d;
-  color: #fff;
+  color: #FFFFFF;
+}
+
+#card-head {
+  font-family: 'Cherry Bomb One', cursive;
+  font-size: 30px;
+  background-color: #FFC107;
+  font-weight: normal;
 }
 
 .card:hover {
