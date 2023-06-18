@@ -15,7 +15,7 @@ body {
 }
 
 #card-head {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'BioRhyme', serif;
   font-size: 30px;
   font-weight: normal;
 }
@@ -42,21 +42,20 @@ header {
   border: solid 2px #FFFFFF;
 }
 h1 {
-  font-weight: normal;
   font-size: 32px;
-  font-family: 'Cherry Bomb One', cursive;
+  font-family: 'BioRhyme', serif;
   border-radius: 15px;
 }
 
 h2 {
   font-weight: bold;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 36px;
+  font-family: 'BioRhyme', serif;
+  font-size: 32px;
   border-radius: 15px;
 }
 
 h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'BioRhyme', serif;
   font-size: 36px;
   background-color: #FDE293;
   border-radius: 15px;
@@ -65,6 +64,7 @@ h3 {
 
 h4 {
   font-weight: bold;
+  font-size: 20px;
 }
 
 input {
@@ -95,7 +95,7 @@ input {
   flex:auto;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'BioRhyme', serif;
   font-weight: bold;
 }
 
