@@ -99,10 +99,6 @@ input {
   font-weight: bold;
 }
 
-.row image-text {
-  font-weight: bold;
-}
-
 .show-text-on-img {
   position: absolute;
   top: 0;
