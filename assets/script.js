@@ -370,10 +370,7 @@ function displayResults() {
     }
   }
   // append info to card-head
-  $('#card-head').append('Displaying bottom 4 of ' + localStorage.getItem('totalArray') + ' ' + capitalizeEachWord(categoryInput.value) + ' near ' + locationInput.value)
-  if (endsWithS) {
-    $('#card-head').append('s');
-  }
+  $('#card-head').append('Displaying bottom <b>4</b> of ' + localStorage.getItem('totalArray') + ' ' + capitalizeEachWord(categoryInput.value) + ' near ' + locationInput.value)
 }
 
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
