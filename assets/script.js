@@ -273,7 +273,6 @@ function getSearchInput() {
   const searchInput = document.getElementById('locationInput').value;
   var newCategoryInput = categoryInput.value.replace(/\s/g, '').toLowerCase();
   console.log(newCategoryInput)
-  var endsWithS = capitalizeEachWord(categoryInput.value).endsWith('s');
 
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
