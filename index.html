@@ -20,11 +20,12 @@
         crossorigin="anonymous"></script>
     <title>Krapyak</title>
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛶</text></svg>">
+        href="data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛶</text></svg>"
+        type="image/svg+xml">
     <!-- Below I link our local css  -->
     <link rel="stylesheet" type="text/css" href="./assets/CSS/styles.css" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Cedarville+Cursive&family=Cherry+Bomb+One&family=Diphylleia&family=Gasoek+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Cedarville+Cursive&family=Cherry+Bomb+One&family=BioRhyme&family=Montserrat&family=Lilita+One&display=swap');
     </style>
 </head>
 
@@ -33,47 +34,59 @@
     <div class="container-fluid">
         <!--Below I created a header -->
         <!-- the bg-gradient added a gradient shade to he background -->
-        <header class="mx-2 mt-2 text-center text-white bg-warning rounded">
-            <h1><span id="krapyak">krapyak 🛶 </span> Your Destination's Nightmares...</h1>
+        <header class="mx-2 mb-5 mt-2 text-center">
+            <h1><span id="krapyak">🛶 krapyak </span> Your Destination's Nightmares...</h1>
         </header>
 
         <!-- Below I created a input group with a dropdown menu -->
         <!-- I borrowed some stuff from https://getbootstrap.com/docs/5.1/forms/input-group/ -->
-        <div class="row">
-            <div class="col m-2 input-group">
-                <span class="input-group-text">Location</span>
-                <input type="text" class="form-control" placeholder="Enter a Location" aria-label="location"
-                    id="locationInput">
-                <span class="input-group-text">Category</span>
+        <div class="container-fluid row mx-auto mb-4 d-flex justify-content-center">
+            <div class="mb-4 col-md-4 col-sm-12">
+              <span class="input-group-text border-dark">Location &nbsp&nbsp&nbsp
+                <input type="text" class="form-control mr-3" placeholder="Enter a Location" aria-label="location"
+                  id="locationInput"></span>
+            </div>
+            <div class="mb-4 col-md-4 col-sm-12">
+              <span class="input-group-text border-dark">Category &nbsp&nbsp&nbsp
                 <input type="text" class="form-control" aria-label="category"
-                    placeholder="e.g. Sports Bars, Hotels, Climbing, Bowling, etc..." id="categoryInput">
-                <button class="btn btn-outline-secondary" type="button" id="getCityBtn"><i
-                        class="fa-solid fa-earth-asia"></i></button>
-                <button class="btn btn-outline-secondary" type="button" id="goBtn"><i
-                        class="fa-solid fa-magnifying-glass"></i></button>
+                  placeholder="e.g. Sports Bars, Hotels, Climbing, Bowling, etc..." id="categoryInput"></span>
+            </div>
+            <div class="col-md-4 col-sm-12" style="width: fit-content;">
+              <button class="btn btn-outline-dark" style="height:3.28rem;" type="button" id="getCityBtn"><i
+                  class="fa-solid fa-earth-asia"></i></button>
+              <button class="btn btn-outline-dark" style="height:3.28rem;" type="button" id="goBtn"><i
+                  class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
 
+<<<<<<< HEAD
         <div class="container" id="suggestions">
             <div class="text-row">
                 <h2> Tourist Hotspots! </h2>
+=======
+
+        <div class="container mb-5" id="suggestions">
+            <div class="text-row" style="width: 20rem">
+                <h2 class="text-center mb-5"> Tourist Hotspots! </h2>
+>>>>>>> 1401213995df4941aefc809cde67041031a9c09c
             </div>
             <div class="row image-text">
-                <div class="col-3 top-city-img">
-                    <img src="./assets/Images/hongkong.jpg" alt="Hong Kong">
+                <div class="top-city-img mb-3">
+                    <img src="./assets/Images/cities/hongkong.jpg" alt="Hong Kong"> <p class="text-center"><b>Hong Kong</b></p>
                     <div class="show-text-on-img">Hong Kong</div>
                 </div>
-                <div class="col-3 top-city-img">
-                    <img src="./assets/Images/LA.jpg" alt="Los Angeles">
+                <div class="top-city-img mb-3">
+                    <img src="./assets/Images/cities/LA.jpg" alt="Los Angeles"> <p class="text-center"><b>Los Angeles</b></p>
                     <div class="show-text-on-img">Los Angeles</div>
                 </div>
-                <div class="col-3 top-city-img">
-                    <img src="./assets/Images/munich.jpg" alt="Munich">
+                <div class="top-city-img mb-3">
+                    <img src="./assets/Images/cities/munich.jpg" alt="Munich"> <p class="text-center"><b>Munich</b></p>
                     <div class="show-text-on-img">Munich</div>
                 </div>
             </div>
         </div>
 
+<<<<<<< HEAD
         <div class="row mx-3 resultCards justify-content-between" id="showResults">
             <h1 class="text-center" id="card-head"></h1>
             <hr class="mb-2">
@@ -109,8 +122,52 @@
                         <h5 class="card-title">Fetching Data..</h5>
                         <p class="card-text">Fetching Data..</p>
                         <a target="_blank" href="#" class="btn btn-primary"><i class="fa-brands fa-yelp"></i></a>
+=======
+
+        <div class="resultCards container-fluid row mx-auto" id="showResults">
+            <h1 class="text-center" id="card-head"></h1>
+            <div class="row">
+                <section class="card mt-4 mx-auto mb-2" style="width: 14rem; height:12rem;" id="biz1">
+                    <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+                        <h4 class="card-title">Fetching <span style="font-size: 28px;">💩</span></h4>
+                        <p class="card-text">Yaks flushing...</p>
+                        <a target="_blank" href="#" class="btn text-center mt-2 card-bottom-center" style="position: absolute; bottom: 0;"> <b>View On </b>
+                            <img src="assets/images/custom_yelp_logo2.png" class="mb-2 rounded" alt="Yelp">
+                          </a>
                     </div>
                 </section>
+            
+                <section class="card mt-4 mx-auto mb-2" style="width: 14rem; height:12rem;" id="biz2">
+                    <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+                        <h4 class="card-title">Fetching <span style="font-size: 28px;">💩</span></h4>
+                        <p class="card-text">Yaks flushing...</p>
+                        <a target="_blank" href="#" class="btn text-center mt-2 card-bottom-center" style="position: absolute; bottom: 0;"> <b>View On </b> 
+                            <img src="assets/images/custom_yelp_logo2.png" class="mb-2 rounded" alt="Yelp">
+                          </a>
+                    </div>
+                </section>               
+            
+                <section class="card mt-4 mx-auto mb-2" style="width: 14rem; height:12rem;" id="biz3">
+                    <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+                        <h4 class="card-title card-top-center">Fetching <span style="font-size: 28px;">💩</span></h4>
+                        <p class="card-text">Yaks flushing...</p>
+                        <a target="_blank" href="#" class="btn text-center mt-2 card-bottom-center" style="position: absolute; bottom: 0;"> <b>View On </b>
+                            <img src="assets/images/custom_yelp_logo2.png" class="mb-2 rounded" alt="Yelp">
+                          </a>
+                    </div>
+                </section>
+            
+                <section class="card mt-4 mx-auto mb-2" style="width: 14rem; height:12rem;" id="biz4">
+                    <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+                        <h4 class="card-title">Fetching <span style="font-size: 28px;">💩</span></h4>
+                        <p class="card-text">Yaks flushing...</p>
+                        <a target="_blank" href="#" class="btn text-center mt-2 card-bottom-center" style="position: absolute; bottom: 0;"> <b>View On </b>
+                            <img src="assets/images/custom_yelp_logo2.png" class="mb-2 rounded" alt="Yelp">
+                          </a>
+>>>>>>> 1401213995df4941aefc809cde67041031a9c09c
+                    </div>
+                </section>
+                
             </div>
         </div>
 
@@ -124,8 +181,8 @@
     </div>
     <!-- Insert API KEY and set the callback id to initMap -->
     <script src="./assets/script.js"></script>
-    <footer class="row absolute mx-3 mb-2 text-center rounded">
-        <h5> Designed, Coded, and 🌳 Cultivated by Team 💪 ONE ™</h5>
+    <footer class="mx-3 mb-2 text-center">
+        <h5> Designed, Coded, and 🌳 Cultivated by Team ONE ™</h5>
     </footer>
 </body>
 
