@@ -137,3 +137,6 @@ input {
   border: 2px solid #FDE293;
   overflow: auto;
 }
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.767);
+}
