@@ -348,10 +348,12 @@ function displayResults() {
       cardTitles[i].textContent = data[i];
     }
   }
+  // get localstorage of business ratings array and begin parsing JSON.
   var localStorageData = localStorage.getItem('bizRating');
   if (localStorageData) {
     var data = JSON.parse(localStorageData);
     var cardContent = document.querySelectorAll('.card-text');
+    // function to select yelp API display requirement star rating images appropriate to cards business' yelp rating.
     function ratingToImage(rating) {
       var img = "";
       if (rating == 1) {
@@ -377,12 +379,13 @@ function displayResults() {
       }
       return img;
     }
-    
+    // for loop that registers functions data[i] in this case rating value and updates the rating and img in card.
     for (var i = 0; i < cardContent.length; i++) {
       var img = ratingToImage(data[i]);
       cardContent[i].innerHTML = `Rating: ${data[i]} <img src="${img}" alt="Rating">`;
     }
   }
+
   var localStorageData = localStorage.getItem('bizUrl');
   if (localStorageData) {
     var data = JSON.parse(localStorageData);
