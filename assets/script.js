@@ -352,12 +352,35 @@ function displayResults() {
   if (localStorageData) {
     var data = JSON.parse(localStorageData);
     var cardContent = document.querySelectorAll('.card-text');
-    for (var i = 0; i < cardContent.length; i++) {
-      var emoji = "";
-      for (var j = 0; j < data[i]; j++) {
-        emoji += "💩";
+    function ratingToImage(rating) {
+      var img = "";
+      if (rating == 1) {
+        img = "assets/Images/yelp-stars/small_1.png";
+      } else if (rating == 1.5) {
+        img = "assets/Images/yelp-stars/small_1_half.png";
+      } else if (rating == 2) {
+        img = "assets/Images/yelp-stars/small_2.png";
+      } else if (rating == 2.5) {
+        img = "assets/Images/yelp-stars/small_2_half.png";
+      } else if (rating == 3) {
+        img = "assets/Images/yelp-stars/small_3.png";
+      } else if (rating == 3.5) {
+        img = "assets/Images/yelp-stars/small_3_half.png";
+      } else if (rating == 4) {
+        img = "assets/Images/yelp-stars/small_4.png";
+      } else if (rating == 4.5) {
+        img = "assets/Images/yelp-stars/small_4_half.png";
+      } else if (rating == 5) {
+        img = "assets/Images/yelp-stars/small_5.png";
+      } else {
+        img = "assets/Images/yelp-stars/small_0.png";
       }
-      cardContent[i].textContent = "Rating: " + data[i] + emoji;
+      return img;
+    }
+    
+    for (var i = 0; i < cardContent.length; i++) {
+      var img = ratingToImage(data[i]);
+      cardContent[i].innerHTML = `Rating: ${data[i]} <img src="${img}" alt="Rating">`;
     }
   }
   var localStorageData = localStorage.getItem('bizUrl');
