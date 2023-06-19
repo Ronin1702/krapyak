@@ -64,7 +64,7 @@ h3 {
 
 h4 {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 input {
@@ -96,7 +96,6 @@ input {
   justify-content: space-between;
   align-items: center;
   font-family: 'BioRhyme', serif;
-  font-weight: bold;
 }
 
 .show-text-on-img {

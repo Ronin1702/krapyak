@@ -354,11 +354,26 @@ function displayResults() {
     var cardContent = document.querySelectorAll('.card-text');
     function ratingToImage(rating) {
       var img = "";
-      for (var i = 1; i <= 5; i++) {
-        if (rating == i) {
-          img = `assets/Images/yelp-stars/small_${i}.png`;
-          break;
-        }
+      if (rating == 1) {
+        img = "assets/Images/yelp-stars/small_1.png";
+      } else if (rating == 1.5) {
+        img = "assets/Images/yelp-stars/small_1_half.png";
+      } else if (rating == 2) {
+        img = "assets/Images/yelp-stars/small_2.png";
+      } else if (rating == 2.5) {
+        img = "assets/Images/yelp-stars/small_2_half.png";
+      } else if (rating == 3) {
+        img = "assets/Images/yelp-stars/small_3.png";
+      } else if (rating == 3.5) {
+        img = "assets/Images/yelp-stars/small_3_half.png";
+      } else if (rating == 4) {
+        img = "assets/Images/yelp-stars/small_4.png";
+      } else if (rating == 4.5) {
+        img = "assets/Images/yelp-stars/small_4_half.png";
+      } else if (rating == 5) {
+        img = "assets/Images/yelp-stars/small_5.png";
+      } else {
+        img = "assets/Images/yelp-stars/small_0.png";
       }
       return img;
     }
