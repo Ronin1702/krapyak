@@ -382,3 +382,9 @@ function hidePics() {
 }
 
 goBtn.addEventListener('click', hidePics);
+categoryInput.addEventListener('keyup',  function(event) {
+  if (event.keyCode === 13) {
+    getSearchInput();
+    hidePics();
+  }
+});
