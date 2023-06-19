@@ -57,40 +57,56 @@ function initMap() { //write a function for initMap as indicated in the url tag
     // Parse the bizLocations array from localStorage
     var bizLatitude = JSON.parse(localStorage.getItem('bizLat'));
     var bizLongitude = JSON.parse(localStorage.getItem('bizLng'));
-    // Create a marker for each location in bizLocations
+
     map = new google.maps.Map($("#map")[0], {
       center: { lat: bizLatitude[0], lng: bizLongitude[0] },
       zoom: 18,
+    });
+    const marker = new google.maps.Marker({
+      position: { lat: bizLatitude[0], lng: bizLongitude[0] },
+      map: map,
     });
   });
   $("#biz2").click(function () {
     // Parse the bizLocations array from localStorage
     var bizLatitude = JSON.parse(localStorage.getItem('bizLat'));
     var bizLongitude = JSON.parse(localStorage.getItem('bizLng'));
-    // Create a marker for each location in bizLocations
+
     map = new google.maps.Map($("#map")[0], {
       center: { lat: bizLatitude[1], lng: bizLongitude[1] },
       zoom: 18,
+    });
+    const marker = new google.maps.Marker({
+      position: { lat: bizLatitude[1], lng: bizLongitude[1] },
+      map: map,
     });
   });
   $("#biz3").click(function () {
     // Parse the bizLocations array from localStorage
     var bizLatitude = JSON.parse(localStorage.getItem('bizLat'));
     var bizLongitude = JSON.parse(localStorage.getItem('bizLng'));
-    // Create a marker for each location in bizLocations
+
     map = new google.maps.Map($("#map")[0], {
       center: { lat: bizLatitude[2], lng: bizLongitude[2] },
       zoom: 18,
+    });
+    const marker = new google.maps.Marker({
+      position: { lat: bizLatitude[2], lng: bizLongitude[2] },
+      map: map,
     });
   });
   $("#biz4").click(function () {
     // Parse the bizLocations array from localStorage
     var bizLatitude = JSON.parse(localStorage.getItem('bizLat'));
     var bizLongitude = JSON.parse(localStorage.getItem('bizLng'));
-    // Create a marker for each location in bizLocations
+
     map = new google.maps.Map($("#map")[0], {
       center: { lat: bizLatitude[3], lng: bizLongitude[3] },
       zoom: 18,
+    });
+    const marker = new google.maps.Marker({
+      position: { lat: bizLatitude[3], lng: bizLongitude[3] },
+      map: map,
     });
   });
   infoWindow = new google.maps.InfoWindow();
@@ -389,7 +405,7 @@ function displayResults() {
   var localStorageData = localStorage.getItem('bizUrl');
   if (localStorageData) {
     var data = JSON.parse(localStorageData);
-    var cardUrl = document.querySelectorAll('[href="#"]');
+    var cardUrl = document.querySelectorAll('.card-link');
     for (var i = 0; i < cardUrl.length; i++) {
       cardUrl[i].href = data[i];
     }
