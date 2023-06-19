@@ -66,6 +66,7 @@ h4 {
   font-weight: bold;
   font-size: 18px;
 }
+
 input {
   font-size: 18px;
 }
@@ -80,6 +81,7 @@ input {
   font-size: 64px;
   font-family: 'Cherry Bomb One', cursive;
 }
+
 #map {
     flex: auto;
     height: 50vh;
@@ -95,6 +97,7 @@ input {
   align-items: center;
   font-family: 'BioRhyme', serif;
 }
+
 .show-text-on-img {
   position: absolute;
   top: 0;
@@ -113,6 +116,7 @@ input {
   border-radius: 15px;
   overflow: auto;
 }
+
 .top-city-img:hover .show-text-on-img {
   opacity: 1;
   border: 2px solid #FDE293;
