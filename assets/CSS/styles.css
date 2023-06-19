@@ -115,12 +115,12 @@ input {
   font-size: 18px;
   box-sizing: border-box;
   border-radius: 20px;
-  border: 2px solid #FDE293;
   overflow: auto;
 }
 
 .top-city-img:hover .show-text-on-img {
   opacity: 1;
+  border: 2px solid #FDE293;
 }
 
 .top-city-img {
@@ -130,8 +130,7 @@ input {
   height: 200px; 
   cursor: pointer;
   padding: 0;
-  border-radius: 20px;
-  border: 2px solid #FFFFFF;
+  border-radius: 15px;
   
 }
 

@@ -40,25 +40,29 @@
 
         <!-- Below I created a input group with a dropdown menu -->
         <!-- I borrowed some stuff from https://getbootstrap.com/docs/5.1/forms/input-group/ -->
-        <div class="row">
-            <div class="m-2 mb-5 input-group input-outline-dark">
-                <span class="input-group-text">Location</span>
-                <input type="text" class="form-control" placeholder="Enter a Location" aria-label="location"
-                    id="locationInput">
-                <span class="input-group-text">Category</span>
+        <div class="container-fluid row mx-auto mb-5 d-flex justify-content-center">
+            <div class="col-md-4 col-sm-12">
+              <span class="input-group-text border-dark">Location
+                <input type="text" class="form-control mr-3" placeholder="Enter a Location" aria-label="location"
+                  id="locationInput"></span>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <span class="input-group-text border-dark">Category
                 <input type="text" class="form-control" aria-label="category"
-                    placeholder="e.g. Sports Bars, Hotels, Climbing, Bowling, etc..." id="categoryInput">
-                <button class="btn btn-outline-dark" type="button" id="getCityBtn"><i
-                        class="fa-solid fa-earth-asia"></i></button>
-                <button class="btn btn-outline-dark" type="button" id="goBtn"><i
-                        class="fa-solid fa-magnifying-glass"></i></button>
+                  placeholder="e.g. Sports Bars, Hotels, Climbing, Bowling, etc..." id="categoryInput"></span>
+            </div>
+            <div class="col-md-4 col-sm-12" style="width: fit-content;">
+              <button class="btn btn-outline-dark" type="button" id="getCityBtn"><i
+                  class="fa-solid fa-earth-asia"></i></button>
+              <button class="btn btn-outline-dark" type="button" id="goBtn"><i
+                  class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
 
 
-        <div class="container" id="suggestions">
+        <div class="container mb-5" id="suggestions">
             <div class="text-row" style="width: 20rem">
-                <h2 class="text-center"> Tourist Hotspots! </h2>
+                <h2 class="text-center mb-5"> Tourist Hotspots! </h2>
             </div>
             <div class="row image-text">
                 <div class="top-city-img mb-3">
@@ -77,7 +81,7 @@
         </div>
 
 
-        <div class="resultCards container-fluid row mx-auto ml-1 mr-1" id="showResults">
+        <div class="resultCards container-fluid row mx-auto" id="showResults">
             <h1 class="text-center" id="card-head"></h1>
             <div class="row">
                 <section class="card mt-4 mx-auto mb-2" style="width: 14rem; height:13rem;" id="biz1">
