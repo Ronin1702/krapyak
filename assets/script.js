@@ -1,6 +1,6 @@
 const goBtn = document.getElementById('goBtn');
 // base on https://docs.developer.yelp.com/docs/resources-categories, some categoryList needs lower case
-let categoryList = ["Parks", "Restaurants", "Hotels", "coffee", "farmersmarket", "Bars", "Nightlife"];
+let categoryList = ["Parks", "Restaurants", "Hotels", "Coffee", "Farmersmarket", "Bars", "Nightlife"];
 let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
 let categoryInput = document.querySelector('#categoryInput');
@@ -289,9 +289,10 @@ function getSearchInput() {
   const searchInput = document.getElementById('locationInput').value;
   var newCategoryInput = categoryInput.value.replace(/\s/g, '').toLowerCase();
   console.log(newCategoryInput)
+
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
-  yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+  yelpHeaders.append("Authorization", "Bearer AJd_-brP0SR373HBoy1kA1NQQDN4XKgORy24LJjxuvfW6c9MyCRs0NqBTBnMho12trBlZFSLrymP4j9vKBbX4ToCVDZnTsWK35S_gMRQAQD6JXIpl74xqKsDMcl-ZHYx");
 
   var requestOptions = {
     method: 'GET',
@@ -299,7 +300,7 @@ function getSearchInput() {
     redirect: 'follow'
   };
   // fetch restaurant json
-  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&radius=40000&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
+  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
     .then(response => response.json())
     .then(result => {
       console.log('Result:', result);
@@ -311,7 +312,7 @@ function getSearchInput() {
       console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
-      yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+      yelpHeaders.append("Authorization", "Bearer AJd_-brP0SR373HBoy1kA1NQQDN4XKgORy24LJjxuvfW6c9MyCRs0NqBTBnMho12trBlZFSLrymP4j9vKBbX4ToCVDZnTsWK35S_gMRQAQD6JXIpl74xqKsDMcl-ZHYx");
 
       var requestOptions = {
         method: 'GET',
@@ -319,7 +320,7 @@ function getSearchInput() {
         redirect: 'follow'
       };
       // Perform a new fetch operation using the offset parameter
-      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&radius=40000&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
+      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
         .then(response => response.json())
         .then(newResult => {
           console.log(newResult)
@@ -341,7 +342,7 @@ function getSearchInput() {
           console.log('bizNames Array Reversed:', bizNames); // To see the stored names2
           console.log('biz Rating Array Reversed:', bizRating); // To see the stored ratings
           console.log('bizUrl Array Reversed:', bizUrl);
-          // Call the function to display the restaurants
+          // Call the function to display the business results.
           displayResults();
         })
         .catch(error => console.log('error', error));
@@ -350,8 +351,9 @@ function getSearchInput() {
 }
 // When the goBtn is clicked the above fetch link get the location inputs in the textbox.
 document.getElementById('goBtn').addEventListener('click', getSearchInput);
+document.getElementById('categoryInput').addEventListener('enter', getSearchInput)
 
-// Append and Display the Restaurant results in the list from localStorage
+// Append and Display the business category results in the list from localStorage
 function displayResults() {
   $('#card-head').empty(); // this is to make sure that it empties the card-head before appending new info.
   var localStorageData = localStorage.getItem('bizNames');
@@ -362,14 +364,44 @@ function displayResults() {
       cardTitles[i].textContent = data[i];
     }
   }
+  // get localstorage of business ratings array and begin parsing JSON.
   var localStorageData = localStorage.getItem('bizRating');
   if (localStorageData) {
     var data = JSON.parse(localStorageData);
     var cardContent = document.querySelectorAll('.card-text');
+    // function to select yelp API display requirement star rating images appropriate to cards business' yelp rating.
+    function ratingToImage(rating) {
+      var img = "";
+      if (rating == 1) {
+        img = "assets/Images/yelp-stars/small_1.png";
+      } else if (rating == 1.5) {
+        img = "assets/Images/yelp-stars/small_1_half.png";
+      } else if (rating == 2) {
+        img = "assets/Images/yelp-stars/small_2.png";
+      } else if (rating == 2.5) {
+        img = "assets/Images/yelp-stars/small_2_half.png";
+      } else if (rating == 3) {
+        img = "assets/Images/yelp-stars/small_3.png";
+      } else if (rating == 3.5) {
+        img = "assets/Images/yelp-stars/small_3_half.png";
+      } else if (rating == 4) {
+        img = "assets/Images/yelp-stars/small_4.png";
+      } else if (rating == 4.5) {
+        img = "assets/Images/yelp-stars/small_4_half.png";
+      } else if (rating == 5) {
+        img = "assets/Images/yelp-stars/small_5.png";
+      } else {
+        img = "assets/Images/yelp-stars/small_0.png";
+      }
+      return img;
+    }
+    // for loop that registers functions data[i] in this case rating value and updates the rating and img in card.
     for (var i = 0; i < cardContent.length; i++) {
-      cardContent[i].textContent = "Rating: " + data[i];
+      var img = ratingToImage(data[i]);
+      cardContent[i].innerHTML = `Rating: ${data[i]} <img src="${img}" alt="Rating">`;
     }
   }
+
   var localStorageData = localStorage.getItem('bizUrl');
   if (localStorageData) {
     var data = JSON.parse(localStorageData);
@@ -379,8 +411,9 @@ function displayResults() {
     }
   }
   // append info to card-head
-  $('#card-head').append('There are total of ' + localStorage.getItem('totalArray') + ' ' + capitalizeEachWord(categoryInput.value) + ' in ' + locationInput.value)
+  $('#card-head').append('Displaying bottom <b>4</b> of ' + localStorage.getItem('totalArray') + ' ' + capitalizeEachWord(categoryInput.value) + ' near ' + locationInput.value)
 }
+
 // hides Daniel's suggestion pictures when clicking go button, unhides 5 card elements in same spot.
 function hidePics() {
   var hidePic = document.getElementById('suggestions');
@@ -391,3 +424,9 @@ function hidePics() {
 }
 
 goBtn.addEventListener('click', hidePics);
+categoryInput.addEventListener('keyup',  function(event) {
+  if (event.keyCode === 13) {
+    getSearchInput();
+    hidePics();
+  }
+});
