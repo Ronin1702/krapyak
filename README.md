@@ -1,7 +1,7 @@
-# Krapyak:
+# krapyak:
 ![image](https://github.com/Ronin1702/krapyak/assets/129554518/33ffff70-e6c8-4ec5-aa06-171d7929441a)
 ## Description
-Krapak is a spin-off of Kayak and provides 4 worst places of a chosen category in a given city.
+krapyak is a spin-off of kayak and provides 4 worst places of a chosen category in a given city.
 
 ### Built With
 - [Yelp Fusion API](https://fusion.yelp.com/)
@@ -15,12 +15,12 @@ Krapak is a spin-off of Kayak and provides 4 worst places of a chosen category i
 
 ```md
 As a traveler,
-I want to know what businesses of a chosen cateogy to AVOID in a certain area,
+I want to know what businesses of a chosen categogy to AVOID in a certain area,
 So that I may NOT have the worst experience.
 ```
 
 ```md
-Given I am using krapyak.com to know what places to avoid
+Given I am using krapyak to know what places to avoid
 WHEN I open "krapyak"
 THEN I am presented an alert modal with a link to enbale CORS
 WHEN I am on the main page
