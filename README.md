@@ -15,7 +15,7 @@ krapyak is a spin-off of kayak and provides 4 worst places of a chosen category 
 
 ```md
 As a traveler,
-I want to know what businesses of a chosen categogy to AVOID in a certain area,
+I want to know what businesses of a chosen category to AVOID in a certain area,
 So that I may NOT have the worst experience.
 ```
 
