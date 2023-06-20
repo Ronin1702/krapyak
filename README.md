@@ -41,8 +41,8 @@ THEN I am presented with a new tab of that business' website
 ![NEWKRAPYAKDEMO_Trim](https://github.com/Ronin1702/krapyak/assets/131202032/b511f917-8cb1-47e4-9fe0-6fb7f797954a)
 
 ### Repo and Deployed Link
-<li>Deployed Link for review: https://ronin1702.github.io/krapyak/</li>
-<li>Repo: https://github.com/Ronin1702/krapyak</li>
+<li> Deployed Link for review: https://ronin1702.github.io/krapyak/ </li>
+<li> Repo: https://github.com/Ronin1702/krapyak </li>
 
 ### Credits
 <li>Ceres Markley© </li>
