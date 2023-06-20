@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById("popup").onclick = function (e) {
     e.preventDefault();
 
-    var popupWidth = 400;
-    var popupHeight = 200;
+    var popupWidth = 500;
+    var popupHeight = 150;
     var left = (window.innerWidth / 2) - (popupWidth / 2);
     var top = (window.innerHeight / 2) - (popupHeight / 2);
 
