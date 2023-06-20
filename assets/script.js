@@ -18,6 +18,8 @@ function picLocation(element) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  var myModal = new bootstrap.Modal(document.getElementById('alertModal'), {});
+  myModal.show();
   images.forEach(function (image) {
     image.addEventListener('click', hidePics);
     image.addEventListener('click', function () {
