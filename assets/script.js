@@ -18,6 +18,8 @@ function picLocation(element) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  var myModal = new bootstrap.Modal(document.getElementById('alertModal'), {});
+  myModal.show();
   images.forEach(function (image) {
     image.addEventListener('click', hidePics);
     image.addEventListener('click', function () {
@@ -300,7 +302,7 @@ function getSearchInput() {
     redirect: 'follow'
   };
   // fetch restaurant json
-  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
+  fetch("https://cors-anywhere.herokuapp.com/http://api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
     .then(response => response.json())
     .then(result => {
       console.log('Result:', result);
@@ -320,7 +322,7 @@ function getSearchInput() {
         redirect: 'follow'
       };
       // Perform a new fetch operation using the offset parameter
-      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
+      fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
         .then(response => response.json())
         .then(newResult => {
           console.log(newResult)
