@@ -22,9 +22,9 @@ So that I may NOT have the worst experience.
 ```md
 Given I am using krapyak to know what places to avoid
 WHEN I open "krapyak"
-THEN I am presented an alert modal with a link to enbale CORS
+THEN I am presented an alert modal with a link to enable CORS
 WHEN I am on the main page
-THEN I am presented with THREE tourist hotspots and the locaion of Columbus on the map
+THEN I am presented with THREE tourist hotspots and the location of Columbus on the map
 WHEN I click on any of the hotspots
 THEN I am presented with no more hotspot suggestions, but with 4 bottom businesses of a random category of that hotspot
 WHEN I start to type a location in the location input box
@@ -41,8 +41,8 @@ THEN I am presented with a new tab of that business' website
 ![NEWKRAPYAKDEMO_Trim](https://github.com/Ronin1702/krapyak/assets/131202032/b511f917-8cb1-47e4-9fe0-6fb7f797954a)
 
 ### Repo and Deployed Link
-Deployed Link for review: https://ronin1702.github.io/krapyak/
-Repo: https://github.com/Ronin1702/krapyak
+<li> Deployed Link for review: https://ronin1702.github.io/krapyak/ </li>
+<li> Repo: https://github.com/Ronin1702/krapyak </li>
 
 ### Credits
 <li>Ceres Markley© </li>
