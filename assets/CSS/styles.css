@@ -89,6 +89,20 @@ input {
     flex-wrap: wrap;
   }
 
+.modal-header {
+  font-family: 'BioRhyme', serif;
+  background-color: #FDE293;
+}
+
+.modal-title {
+  color:black;
+}
+
+.modal-body {
+  font-family: 'BioRhyme', serif;
+  font-size: 18px;
+}
+
 .resultCards {
   display: none;
   flex-direction: row;
