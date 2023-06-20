@@ -22,9 +22,9 @@ So that I may NOT have the worst experience.
 ```md
 Given I am using krapyak to know what places to avoid
 WHEN I open "krapyak"
-THEN I am presented an alert modal with a link to enbale CORS
+THEN I am presented an alert modal with a link to enable CORS
 WHEN I am on the main page
-THEN I am presented with THREE tourist hotspots and the locaion of Columbus on the map
+THEN I am presented with THREE tourist hotspots and the location of Columbus on the map
 WHEN I click on any of the hotspots
 THEN I am presented with no more hotspot suggestions, but with 4 bottom businesses of a random category of that hotspot
 WHEN I start to type a location in the location input box
