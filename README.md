@@ -1,5 +1,5 @@
 # Krapyak:
-![KRAPYAKDEMO_Trim](https://github.com/Ronin1702/krapyak/assets/131202032/b9526e23-b77c-471c-a1b9-fb5617be50f5)
+![image](https://github.com/Ronin1702/krapyak/assets/129554518/33ffff70-e6c8-4ec5-aa06-171d7929441a)
 ## Description
 Krapak is a spin-off of Kayak and provides 4 worst places of a chosen category in a given city.
 
@@ -38,7 +38,7 @@ THEN I am presented with a new tab of that business' website
 ```
 
 ### In Use Screenshots
-![image](https://github.com/Ronin1702/krapyak/assets/129554518/33ffff70-e6c8-4ec5-aa06-171d7929441a)
+![NEWKRAPYAKDEMO_Trim](https://github.com/Ronin1702/krapyak/assets/131202032/b511f917-8cb1-47e4-9fe0-6fb7f797954a)
 
 ### Repo and Deployed Link
 Deployed Link for review: https://ronin1702.github.io/krapyak/
