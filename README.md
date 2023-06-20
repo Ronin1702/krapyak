@@ -15,8 +15,8 @@ Krapak is a spin-off of Kayak and provides 4 worst places of a chosen category i
 
 ```md
 As a traveler,
-I want to know what hotels and/or restaurants to avoid in the area I am staying,
-So that I may NOT have the worst accomadations and/or dining experience.
+I want to know what businesses of a chosen cateogy to AVOID in a certain area,
+So that I may NOT have the worst experience.
 ```
 
 ```md
