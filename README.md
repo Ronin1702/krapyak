@@ -1,4 +1,5 @@
 # Krapyak:
+![KRAPYAKDEMO_Trim](https://github.com/Ronin1702/krapyak/assets/131202032/b9526e23-b77c-471c-a1b9-fb5617be50f5)
 ## Description
 Krapak is a spin-off of Kayak and provides 4 worst places of a chosen category in a given city.
 
