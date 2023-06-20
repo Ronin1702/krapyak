@@ -18,6 +18,8 @@ function picLocation(element) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  var myModal = new bootstrap.Modal(document.getElementById('alertModal'), {});
+  myModal.show();
   images.forEach(function (image) {
     image.addEventListener('click', hidePics);
     image.addEventListener('click', function () {
@@ -292,7 +294,7 @@ function getSearchInput() {
 
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
-  yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+  yelpHeaders.append("Authorization", "Bearer AJd_-brP0SR373HBoy1kA1NQQDN4XKgORy24LJjxuvfW6c9MyCRs0NqBTBnMho12trBlZFSLrymP4j9vKBbX4ToCVDZnTsWK35S_gMRQAQD6JXIpl74xqKsDMcl-ZHYx");
 
   var requestOptions = {
     method: 'GET',
@@ -300,7 +302,7 @@ function getSearchInput() {
     redirect: 'follow'
   };
   // fetch restaurant json
-  fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
+  fetch("https://cors-anywhere.herokuapp.com/http://api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
     .then(response => response.json())
     .then(result => {
       console.log('Result:', result);
@@ -312,7 +314,7 @@ function getSearchInput() {
       console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
-      yelpHeaders.append("Authorization", "Bearer XvfCGGhClD2Ru5otL6JPCW7dq0UbW_GqNmFDuoR7UJokbxfVPY708rQI54HNgXkSUTm4FWgd3C6zzavgV81AYuMawvDNESAvB6Uz3fsj56TDJk5togcwRKErnX2CZHYx");
+      yelpHeaders.append("Authorization", "Bearer ZQ0ivuxCz8UtpEp_aWdzBBBMid4yj_j2tinBEnA7JD-StFKuuZR8M8nimdc39andphNW7xRIPcdzmlCyxXAToCywp_-x3pcoKSvvBkLsPqlJQIAvpwSyQjhpYByBZHYx");
 
       var requestOptions = {
         method: 'GET',
@@ -320,7 +322,7 @@ function getSearchInput() {
         redirect: 'follow'
       };
       // Perform a new fetch operation using the offset parameter
-      fetch("https:/cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
+      fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&sort_by=rating&limit=5&offset=" + offsetArray, requestOptions) //limit is 5 to the offet variable
         .then(response => response.json())
         .then(newResult => {
           console.log(newResult)
