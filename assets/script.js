@@ -1,6 +1,6 @@
 const goBtn = document.getElementById('goBtn');
 // base on https://docs.developer.yelp.com/docs/resources-categories, some categoryList needs lower case
-let categoryList = ["Parks", "Restaurants", "Hotels", "Coffee", "Farmersmarket", "Bars", "Nightlife"];
+let categoryList = ["Parks", "Hotels", "Farmersmarket", "Bars"];
 let locationInput = document.querySelector('#locationInput');
 // Get a reference to the 'categoryInput' and 'listHeader' element
 let categoryInput = document.querySelector('#categoryInput');
@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById("popup").onclick = function (e) {
     e.preventDefault();
 
-    var popupWidth = 400;
-    var popupHeight = 200;
+    var popupWidth = 500;
+    var popupHeight = 160;
     var left = (window.innerWidth / 2) - (popupWidth / 2);
     var top = (window.innerHeight / 2) - (popupHeight / 2);
 
@@ -305,7 +305,7 @@ function getSearchInput() {
 
   // fetch request from Yelp Fusion API:
   var yelpHeaders = new Headers();
-  yelpHeaders.append("Authorization", "Bearer AJd_-brP0SR373HBoy1kA1NQQDN4XKgORy24LJjxuvfW6c9MyCRs0NqBTBnMho12trBlZFSLrymP4j9vKBbX4ToCVDZnTsWK35S_gMRQAQD6JXIpl74xqKsDMcl-ZHYx");
+  yelpHeaders.append("Authorization", "Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx");
 
   var requestOptions = {
     method: 'GET',
@@ -313,7 +313,7 @@ function getSearchInput() {
     redirect: 'follow'
   };
   // fetch restaurant json
-  fetch("https://cors-anywhere.herokuapp.com/http://api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
+  fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + searchInput + "&categories=" + newCategoryInput + "&sort_by=rating", requestOptions)// we do not set an offet value to 1000 here because some of them are less than 1000.
     .then(response => response.json())
     .then(result => {
       console.log('Result:', result);
@@ -325,7 +325,7 @@ function getSearchInput() {
       console.log('Update offsetArray:', offsetArray)
       // fetch request from Yelp Fusion API:
       var yelpHeaders = new Headers();
-      yelpHeaders.append("Authorization", "Bearer ZQ0ivuxCz8UtpEp_aWdzBBBMid4yj_j2tinBEnA7JD-StFKuuZR8M8nimdc39andphNW7xRIPcdzmlCyxXAToCywp_-x3pcoKSvvBkLsPqlJQIAvpwSyQjhpYByBZHYx");
+      yelpHeaders.append("Authorization", "Bearer DHlMvdIxJ3GkiJb-JvdUfVgar7Z2K_XQoqd5TP9z9x3_jDtZsH2-H6ss7DWllpBUE79UFsxLoNfebBjQFgPDjObq3upq-sC9Apvp3jZ87s-ASl2ns3_tPOsTjK1-ZHYx");
 
       var requestOptions = {
         method: 'GET',
@@ -386,25 +386,25 @@ function displayResults() {
     function ratingToImage(rating) {
       var img = "";
       if (rating == 1) {
-        img = "assets/Images/yelp-stars/small_1.png";
+        img = "./assets/Images/yelp-stars/small_1.png";
       } else if (rating == 1.5) {
-        img = "assets/Images/yelp-stars/small_1_half.png";
+        img = "./assets/Images/yelp-stars/small_1_half.png";
       } else if (rating == 2) {
-        img = "assets/Images/yelp-stars/small_2.png";
+        img = "./assets/Images/yelp-stars/small_2.png";
       } else if (rating == 2.5) {
-        img = "assets/Images/yelp-stars/small_2_half.png";
+        img = "./assets/Images/yelp-stars/small_2_half.png";
       } else if (rating == 3) {
-        img = "assets/Images/yelp-stars/small_3.png";
+        img = "./assets/Images/yelp-stars/small_3.png";
       } else if (rating == 3.5) {
-        img = "assets/Images/yelp-stars/small_3_half.png";
+        img = "./assets/Images/yelp-stars/small_3_half.png";
       } else if (rating == 4) {
-        img = "assets/Images/yelp-stars/small_4.png";
+        img = "./assets/Images/yelp-stars/small_4.png";
       } else if (rating == 4.5) {
-        img = "assets/Images/yelp-stars/small_4_half.png";
+        img = "./assets/Images/yelp-stars/small_4_half.png";
       } else if (rating == 5) {
-        img = "assets/Images/yelp-stars/small_5.png";
+        img = "./assets/Images/yelp-stars/small_5.png";
       } else {
-        img = "assets/Images/yelp-stars/small_0.png";
+        img = "./assets/Images/yelp-stars/small_0.png";
       }
       return img;
     }
