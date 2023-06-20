@@ -30,8 +30,19 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(locationInput);
     });
   });
+  //make a centered popup window for CORS modal
+  document.getElementById("popup").onclick = function (e) {
+    e.preventDefault();
+
+    var popupWidth = 400;
+    var popupHeight = 200;
+    var left = (window.innerWidth / 2) - (popupWidth / 2);
+    var top = (window.innerHeight / 2) - (popupHeight / 2);
+
+    window.open(this.href, "popup", "width=" + popupWidth + ",height=" + popupHeight + ",left=" + left + ",top=" + top);
+  }
 });
-// API keys
+// google map API key
 const googleApiKey = "AIzaSyBhYfGeciSa00nbDY9OZNDpJPs5gKYymH4";
 
 // the two urls used, I noticed as long as you got initMap in the callback it doesn't matter which one I use
@@ -426,7 +437,7 @@ function hidePics() {
 }
 
 goBtn.addEventListener('click', hidePics);
-categoryInput.addEventListener('keyup',  function(event) {
+categoryInput.addEventListener('keyup', function (event) {
   if (event.keyCode === 13) {
     getSearchInput();
     hidePics();
