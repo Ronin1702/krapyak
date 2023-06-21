@@ -62,6 +62,7 @@ loadGoogleMapsApi("initMap"); // call the fuinction where 'initMap' is the argum
 let map, infoWindow;
 
 function initMap() { //write a function for initMap as indicated in the url tag
+
   map = new google.maps.Map($("#map")[0], {
     center: { lat: 39.9833, lng: -82.9833 },
     zoom: 12,
@@ -443,3 +444,4 @@ categoryInput.addEventListener('keyup', function (event) {
     hidePics();
   }
 });
+
